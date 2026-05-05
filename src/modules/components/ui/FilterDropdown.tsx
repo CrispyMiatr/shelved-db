@@ -1,4 +1,4 @@
-import '~styles/pages/app.scss'
+import '~styles/app.scss'
 
 export const FilterDropdown = () => {
     return (

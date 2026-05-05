@@ -1,4 +1,4 @@
-import '~styles/pages/product.scss.scss'
+import '~styles/pages/product.scss'
 
 export const Product = () => {
     return (

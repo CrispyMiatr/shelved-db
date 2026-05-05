@@ -1,36 +1,41 @@
 import {createBrowserRouter} from "react-router";
-import { Layout } from '~/components';
-import { Home } from './Home.tsx';
-import { Catalogue } from './Catalogue.tsx';
-import { Brand } from './Brand.tsx';
-import { Product } from './Product.tsx';
-import { Profile } from './Profile.tsx';
+import {Layout} from '~/components';
+import {Home} from './Home.tsx';
+import {Catalogue} from './Catalogue.tsx';
+import {Brand} from './Brand.tsx';
+import {Product} from './Product.tsx';
+import {Profile} from './Profile.tsx';
+import {Login} from "~/pages/Login";
 
 export const router = createBrowserRouter(
     [
         {
             path: "/",
-            element: <Layout />,
+            element: <Layout/>,
             children: [
                 {
                     index: true,
-                    element: <Home />
+                    element: <Home/>
                 },
                 {
                     path: "catalogue",
-                    element: <Catalogue />
+                    element: <Catalogue/>
                 },
                 {
                     path: "catalogue/:brand",
-                    element: <Brand />
+                    element: <Brand/>
                 },
                 {
                     path: "catalogue/:brand/:product",
-                    element: <Product />
+                    element: <Product/>
                 },
                 {
                     path: "profile/:id",
-                    element: <Profile />
+                    element: <Profile/>
+                },
+                {
+                    path: "login",
+                    element: <Login/>
                 },
                 {
                     path: "*",

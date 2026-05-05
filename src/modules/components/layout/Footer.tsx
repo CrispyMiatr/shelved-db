@@ -1,9 +1,9 @@
-import '~styles/pages/app.scss'
+import '~styles/app.scss'
 
 export const Footer = () => {
     return (
         <nav className='footer'>
-            <h2>Footer</h2>
+            <h3>This is an unfinished footer</h3>
         </nav>
     );
 };

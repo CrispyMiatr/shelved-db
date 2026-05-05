@@ -1,9 +1,16 @@
-import '~styles/pages/app.scss'
+import '~styles/app.scss'
+import type {ButtonItem} from '~/shared/services/button.types';
+import {NavLink} from "react-router";
 
-export const Button = () => {
+export const NavButton = ({name, link}: ButtonItem) => {
     return (
-        <nav className='button'>
-            <h3>Header</h3>
-        </nav>
+        <NavLink
+            to={link}
+            className={({isActive}) =>
+                isActive ? 'button button--active' : 'button'
+            }
+        >
+            <p className='button__title'>{name}</p>
+        </NavLink>
     );
 };
