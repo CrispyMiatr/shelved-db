@@ -1,0 +1,29 @@
+.home-container {
+
+}
+
+.hero {
+
+  &__text {
+
+    &__title {
+
+    }
+
+    &__subtitle {
+
+    }
+
+    &__description {
+
+    }
+  }
+
+  &__banner {
+    width: 100vw;
+    height: 360px;
+
+    object-fit: cover;
+    object-position: center;
+  }
+}
