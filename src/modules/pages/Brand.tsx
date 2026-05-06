@@ -1,5 +1,5 @@
 import brand from '~styles/pages/brand.module.scss';
-import CocaCola from '~assets/logo_coca-cola.png'
+import CocaCola from '~assets/logo_coca-cola.png';
 
 export const Brand = () => {
     return (

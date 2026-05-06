@@ -1,4 +1,4 @@
-import '~styles/pages/catalogue.scss'
+import '~styles/pages/catalogue.scss';
 import home from "~styles/pages/home.module.scss";
 import chevron from "~assets/chevron-left.svg";
 import icon from "~styles/components/icons.module.scss";
@@ -30,16 +30,18 @@ export const Catalogue = () => {
                     </div>
 
                     <div className={home['index__header__filter']}>
-                        <div className={home['index-group']}>
-                            <div className={home['index-group__item']}>
-                                <div className={home['index-group__item__title']}>
-                                    3D Energy Drink
-                                </div>
 
-                                <div className={home['index-group__item__count']}>
-                                    [53]
-                                </div>
-                            </div>
+                    </div>
+                </div>
+
+                <div className={home['index__group']}>
+                    <div className={home['index__group__item']}>
+                        <div className={home['index__group__item__title']}>
+                            3D Energy Drink
+                        </div>
+
+                        <div className={home['index__group__item__count']}>
+                            [53]
                         </div>
                     </div>
                 </div>
