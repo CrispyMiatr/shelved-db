@@ -1,21 +1,20 @@
-import '~styles/pages/catalogue.scss';
-import home from "~styles/pages/home.module.scss";
-import chevron from "~assets/chevron-left.svg";
+import catalog from '~styles/pages/catalogue.module.scss';
 import icon from "~styles/components/icons.module.scss";
+import chevron from "~assets/chevron-left.svg";
 
 export const Catalogue = () => {
     return (
         <div className='catalogue-container'>
             <h2>Catalogue</h2>
 
-            <div className={home['brands']}>
-                <div className={home['brands__title']}>
+            <div className={catalog['brands']}>
+                <div className={catalog['brands__title']}>
                     <h3>Popular Profiles</h3>
                 </div>
-                <div className={home['brands__carousel']}>
+                <div className={catalog['brands__carousel']}>
                     <img src={chevron} alt="left" className={icon['chevron']}/>
 
-                    <div className={home['brands__carousel__items']}>
+                    <div className={catalog['brands__carousel__items']}>
                         Temp.
                     </div>
 
@@ -23,24 +22,24 @@ export const Catalogue = () => {
                 </div>
             </div>
 
-            <div className={home['index']}>
-                <div className={home['index__header']}>
-                    <div className={home['index__header__title']}>
+            <div className={catalog['index']}>
+                <div className={catalog['index__header']}>
+                    <div className={catalog['index__header__title']}>
                         <h3>All brands</h3>
                     </div>
 
-                    <div className={home['index__header__filter']}>
+                    <div className={catalog['index__header__filter']}>
 
                     </div>
                 </div>
 
-                <div className={home['index__group']}>
-                    <div className={home['index__group__item']}>
-                        <div className={home['index__group__item__title']}>
+                <div className={catalog['index__group']}>
+                    <div className={catalog['index__group__item']}>
+                        <div className={catalog['index__group__item__title']}>
                             3D Energy Drink
                         </div>
 
-                        <div className={home['index__group__item__count']}>
+                        <div className={catalog['index__group__item__count']}>
                             [53]
                         </div>
                     </div>
