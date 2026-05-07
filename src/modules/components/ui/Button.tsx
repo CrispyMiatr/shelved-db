@@ -7,10 +7,10 @@ export const NavButton = ({name, link}: ButtonItem) => {
         <NavLink
             to={link}
             className={({isActive}) =>
-                isActive ? 'button button--active' : 'button'
+                isActive ? 'nav-button button--active' : 'nav-button'
             }
         >
-            <p className='button__title'>{name}</p>
+            <p className='nav-button__title'>{name}</p>
         </NavLink>
     );
 };
