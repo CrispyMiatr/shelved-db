@@ -1,0 +1,47 @@
+@use '../base/general' as *;
+
+.catalogue-container {
+
+}
+
+brands {
+
+  &__title {
+
+  }
+
+  &__carousel {
+
+    &__items {
+
+    }
+  }
+}
+
+.index {
+
+  &__header {
+
+    &__title {
+
+    }
+
+    &__filter {
+
+    }
+
+    &__group {
+
+      &__item {
+
+        &__title {
+
+        }
+
+        &__count {
+
+        }
+      }
+    }
+  }
+}

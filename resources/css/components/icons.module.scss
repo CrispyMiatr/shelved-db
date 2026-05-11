@@ -1,0 +1,9 @@
+.chevron {
+  width: 10px;
+  height: 20px;
+  cursor: pointer;
+
+  &--right {
+    transform: rotate(180deg);
+  }
+}

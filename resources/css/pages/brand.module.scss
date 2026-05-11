@@ -1,0 +1,41 @@
+@use '../base/general' as *;
+
+.brand-container {
+
+}
+
+.breadcrumbs {
+
+}
+
+.divider-v {
+
+}
+
+.divider-h {
+
+}
+
+.header {
+
+  &__brand-title {
+
+    &__image {
+      width: 430px;
+      height: 140px;
+
+      object-fit: contain;
+    }
+  }
+
+  &__filter {
+
+  }
+}
+
+.products {
+
+  &__sort {
+
+  }
+}
