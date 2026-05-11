@@ -3,6 +3,7 @@ import home from '~styles/pages/home.module.scss'
 import icon from '~styles/components/icons.module.scss'
 import banner from '~assets/banner.jpg'
 import chevron from '~assets/icons/chevron-left.svg'
+import { ProfileCard } from '~/components/ui/ProfileCard';
 
 const Home = () => {
     return (
@@ -50,6 +51,7 @@ const Home = () => {
                             volume={500}
                             country={'CC'}
                             img={'https://placehold.co/150x200'}
+                            isSmall={false}
                         />
                     </div>
 
@@ -79,6 +81,7 @@ const Home = () => {
                             volume={500}
                             country={'CC'}
                             img={'https://placehold.co/150x200'}
+                            isSmall={false}
                         />
                     </div>
 
@@ -94,7 +97,7 @@ const Home = () => {
                     <img src={chevron} alt="left" className={icon['chevron']} />
 
                     <div className={home['profiles__carousel__items']}>
-                        Temp.
+                        <ProfileCard name={'Name'} username={'user.name'} img={'https://placehold.co/150x150'} />
                     </div>
 
                     <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />

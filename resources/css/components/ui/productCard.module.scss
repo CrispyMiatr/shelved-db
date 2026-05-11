@@ -1,3 +1,12 @@
 .product-card {
     background-color: #ffe8e8;
+    width: 150px;
+
+    &.small {
+        width: 130px;
+
+        img {
+            width: 130px;
+        }
+    }
 }

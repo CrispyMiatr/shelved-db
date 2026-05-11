@@ -42,6 +42,7 @@ const Brand = () => {
                     volume={500}
                     country={'CC'}
                     img={'https://placehold.co/150x200'}
+                    isSmall={true}
                 />
             </div>
         </div>
