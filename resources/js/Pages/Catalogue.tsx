@@ -1,8 +1,7 @@
-import { Layout } from '~/components';
+import { Layout, BrandCard } from '~/components';
 import catalog from '~styles/pages/catalogue.module.scss';
 import icon from "~styles/components/icons.module.scss";
 import chevron from "~assets/icons/chevron-left.svg";
-import { BrandCard } from '~/components/ui/BrandCard';
 
 const Catalogue = () => {
     return (

@@ -1,9 +1,8 @@
-import { Layout, ProductCard } from '~/components';
+import { Layout, ProductCard, ProfileCard } from '~/components';
 import home from '~styles/pages/home.module.scss'
 import icon from '~styles/components/icons.module.scss'
 import banner from '~assets/banner.jpg'
 import chevron from '~assets/icons/chevron-left.svg'
-import { ProfileCard } from '~/components/ui/ProfileCard';
 
 const Home = () => {
     return (

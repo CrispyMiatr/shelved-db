@@ -13,7 +13,7 @@ const Profile = () => {
 
                 <div className={profile['info-wrap__info']}>
                     <div className={profile['info-wrap__info__name']}>
-
+                        
                     </div>
 
                     <div className={profile['info-wrap__info__bio']}>
