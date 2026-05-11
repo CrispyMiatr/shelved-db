@@ -1,6 +1,12 @@
-import { Layout } from '~/components';
+import { Layout, ProductCard } from '~/components';
 import brand from '~styles/pages/brand.module.scss';
 import CocaCola from '~assets/logo_coca-cola.png';
+
+// filter dropdowns
+// sort buttons
+// product data retrieval
+// working product page redirect
+// working breadcrumbs
 
 const Brand = () => {
     return (
@@ -30,7 +36,22 @@ const Brand = () => {
                     <p>sort buttons</p>
                 </div>
 
-                <p>products</p>
+                {/* With brand name */}
+                <ProductCard
+                    name={'Product Name'}
+                    brand={'Brand Name'}
+                    volume={500}
+                    country={'CC'}
+                    img={'https://placehold.co/150x200'}
+                />
+
+                {/* Without brand name */}
+                <ProductCard
+                    name={'Product Name'}
+                    volume={500}
+                    country={'CC'}
+                    img={'https://placehold.co/150x200'}
+                />
             </div>
         </div>
     );

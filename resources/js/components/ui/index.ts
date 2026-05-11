@@ -1,4 +1,4 @@
 export { NavButton } from './Button';
 export { FilterDropdown } from './FilterDropdown'
-export { ProductItem } from './ProductItem'
+export { ProductCard } from './ProductCard'
 export { SearchBar } from './SearchBar'

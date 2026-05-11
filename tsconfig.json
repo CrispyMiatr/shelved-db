@@ -23,9 +23,6 @@
             ],
             "~styles/*": [
                 "./resources/css/*"
-            ],
-            "~types/*": [
-                "./resources/types/*"
             ]
         }
     },
