@@ -36,15 +36,6 @@ const Brand = () => {
                     <p>sort buttons</p>
                 </div>
 
-                {/* With brand name */}
-                <ProductCard
-                    name={'Product Name'}
-                    brand={'Brand Name'}
-                    volume={500}
-                    country={'CC'}
-                    img={'https://placehold.co/150x200'}
-                />
-
                 {/* Without brand name */}
                 <ProductCard
                     name={'Product Name'}

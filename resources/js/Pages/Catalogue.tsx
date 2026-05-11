@@ -2,6 +2,7 @@ import { Layout } from '~/components';
 import catalog from '~styles/pages/catalogue.module.scss';
 import icon from "~styles/components/icons.module.scss";
 import chevron from "~assets/icons/chevron-left.svg";
+import { BrandCard } from '~/components/ui/BrandCard';
 
 const Catalogue = () => {
     return (
@@ -16,7 +17,7 @@ const Catalogue = () => {
                     <img src={chevron} alt="left" className={icon['chevron']} />
 
                     <div className={catalog['brands__carousel__items']}>
-                        Temp.
+                        <BrandCard brand={'Brand Name'} count={9812} img={'https://placehold.co/200x200'} />
                     </div>
 
                     <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />

@@ -1,4 +1,4 @@
-import { Layout } from '~/components';
+import { Layout, ProductCard } from '~/components';
 import home from '~styles/pages/home.module.scss'
 import icon from '~styles/components/icons.module.scss'
 import banner from '~assets/banner.jpg'
@@ -44,7 +44,13 @@ const Home = () => {
                     <img src={chevron} alt="left" className={icon['chevron']} />
 
                     <div className={home['released__carousel__items']}>
-                        Temp.
+                        <ProductCard
+                            name={'Product Name'}
+                            brand={'Brand Name'}
+                            volume={500}
+                            country={'CC'}
+                            img={'https://placehold.co/150x200'}
+                        />
                     </div>
 
                     <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
@@ -67,7 +73,13 @@ const Home = () => {
                     <img src={chevron} alt="left" className={icon['chevron']} />
 
                     <div className={home['added__carousel__items']}>
-                        Temp.
+                        <ProductCard
+                            name={'Product Name'}
+                            brand={'Brand Name'}
+                            volume={500}
+                            country={'CC'}
+                            img={'https://placehold.co/150x200'}
+                        />
                     </div>
 
                     <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
