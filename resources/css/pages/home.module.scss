@@ -1,24 +1,16 @@
 @use '../base/general' as *;
 
-home-container {
-
-}
+.home-container {}
 
 .hero {
 
   &__text {
 
-    &__title {
+    &__title {}
 
-    }
+    &__subtitle {}
 
-    &__subtitle {
-
-    }
-
-    &__description {
-
-    }
+    &__description {}
   }
 
   &__banner {

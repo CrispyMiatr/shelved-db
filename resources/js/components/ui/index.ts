@@ -1,3 +1,4 @@
+export { Breadcrumbs } from './Breadcrumbs'
 export { NavButton } from './Button';
 export { FilterDropdown } from './FilterDropdown'
 export { SearchBar } from './SearchBar'

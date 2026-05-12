@@ -1,8 +1,7 @@
-import { Layout } from '~/components';
+import { Breadcrumbs, Layout } from '~/components';
 import prod from '~styles/pages/product.module.scss';
 import icon from "~styles/components/icons.module.scss";
 import chevron from "~assets/icons/chevron-left.svg";
-import { Link } from '@inertiajs/react';
 
 // TO-DO:
 // dynamic product information
@@ -15,7 +14,11 @@ const Product = ({ beverage }: any) => {
     return (
         <div className={prod['product-container']}>
             <div className={prod['breadcrumbs']}>
-                <p>Catalogue • Brand Name • Product Name</p>
+                <Breadcrumbs crumbs={[
+                    { label: 'Catalogue', href: '/catalogue' },
+                    { label: beverage.brand.name, href: `/catalogue/${beverage.brand.slug}` },
+                    { label: beverage.name }
+                ]} />
             </div>
 
             <div className={prod['product-wrap']}>

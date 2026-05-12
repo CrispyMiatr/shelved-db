@@ -1,4 +1,4 @@
-import { Layout, ProductCard } from '~/components';
+import { Breadcrumbs, Layout, ProductCard } from '~/components';
 import { BeverageType, BrandType } from '~/types';
 import { Link } from '@inertiajs/react';
 import styles from '~styles/pages/brand.module.scss';
@@ -12,7 +12,10 @@ const Brand = ({ brand }: Props) => {
     return (
         <div className={styles['brand-container']}>
             <div className={styles['breadcrumbs']}>
-                <p>Catalogue • Brand Name</p>
+                <Breadcrumbs crumbs={[
+                    { label: 'Catalogue', href: '/catalogue' },
+                    { label: brand.name }
+                ]} />
             </div>
 
             <div className={styles['header']}>
