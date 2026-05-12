@@ -1,49 +1,66 @@
 import { Layout, ProductCard } from '~/components';
-import brand from '~styles/pages/brand.module.scss';
-import CocaCola from '~assets/logo_coca-cola.png';
+import { BeverageType, BrandType } from '~/types';
+import { Link } from '@inertiajs/react';
+import styles from '~styles/pages/brand.module.scss';
+import global from '~styles/app.scss'
 
-// filter dropdowns
-// sort buttons
-// product data retrieval
-// working product page redirect
-// working breadcrumbs
+interface Props {
+    brand: BrandType & { beverages: BeverageType[] };
+}
 
-const Brand = () => {
+const Brand = ({ brand }: Props) => {
     return (
-        <div className={brand['brand-container']}>
-            <div className={brand['breadcrumbs']}>
+        <div className={styles['brand-container']}>
+            <div className={styles['breadcrumbs']}>
                 <p>Catalogue • Brand Name</p>
             </div>
 
-            <div className={brand['header']}>
-                <div className={brand['header__brand-title']}>
+            <div className={styles['header']}>
+                <div className={styles['header__brand-title']}>
                     <h2>The</h2>
-                    <span className={brand['divider-v']}></span>
-                    <img src={CocaCola} alt="brand logo" className={brand['header__brand-title__image']} />
-                    <span className={brand['divider-v']}></span>
+                    <span className={styles['divider-v']}></span>
+
+                    <img
+                        src={brand.logo_path || 'https://placehold.co/100x100?text=Brand Logo'}
+                        alt={`${brand.name} logo`}
+                        className={styles['header__brand-title__image']}
+                    />
+
+                    <span className={styles['divider-v']}></span>
                     <h2>Shelf</h2>
                 </div>
 
-                <div className={brand['header__filter']}>
-                    <p>filter dropdowns</p>
+                <div className={styles['header__filter']}>
+                    <p>{brand.beverages_count} Items total</p>
                 </div>
             </div>
 
-            <span className={brand['divider-h']}></span>
+            <span className={styles['divider-h']}></span>
 
-            <div className={brand['products']}>
-                <div className={brand['products__sort']}>
-                    <p>sort buttons</p>
+            <div className={styles['products']}>
+                <div className={styles['products__sort']}>
+                    <p>Sorted by: Newest</p>
                 </div>
 
-                {/* Without brand name */}
-                <ProductCard
-                    name={'Product Name'}
-                    volume={500}
-                    country={'CC'}
-                    img={'https://placehold.co/150x200'}
-                    isSmall={true}
-                />
+                <div className={styles['products__grid']}>
+                    {brand.beverages && brand.beverages.length > 0 ? (
+                        brand.beverages.map((beverage) => (
+                            <ProductCard
+                                key={beverage.id}
+                                name={beverage.name}
+                                volume={beverage.volume}
+                                country={beverage.country_code}
+                                img={beverage.img_url || 'https://placehold.co/150x200'}
+                                isSmall={true}
+                                href={`/catalogue/${brand.slug}/${beverage.slug}`}
+                            />
+                        ))
+                    ) : (
+                        <div className={styles['products__empty']}>
+                            <p>No products found for this brand.</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

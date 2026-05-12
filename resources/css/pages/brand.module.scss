@@ -1,20 +1,12 @@
 @use '../base/general' as *;
 
-.brand-container {
+.brand-container {}
 
-}
+.breadcrumbs {}
 
-.breadcrumbs {
+.divider-v {}
 
-}
-
-.divider-v {
-
-}
-
-.divider-h {
-
-}
+.divider-h {}
 
 .header {
 
@@ -28,14 +20,10 @@
     }
   }
 
-  &__filter {
-
-  }
+  &__filter {}
 }
 
 .products {
 
-  &__sort {
-
-  }
+  &__sort {}
 }

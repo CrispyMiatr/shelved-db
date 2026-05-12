@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -13,6 +14,37 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    /**
+     * Display a user's public profile.
+     */
+    public function show(Request $request, string $username): Response
+    {
+        // 1. Find user by username, or 404
+        $user = User::where('username', $username)
+            ->withCount(['collection', 'followers', 'following'])
+            ->firstOrFail();
+
+        $authUser = $request->user();
+
+        // 2. Privacy Logic
+        $isOwner = $authUser && $authUser->id === $user->id;
+        $isFollowing = $authUser ? $authUser->following()->where('following_id', $user->id)->exists() : false;
+        $followsBack = $authUser ? $user->following()->where('following_id', $authUser->id)->exists() : false;
+
+        $canSeeContent = !$user->is_private || $isOwner || ($isFollowing && $followsBack);
+
+        return Inertia::render('Profile/Show', [
+            'user' => $user->makeHidden(['email']), // Security: hide email on public profiles
+            'collection' => $canSeeContent 
+                ? $user->collection()->with('brand')->latest()->get() 
+                : [],
+            'isFollowing' => $isFollowing,
+            'isMutual' => $isFollowing && $followsBack,
+            'canSeeContent' => $canSeeContent,
+            'isOwner' => $isOwner
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -29,15 +61,35 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // The validation for 'username', 'bio', 'social_links', 'is_private' 
+        // should be added to your ProfileUpdateRequest file.
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return Redirect::route('profile.edit');
+    }
+
+    /**
+     * Follow/Unfollow Logic
+     */
+    public function toggleFollow(User $user): RedirectResponse
+    {
+        $authUser = Auth::user();
+
+        if ($authUser->id === $user->id) {
+            return back()->withErrors(['message' => 'You cannot follow yourself.']);
+        }
+
+        // toggle() adds if missing, removes if exists
+        $authUser->following()->toggle($user->id);
+
+        return back();
     }
 
     /**
@@ -50,9 +102,7 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();

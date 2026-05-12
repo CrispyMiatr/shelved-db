@@ -18,14 +18,25 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
+            'username' => [
+                'required', 'string', 'lowercase', 'alpha_dash', 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'email' => [
+                'required', 'string', 'lowercase', 'email', 'max:255',
+                Rule::unique(User::class)->ignore($this->user()->id),
+            ],
+            'bio' => ['nullable', 'string', 'max:500'],
+            'is_private' => ['boolean'],
+            'social_links' => ['nullable', 'array'],
+            'social_links.facebook' => ['nullable', 'url'],
+            'social_links.instagram' => ['nullable', 'url'],
+            'social_links.twitter' => ['nullable', 'url'],
+            'social_links.tiktok' => ['nullable', 'url'],
+            'social_links.threads' => ['nullable', 'url'],
+            'social_links.bluesky' => ['nullable', 'url'],
+            'social_links.youtube' => ['nullable', 'url'],
+            'social_links.ebay' => ['nullable', 'url'],
         ];
     }
 }

@@ -1,10 +1,11 @@
 export interface ProductCardType {
     name: string;
     brand?: string;
-    volume: number;
+    volume: string | number;
     country: string;
     img: string;
     isSmall?: boolean;
+    href: string;
 }
 
 export interface BrandCardType {

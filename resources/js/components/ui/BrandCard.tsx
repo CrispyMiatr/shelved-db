@@ -1,4 +1,4 @@
-import { BrandCardType } from '~/types/uiCards';
+import { BrandCardType } from '~/types/uiCards.types';
 import styles from '~styles/components/ui/brandCard.module.scss'
 
 export const BrandCard = ({ brand, count, img }: BrandCardType) => {

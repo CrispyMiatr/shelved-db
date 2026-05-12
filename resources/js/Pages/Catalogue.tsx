@@ -2,8 +2,9 @@ import { Layout, BrandCard } from '~/components';
 import catalog from '~styles/pages/catalogue.module.scss';
 import icon from "~styles/components/icons.module.scss";
 import chevron from "~assets/icons/chevron-left.svg";
+import { BrandType } from '~/types';
 
-const Catalogue = () => {
+const Catalogue = ({ brands }: { brands: BrandType[] }) => {
     return (
         <div className='catalogue-container'>
             <h2>Catalogue</h2>
@@ -35,15 +36,14 @@ const Catalogue = () => {
                 </div>
 
                 <div className={catalog['index__group']}>
-                    <div className={catalog['index__group__item']}>
-                        <div className={catalog['index__group__item__title']}>
-                            3D Energy Drink
+                    {brands.map(brand => (
+                        <div key={brand.id} className={catalog['index__group__item']}>
+                            {/* Use the .slug we created in the model! */}
+                            <a href={`/catalogue/${brand.slug}`}>
+                                {brand.name} [{brand.beverages_count}]
+                            </a>
                         </div>
-
-                        <div className={catalog['index__group__item__count']}>
-                            [53]
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
 export type { ButtonItem } from './button.types'
-export type { ProductCardType } from './uiCards'
-export type { BrandCardType } from './uiCards'
+export type { ProductCardType } from './uiCards.types'
+export type { BrandCardType } from './uiCards.types'
+export type { BrandType } from './brand.types'
+export type { BeverageType } from './beverage.types'

@@ -4,7 +4,7 @@ import icon from '~styles/components/icons.module.scss'
 import banner from '~assets/banner.jpg'
 import chevron from '~assets/icons/chevron-left.svg'
 
-const Home = () => {
+const Home = ({ newlyAdded, popularBrands }: any) => {
     return (
         <div className={home['home-container']}>
             <div className={home['hero']}>
@@ -51,6 +51,7 @@ const Home = () => {
                             country={'CC'}
                             img={'https://placehold.co/150x200'}
                             isSmall={false}
+                            href={''}
                         />
                     </div>
 
@@ -74,14 +75,18 @@ const Home = () => {
                     <img src={chevron} alt="left" className={icon['chevron']} />
 
                     <div className={home['added__carousel__items']}>
-                        <ProductCard
-                            name={'Product Name'}
-                            brand={'Brand Name'}
-                            volume={500}
-                            country={'CC'}
-                            img={'https://placehold.co/150x200'}
-                            isSmall={false}
-                        />
+                        {newlyAdded.map((item: any) => (
+                            <ProductCard
+                                key={item.id}
+                                name={item.name}
+                                brand={item.brand.name}
+                                volume={item.volume}
+                                country={item.country_code}
+                                img={item.img_url || 'https://placehold.co/150x200'}
+                                isSmall={false}
+                                href={`/catalogue/${item.brand.slug}/${item.slug}`}
+                            />
+                        ))}
                     </div>
 
                     <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 #[Fillable([
     'brand_id', 'name', 'lineup_flavor', 'country_code', 'sku', 
@@ -68,4 +69,33 @@ class Beverage extends Model
     {
         return $this->belongsToMany(User::class, 'beverage_user')->withTimestamps();
     }
+
+    /**
+     * Customizing Route Model Binding to handle "ID-Name" format.
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $id = explode('-', $value)[0];
+
+        // Check if the first part is actually a number
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        return $this->where('id', $id)->firstOrFail();
+    }
+
+    /**
+     * Helper to generate the URL slug in React.
+     * Use this in your frontend: beverage.slug
+     */
+    protected function slug(): \Illuminate\Database\Eloquent\Casts\Attribute
+    {
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
+            get: fn () => $this->id . '-' . \Illuminate\Support\Str::slug($this->name),
+        );
+    }
+
+    // Make sure 'slug' is sent to the frontend
+    protected $appends = ['slug'];
 }

@@ -1,7 +1,7 @@
 import { Layout } from '~/components';
 import profile from '~styles/pages/profile.module.scss';
 
-const Profile = () => {
+const Profile = ({ user, collection, isOwner }: any) => {
     return (
         <div className={profile['profile-container']}>
             <h2>Profile</h2>
@@ -13,11 +13,11 @@ const Profile = () => {
 
                 <div className={profile['info-wrap__info']}>
                     <div className={profile['info-wrap__info__name']}>
-                        
+                        <h2>{user.name}'s Profile (@{user.username})</h2>
                     </div>
 
                     <div className={profile['info-wrap__info__bio']}>
-
+                        <p>{user.bio}</p>
                     </div>
 
                     <div className={profile['info-wrap__info__data']}>
@@ -51,6 +51,9 @@ const Profile = () => {
                     </div>
 
                     <p>products</p>
+                    {collection.map((item: any) => (
+                        <div key={item.id}>{item.name}</div>
+                    ))}
                 </div>
             </div>
         </div>

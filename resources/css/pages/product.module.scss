@@ -1,12 +1,8 @@
 @use '../base/general' as *;
 
-.product-container {
+.product-container {}
 
-}
-
-.breadcrumbs {
-
-}
+.breadcrumbs {}
 
 .product-wrap {
 
@@ -14,39 +10,25 @@
 
     &__images {
 
-      &__preview {
+      &__preview {}
 
-      }
-
-      &__selection {
-
-      }
+      &__selection {}
     }
   }
 
   &__right {
 
-    &__title {
-
-    }
+    &__title {}
 
     &__info {
 
-      &__basic {
+      &__basic {}
 
-      }
+      &__ingredients {}
 
-      &__ingredients {
+      &__warning {}
 
-      }
-
-      &__warning {
-
-      }
-
-      &__nutrition {
-
-      }
+      &__nutrition {}
     }
   }
 }

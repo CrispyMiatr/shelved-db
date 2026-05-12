@@ -1,4 +1,4 @@
-import { ProfileCardType } from '~/types/uiCards';
+import { ProfileCardType } from '~/types/uiCards.types';
 import styles from '~styles/components/ui/profileCard.module.scss'
 
 export const ProfileCard = ({ name, username, img }: ProfileCardType) => {
