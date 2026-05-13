@@ -109,7 +109,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                             {user.social_links && Object.entries(user.social_links).map(([platform, url]) => {
                                 const linkUrl = url as string;
 
-                                // only render if the string is not empty
+                                // only render if URL string exists & not empty
                                 if (!linkUrl || linkUrl.trim() === '') return null;
 
                                 return (
@@ -118,15 +118,20 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                         href={linkUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        style={{ marginRight: '10px' }}
+                                        className={profile['social-icon-link']}
+                                        title={platform.charAt(0).toUpperCase() + platform.slice(1)}
                                     >
-                                        {/* capitalise the name (facebook -> Facebook) */}
-                                        {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                        <img
+                                            src={`/assets/icons/icon_${platform}.svg`}
+                                            alt={platform}
+                                            className={profile['social-icon']}
+                                            onError={(e) => (e.currentTarget.style.display = 'none')}
+                                        />
                                     </a>
                                 );
                             })}
                         </div>
-                        <button onClick={handleShare}>Share Profile</button>
+                        <button onClick={handleShare} className={profile['share-btn']}>Share Profile</button>
                     </div>
                 </div>
             </div>

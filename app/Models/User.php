@@ -40,14 +40,14 @@ class User extends Authenticatable
     protected function username(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => strtolower($value),
+            set: fn(string $value) => strtolower($value),
         );
     }
 
     /**
      * Check if the user is a Head Admin (Superuser).
      */
-    public function isHeadAdmin(): bool 
+    public function isHeadAdmin(): bool
     {
         return $this->role === 'head_admin';
     }
@@ -56,7 +56,7 @@ class User extends Authenticatable
      * Check if the user is a regular Admin or Head Admin.
      * Useful for "Staff Only" areas.
      */
-    public function isStaff(): bool 
+    public function isStaff(): bool
     {
         return in_array($this->role, ['admin', 'head_admin']);
     }
