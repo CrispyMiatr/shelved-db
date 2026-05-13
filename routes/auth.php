@@ -56,4 +56,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    Route::get('register/setup', function () {
+    return Inertia::render('Auth/RegisterSetup');
+})->name('register.setup');
 });

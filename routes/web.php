@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Profile Setup
+    Route::get('/setup', function () {
+        return Inertia::render('Auth/RegisterSetup');
+    })->name('register.setup');
+
     // Social Actions
     Route::post('/follow/{user}', [ProfileController::class, 'toggleFollow'])->name('follow.toggle');
     

@@ -61,8 +61,6 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        // The validation for 'username', 'bio', 'social_links', 'is_private' 
-        // should be added to your ProfileUpdateRequest file.
         $user = $request->user();
         $user->fill($request->validated());
 
@@ -72,7 +70,9 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.show', [
+            'username' => $user->username
+        ]);
     }
 
     /**

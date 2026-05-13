@@ -18,14 +18,23 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'username' => [
-                'required', 'string', 'lowercase', 'alpha_dash', 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
-            'email' => [
-                'required', 'string', 'lowercase', 'email', 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
+        'username' => [
+            'required',
+            'string',
+            'lowercase',
+            'max:255',
+            // a-z, 0-9, period (.), underscore (_), dash (-)
+            'regex:/^[a-zA-Z0-9\.\-_]+$/', 
+            Rule::unique(User::class)->ignore($this->user()->id),
+        ],
+        'email' => [
+            'required',
+            'string',
+            'lowercase',
+            'email',
+            'max:255',
+            Rule::unique(User::class)->ignore($this->user()->id),
+        ],
             'bio' => ['nullable', 'string', 'max:500'],
             'is_private' => ['boolean'],
             'social_links' => ['nullable', 'array'],
@@ -37,6 +46,16 @@ class ProfileUpdateRequest extends FormRequest
             'social_links.bluesky' => ['nullable', 'url'],
             'social_links.youtube' => ['nullable', 'url'],
             'social_links.ebay' => ['nullable', 'url'],
+        ];
+    }
+
+    /**
+     * Custom error messages for the regex
+     */
+    public function messages(): array
+    {
+        return [
+            'username.regex' => 'The username may only contain letters, numbers, dots, dashes, and underscores.',
         ];
     }
 }
