@@ -25,6 +25,9 @@ Route::get('/catalogue/{brand}/{beverage}', [BeverageController::class, 'show'])
 // Manufacturers List
 Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('manufacturers.index');
 
+// Collector search page
+Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
+
 // Public Social Profile (using the @username format)
 Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.show');
 
@@ -35,7 +38,7 @@ Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.sh
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    
+
     // Profile Editing (Breeze Defaults)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,14 +51,14 @@ Route::middleware('auth')->group(function () {
 
     // Social Actions
     Route::post('/follow/{user}', [ProfileController::class, 'toggleFollow'])->name('follow.toggle');
-    
+
     // Adding/Editing Beverages (OCR flow would start here)
     Route::get('/beverages/create', [BeverageController::class, 'create'])->name('beverage.create');
     Route::post('/beverages', [BeverageController::class, 'store'])->name('beverage.store');
-    
+
     // User Collection
     Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');
 });
 
 // Include standard Breeze Auth routes (Login, Register, etc.)
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

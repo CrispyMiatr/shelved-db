@@ -17,6 +17,7 @@ export const Header = () => {
 
                 <NavButton name="Home" link="/" />
                 <NavButton name="Catalogue" link="/catalogue" />
+                <NavButton name="Collectors" link="/collectors" />
 
                 <NavButton
                     name="Profile"

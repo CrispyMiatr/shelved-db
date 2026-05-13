@@ -115,4 +115,28 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Profile search logic
+     */
+    public function index(Request $request): Response
+    {
+        $search = $request->input('search');
+
+        $collectors = User::query()
+            ->select(['id', 'name', 'username', 'bio', 'is_private'])
+            ->withCount(['collection', 'followers', 'following'])
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'ilike', "%{$search}%") // ilike for case-insensitive Postgres search
+                    ->orWhere('username', 'ilike', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return Inertia::render('Collectors', [
+            'collectors' => $collectors,
+            'filters' => $request->only(['search'])
+        ]);
+    }
 }

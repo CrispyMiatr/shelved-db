@@ -1,7 +1,7 @@
 export { Breadcrumbs } from './Breadcrumbs'
 export { NavButton } from './Button';
 export { FilterDropdown } from './FilterDropdown'
-export { SearchBar } from './SearchBar'
+export { Searchbar } from './Searchbar'
 
 export { BrandCard } from './BrandCard'
 export { ProductCard } from './ProductCard'
