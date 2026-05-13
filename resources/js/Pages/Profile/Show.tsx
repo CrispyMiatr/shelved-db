@@ -1,6 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { Layout } from '~/components';
+import { Layout, ProductCard } from '~/components';
 import { PageProps } from '~/types';
 import profile from '~styles/pages/profile.module.scss';
 
@@ -160,9 +160,16 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                         <p>products</p>
                         {collection && collection.length > 0 ? (
                             collection.map((item: any) => (
-                                <div key={item.id} className={profile['item']}>
-                                    {item.name}
-                                </div>
+                                <ProductCard
+                                    key={item.id}
+                                    name={item.name}
+                                    brand={item.brand.name}
+                                    volume={item.volume}
+                                    country={item.country_code}
+                                    img={item.img_url || 'https://placehold.co/150x200'}
+                                    isSmall={false}
+                                    href={`/catalogue/${item.brand.slug}/${item.slug}`}
+                                />
                             ))
                         ) : (
                             <p>This collection is empty.</p>

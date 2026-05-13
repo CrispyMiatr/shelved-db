@@ -11,7 +11,7 @@ const Catalogue = ({ brands }: { brands: BrandType[] }) => {
 
             <div className={catalog['brands']}>
                 <div className={catalog['brands__title']}>
-                    <h3>Popular Profiles</h3>
+                    <h3>Popular Brands</h3>
                 </div>
                 <div className={catalog['brands__carousel']}>
                     <img src={chevron} alt="left" className={icon['chevron']} />
