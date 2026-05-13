@@ -1,32 +1,20 @@
 @use '../base/general' as *;
 
-.profile-container {
-
-}
+.profile-container {}
 
 .info-wrap {
 
-  &__avatar {
-
-  }
+  &__avatar {}
 
   &__info {
 
-    &__name {
+    &__name {}
 
-    }
+    &__bio {}
 
-    &__bio {
+    &__data {}
 
-    }
-
-    &__data {
-
-    }
-
-    &__socials {
-
-    }
+    &__socials {}
   }
 }
 
@@ -34,19 +22,77 @@
 
   &__header {
 
-    &__buttons {
+    &__buttons {}
 
-    }
-
-    &__filter {
-
-    }
+    &__filter {}
   }
 
   &__products {
 
-    &__sort {
-
-    }
+    &__sort {}
   }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  max-height: 70vh;
+  border-radius: 12px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: inherit;
+
+  img {
+    border-radius: 50%;
+  }
+
+  &__name {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__username {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    color: #007bff;
+  }
+}
+
+.private-notice {
+  text-align: center;
+  padding: 50px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 20px;
 }

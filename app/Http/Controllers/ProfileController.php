@@ -19,14 +19,12 @@ class ProfileController extends Controller
      */
     public function show(Request $request, string $username): Response
     {
-        // 1. Find user by username, or 404
         $user = User::where('username', $username)
             ->withCount(['collection', 'followers', 'following'])
             ->firstOrFail();
 
         $authUser = $request->user();
 
-        // 2. Privacy Logic
         $isOwner = $authUser && $authUser->id === $user->id;
         $isFollowing = $authUser ? $authUser->following()->where('following_id', $user->id)->exists() : false;
         $followsBack = $authUser ? $user->following()->where('following_id', $authUser->id)->exists() : false;
@@ -34,9 +32,16 @@ class ProfileController extends Controller
         $canSeeContent = !$user->is_private || $isOwner || ($isFollowing && $followsBack);
 
         return Inertia::render('Profile/Show', [
-            'user' => $user->makeHidden(['email']), // Security: hide email on public profiles
-            'collection' => $canSeeContent 
-                ? $user->collection()->with('brand')->latest()->get() 
+            'user' => $user->makeHidden(['email']),
+            'collection' => $canSeeContent
+                ? $user->collection()->with('brand')->latest()->get()
+                : [],
+            // FIX: Add 'users.' prefix to columns to avoid ambiguity
+            'followers' => $canSeeContent
+                ? $user->followers()->select(['users.id', 'users.name', 'users.username'])->get()
+                : [],
+            'following' => $canSeeContent
+                ? $user->following()->select(['users.id', 'users.name', 'users.username'])->get()
                 : [],
             'isFollowing' => $isFollowing,
             'isMutual' => $isFollowing && $followsBack,

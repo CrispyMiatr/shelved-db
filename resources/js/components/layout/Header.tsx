@@ -18,13 +18,11 @@ export const Header = () => {
                 <NavButton name="Home" link="/" />
                 <NavButton name="Catalogue" link="/catalogue" />
 
-                {/* If logged in, go to @username. If not, go to login */}
                 <NavButton
                     name="Profile"
                     link={user ? `/@${user.username}` : "/login"}
                 />
 
-                {/* Only show Sign In if user is NOT logged in */}
                 {!user && (
                     <NavButton name="Sign In" link="/login" />
                 )}
