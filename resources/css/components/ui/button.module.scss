@@ -1,21 +1,34 @@
+@use '~styles/base/general.scss' as *;
+
 .nav-button {
   cursor: pointer;
 
-  color: #000;
+  display: inline-block;
+  text-decoration: none;
 
-  padding: 9px 19px 9px 19px;
-  margin: 0px 11px;
+  color: $txt-black;
+  background-color: $clr-white;
+  border: solid 1px $clr-black;
+  border-radius: $rad-sm;
+
+  padding: 7px 14px 3px 14px;
+  margin: 5px;
 
   transition: all 0.1s ease-in-out;
 
   &:hover,
   &--active {
-    color: #fff;
+    color: $txt-white;
+    background-color: $clr-black;
+    border: solid 1px $clr-white;
   }
 
   &__title {
-    font-size: 20px;
+    font-family: $ff-title;
+    font-size: $fs-nav;
     font-weight: 400;
     text-align: center;
+
+    margin: 0;
   }
 }

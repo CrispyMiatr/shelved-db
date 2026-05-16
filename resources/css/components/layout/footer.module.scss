@@ -1,0 +1,31 @@
+@use '~styles/base/general.scss' as *;
+
+.footer {
+    background-color: $clr-gray-300;
+
+    &__container {
+        display: flex;
+
+        &__brand {
+
+            &__logo {
+                width: 85px;
+            }
+
+            &__text {}
+        }
+
+        &__socials {}
+
+        &__legal {}
+
+        &__pages {}
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+
+    &__link-item {}
+}

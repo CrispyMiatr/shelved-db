@@ -44,6 +44,8 @@ $color-no: $clr-red;
 $bg-body: $clr-white-b;
 $bg-card: $clr-white;
 $bg-title: $clr-black;
+$bg-nav-link: $clr-yellow;
+$bg-nav-dark: $clr-black;
 
 // Text
 $txt-black: $clr-black;
@@ -106,6 +108,7 @@ button {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 h1 {
