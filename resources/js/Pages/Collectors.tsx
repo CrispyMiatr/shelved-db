@@ -4,15 +4,15 @@ import { Layout, Searchbar } from '~/components';
 import styles from '~styles/pages/collectors.module.scss';
 
 const Collectors = ({ collectors, filters }: any) => {
-    // 1. Local state to store the growing list of collectors
+    // local state to store the growing list of collectors
     const [list, setList] = useState(collectors.data);
 
-    // 2. Update the list when the search results change or new data is fetched
+    // update list when the search results change or new data is fetched
     useEffect(() => {
         if (collectors.current_page === 1) {
-            setList(collectors.data); // Replace list with new search results
+            setList(collectors.data);
         } else {
-            setList((prev: any) => [...prev, ...collectors.data]); // Append for "See More"
+            setList((prev: any) => [...prev, ...collectors.data]);
         }
     }, [collectors.data]);
 
@@ -22,7 +22,7 @@ const Collectors = ({ collectors, filters }: any) => {
         router.get(collectors.next_page_url, {}, {
             preserveScroll: true,
             preserveState: true,
-            only: ['collectors'], // Only fetch the 'collectors' prop
+            only: ['collectors'],
         });
     };
 
@@ -32,7 +32,6 @@ const Collectors = ({ collectors, filters }: any) => {
 
             <header className={styles['header']}>
                 <h1>Collectors</h1>
-                {/* 3. Pass the filter to the search bar so it remembers the query */}
                 <Searchbar
                     variant="default"
                     placeholder="Search collectors..."

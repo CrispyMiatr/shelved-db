@@ -12,29 +12,29 @@ class ProfileUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array <string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-        'username' => [
-            'required',
-            'string',
-            'lowercase',
-            'max:255',
-            // a-z, 0-9, period (.), underscore (_), dash (-)
-            'regex:/^[a-zA-Z0-9\.\-_]+$/', 
-            Rule::unique(User::class)->ignore($this->user()->id),
-        ],
-        'email' => [
-            'required',
-            'string',
-            'lowercase',
-            'email',
-            'max:255',
-            Rule::unique(User::class)->ignore($this->user()->id),
-        ],
+            'username' => [
+                'required',
+                'string',
+                'lowercase',
+                'max:255',
+                // a-z, 0-9, period (.), underscore (_), dash (-)
+                'regex:/^[a-zA-Z0-9\.\-_]+$/',
+                Rule::unique(User::class)->ignore($this->user()->id),
+            ],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore($this->user()->id),
+            ],
             'bio' => ['nullable', 'string', 'max:500'],
             'is_private' => ['boolean'],
             'social_links' => ['nullable', 'array'],

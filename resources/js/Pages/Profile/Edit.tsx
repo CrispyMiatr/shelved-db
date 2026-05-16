@@ -18,7 +18,7 @@ export default function Edit() {
         email: user.email,
         bio: user.bio || '',
         is_private: user.is_private,
-        // Using fallback emptySocials in case user has never set them
+        // using fallback emptySocials in case user never set them
         social_links: user.social_links || emptySocials,
     });
 
@@ -105,7 +105,6 @@ export default function Edit() {
                                     onChange={e => handleSocialChange(platform, e.target.value)}
                                     placeholder={`Link to your ${platformName}...`}
                                 />
-                                {/* Error handling for nested JSON validation */}
                                 {errors[`social_links.${platform}` as any] && (
                                     <span className="error">{errors[`social_links.${platform}` as any]}</span>
                                 )}

@@ -21,7 +21,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
         ...results.beverages.map(b => ({ ...b, type: 'beverage' }))
     ];
 
-    // Helper to reset the search bar state completely
+    // helper to reset search bar state completely
     const closeAndClear = () => {
         setIsOpen(false);
         setQuery('');
@@ -29,7 +29,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
         setActiveIndex(-1);
     };
 
-    // Handle active search for Collectors page
+    // handle active search for Collectors page
     useEffect(() => {
         if (isHeaderMode) return;
         const delayDebounceFn = setTimeout(() => {
@@ -44,7 +44,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
         return () => clearTimeout(delayDebounceFn);
     }, [query]);
 
-    // Handle live API search for Header hropdown
+    // handle live API search for Header hropdown
     useEffect(() => {
         if (!isHeaderMode) return;
         if (query.length < 2) {
@@ -73,7 +73,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
         return () => clearTimeout(fetchResults);
     }, [query, isHeaderMode]);
 
-    // Close on click outside
+    // close on click outside
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (searchRef.current && !searchRef.current.contains(e.target as Node)) setIsOpen(false);

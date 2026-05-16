@@ -17,7 +17,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
         router.post(route('logout'));
     };
 
-    // Modal State
+    // modal state
     const [modalConfig, setModalConfig] = useState<{ show: boolean, type: 'followers' | 'following', data: any[] }>({
         show: false,
         type: 'followers',
@@ -31,7 +31,8 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
     };
 
     const openModal = (type: 'followers' | 'following') => {
-        if (!canSeeContent) return; // Prevent opening if private
+        // prevent opening if private
+        if (!canSeeContent) return;
         setModalConfig({
             show: true,
             type,
@@ -45,7 +46,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
 
             <div className={profile['info-wrap']}>
                 <div className={profile['info-wrap__avatar']}>
-                    {/* Placeholder for PFP */}
                     <img src={`https://ui-avatars.com/api/?name=${user.username}`} alt="avatar" />
                 </div>
 
@@ -57,7 +57,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                 <button onClick={handleLogout} className={profile['logout-btn']}>Log Out</button>
                             </>
                         ) : (
-                            // If not logged in, clicking Follow should take them to Login
                             !auth.user ? (
                                 <Link href={route('login')}>
                                     <button className={profile['btn-follow']}>Follow</button>
@@ -82,7 +81,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                         <p>{user.bio || 'No bio yet.'}</p>
                     </div>
 
-                    {/* Stats Section with Modal Trigger */}
                     <div className={profile['info-wrap__info__stats']}>
                         <div className={profile['stat-box']}>
                             <strong>{user.collection_count}</strong>

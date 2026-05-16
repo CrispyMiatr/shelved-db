@@ -12,7 +12,6 @@ const Register = () => {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         post(route('register'), {
-            // Adding these helpers to debug
             onFinish: () => console.log('Request finished'),
             onError: (err) => console.log('Validation Errors:', err),
         });
@@ -35,7 +34,6 @@ const Register = () => {
                         value={data.email}
                         onChange={e => setData('email', e.target.value)}
                     />
-                    {/* SHOW THE ERROR HERE */}
                     {errors.email && <div className="error-text" style={{ color: 'red' }}>{errors.email}</div>}
                 </div>
 
@@ -46,7 +44,6 @@ const Register = () => {
                         value={data.password}
                         onChange={e => setData('password', e.target.value)}
                     />
-                    {/* SHOW THE ERROR HERE */}
                     {errors.password && <div className="error-text" style={{ color: 'red' }}>{errors.password}</div>}
                 </div>
 
@@ -57,7 +54,6 @@ const Register = () => {
                         value={data.password_confirmation}
                         onChange={e => setData('password_confirmation', e.target.value)}
                     />
-                    {/* Password confirmation errors usually show up on the 'password' key */}
                 </div>
 
                 {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}

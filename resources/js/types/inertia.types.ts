@@ -15,6 +15,6 @@ export interface PageProps<T extends Record<string, unknown> = Record<string, un
     };
 
     // allows controllers to send any other data 
-    // without having to update this file every time.
+    // without having to update this file every time
     [key: string]: any;
 }

@@ -13,13 +13,12 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
 
-    // Check if scrolling is possible to show/hide arrows
+    // check if scrolling is possible to show/hide arrows
     const updateArrows = () => {
         if (scrollContainer.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
             setShowLeftArrow(scrollLeft > 0);
-            // Show right arrow if there is more content to scroll
-            // We use -1 to account for sub-pixel rounding errors
+            // uuse -1 to account for sub-pixel rounding errors
             setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
         }
     };
@@ -28,11 +27,11 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
         updateArrows();
         window.addEventListener('resize', updateArrows);
         return () => window.removeEventListener('resize', updateArrows);
-    }, [children]); // Re-run if items change
+    }, [children]);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainer.current) {
-            // Scroll by 80% of the visible width for a natural feel
+            // scroll by 80% of the visible width for natural feel
             const scrollAmount = scrollContainer.current.clientWidth * 0.8;
             scrollContainer.current.scrollBy({
                 left: direction === 'left' ? -scrollAmount : scrollAmount,

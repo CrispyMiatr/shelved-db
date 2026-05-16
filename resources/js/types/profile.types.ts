@@ -7,7 +7,7 @@ export interface SocialLinks {
     tiktok: string;
     youtube: string;
     ebay: string;
-    [key: string]: string; // This fixes the "index type" error
+    [key: string]: string;
 }
 
 export interface User {

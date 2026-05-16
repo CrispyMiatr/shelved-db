@@ -40,11 +40,11 @@
 
 .carousel-items {
     display: flex;
-    gap: 15px; // The fixed gap between your fixed cards
+    gap: 15px;
     padding: 10px 0;
-    width: max-content; // IMPORTANT: Prevents items from squishing
+    width: max-content;
 
-    // Ensure cards don't shrink below their defined size
+    // ensures cards don't shrink below their defined size
     &>* {
         flex: 0 0 auto;
     }

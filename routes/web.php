@@ -32,7 +32,7 @@ Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors
 // API for live dropdown search
 Route::get('/api/search', [SearchController::class, 'globalSearch'])->name('api.search');
 
-// Public social profile (using @username format)
+// Public social Profile (using @username format)
 Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.show');
 
 
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     // Social Actions
     Route::post('/follow/{user}', [ProfileController::class, 'toggleFollow'])->name('follow.toggle');
 
-    // Adding/Editing Beverages (OCR flow would start here)
+    // Adding/Editing Beverages (OCR flow)
     Route::get('/beverages/create', [BeverageController::class, 'create'])->name('beverage.create');
     Route::post('/beverages', [BeverageController::class, 'store'])->name('beverage.store');
 

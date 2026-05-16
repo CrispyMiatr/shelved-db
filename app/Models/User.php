@@ -16,7 +16,6 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -29,7 +28,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'social_links' => 'array', // Automatically converts JSON to a PHP array
+            'social_links' => 'array', // automatically converts JSON to a PHP array
             'is_private' => 'boolean',
         ];
     }

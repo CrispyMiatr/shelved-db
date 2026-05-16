@@ -36,7 +36,6 @@ class ProfileController extends Controller
             'collection' => $canSeeContent
                 ? $user->collection()->with('brand')->latest()->get()
                 : [],
-            // FIX: Add 'users.' prefix to columns to avoid ambiguity
             'followers' => $canSeeContent
                 ? $user->followers()->select(['users.id', 'users.name', 'users.username'])->get()
                 : [],

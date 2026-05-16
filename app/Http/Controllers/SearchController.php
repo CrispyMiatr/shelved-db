@@ -18,29 +18,25 @@ class SearchController extends Controller
         }
 
         try {
-            // 1. Search Brands
-            // We ONLY select real database columns: id, name, logo_path
-            // The 'slug' will be added automatically by Laravel when it converts to JSON
+            // search brands -> select real database columns: id, name, logo_path
             $brands = Brand::query()
                 ->where('name', 'ilike', "%{$q}%")
                 ->limit(5)
                 ->get(['id', 'name', 'logo_path']);
 
-            // 2. Search Beverages
+            // search beverages
             $beverages = Beverage::query()
-                // We load the brand relationship, selecting only what we need
                 ->with('brand:id,name')
                 ->where('name', 'ilike', "%{$q}%")
                 ->when(is_numeric($brandContextId), function ($query) use ($brandContextId) {
-                    // Prioritize the current brand
+                    // prioritise current brand
                     $query->orderByRaw("brand_id = ? DESC", [$brandContextId]);
                 })
                 ->orderBy('name', 'asc')
                 ->limit(10)
                 ->get(['id', 'name', 'brand_id']);
 
-            // Return as JSON. 
-            // Because of $appends in your models, 'slug' will appear in the result!
+            // return as JSON. 
             return response()->json([
                 'brands' => $brands,
                 'beverages' => $beverages

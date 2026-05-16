@@ -23,7 +23,7 @@ class Brand extends Model
     {
         $id = explode('-', $value)[0];
 
-        // Check if the first part is actually a number
+        // check if the first part is actually a number
         if (!is_numeric($id)) {
             abort(404);
         }

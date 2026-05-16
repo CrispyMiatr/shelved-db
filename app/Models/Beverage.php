@@ -85,7 +85,7 @@ class Beverage extends Model
     {
         $id = explode('-', $value)[0];
 
-        // Check if the first part is actually a number
+        // check if the first part is actually a number
         if (!is_numeric($id)) {
             abort(404);
         }
@@ -104,6 +104,6 @@ class Beverage extends Model
         );
     }
 
-    // Make sure 'slug' is sent to the frontend
+    // make sure 'slug' is sent to frontend
     protected $appends = ['slug'];
 }

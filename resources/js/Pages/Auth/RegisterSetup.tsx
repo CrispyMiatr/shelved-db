@@ -4,7 +4,6 @@ import { PageProps } from '~/types';
 import '~styles/pages/login.scss';
 
 const RegisterSetup = () => {
-    // We get the current user data from the page props
     const { auth } = usePage<PageProps>().props;
 
     const { data, setData, patch, processing, errors } = useForm({
@@ -17,7 +16,6 @@ const RegisterSetup = () => {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         patch(route('profile.update'), {
-            // Add this to see exactly why it fails if it happens again
             onError: (err) => console.log("Validation Failed:", err)
         });
     };
@@ -47,7 +45,7 @@ const RegisterSetup = () => {
                         placeholder="Choose a username"
                         type="text"
                         value={data.username}
-                        // Matches our regex: letters, numbers, dots, dashes, underscores
+                        // matches regex: letters, numbers, dots, dashes, underscores
                         pattern="[a-zA-Z0-9\.\-_]+"
                         onChange={e => setData('username', e.target.value)}
                     />
