@@ -1,0 +1,27 @@
+@use '~styles/base/general.scss' as *;
+
+.navbar {
+    color: $txt-white;
+    background-color: $bg-nav-link;
+
+    &__container {
+        display: flex;
+        align-items: center;
+
+        &__logo {
+            width: 35px;
+            display: block;
+        }
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__link-item {
+        display: flex;
+        align-items: center;
+    }
+}
