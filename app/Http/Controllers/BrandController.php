@@ -14,15 +14,13 @@ class BrandController extends Controller
     public function index(): Response
     {
         return Inertia::render('Catalogue', [
-            // The full alphabetical list
             'brands' => Brand::withCount('beverages')
                 ->orderBy('name')
                 ->get(),
 
-            // The top 10 most "popular" brands (most beverages)
             'popularBrands' => Brand::withCount('beverages')
                 ->orderBy('beverages_count', 'desc')
-                ->take(25)
+                ->take(15)
                 ->get()
         ]);
     }

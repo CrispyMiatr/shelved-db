@@ -1,47 +1,88 @@
 @use '../base/general' as *;
 
-.catalogue-container {
-
-}
+.catalogue-container {}
 
 brands {
 
-  &__title {
-
-  }
+  &__title {}
 
   &__carousel {
 
-    &__items {
-
-    }
+    &__items {}
   }
 }
 
 .index {
-
   &__header {
+    margin-bottom: 2rem;
+  }
 
-    &__title {
+  &__alphabet {
+    display: block;
+    column-gap: 2rem;
 
+    // Mobile
+    column-count: 1;
+
+    // Tablet
+    @media (min-width: 640px) {
+      column-count: 2;
     }
 
-    &__filter {
-
+    // Desktop
+    @media (min-width: 1024px) {
+      column-count: 4;
     }
+  }
 
-    &__group {
+  &__section {
+    display: inline-block;
+    width: 100%;
+    break-inside: avoid;
+    margin-bottom: 2rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+  }
 
-      &__item {
+  &__letter-title {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid $clr-gray-100;
+    padding-bottom: 0.25rem;
+  }
 
-        &__title {
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 
+    &__item {
+      font-size: 0.95rem;
+
+      a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+
+        &:hover {
+          color: var(--primary-color, #007bff);
+          text-decoration: underline;
         }
 
-        &__count {
-
+        span {
+          color: #888;
+          font-size: 0.8rem;
+          margin-left: 4px;
         }
       }
     }
+  }
+
+  &__empty {
+    font-style: italic;
+    color: #bbb;
+    font-size: 0.85rem;
+    margin: 0;
   }
 }
