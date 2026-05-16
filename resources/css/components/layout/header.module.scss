@@ -1,16 +1,30 @@
 @use '~styles/base/general.scss' as *;
 
 .navbar {
-    color: $txt-white;
-    background-color: $bg-nav-link;
+    position: relative;
+    z-index: 100;
+    overflow: visible !important;
 
     &__container {
         display: flex;
+        flex-direction: column;
         align-items: center;
 
-        &__logo {
-            width: 35px;
-            display: block;
+        &__top {
+            position: relative;
+            width: 100%;
+            background-color: $bg-nav-dark;
+        }
+
+        &__bottom {
+            width: 100%;
+            justify-content: center;
+            background-color: $bg-nav-link;
+
+            &__logo {
+                width: 35px;
+                display: block;
+            }
         }
     }
 }
@@ -18,6 +32,7 @@
 .links {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
 
     &__link-item {

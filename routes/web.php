@@ -5,6 +5,7 @@ use App\Http\Controllers\BeverageController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,7 +15,7 @@ use Inertia\Inertia;
 |--------------------------------------------------------------------------
 */
 
-// Home Page - Shows carousels
+// Homepage - Shows carousels
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Catalogue & Brands
@@ -22,13 +23,16 @@ Route::get('/catalogue', [BrandController::class, 'index'])->name('catalogue');
 Route::get('/catalogue/{brand}', [BrandController::class, 'show'])->name('brand.show');
 Route::get('/catalogue/{brand}/{beverage}', [BeverageController::class, 'show'])->name('beverage.show');
 
-// Manufacturers List
+// Manufacturers list
 Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('manufacturers.index');
 
 // Collector search page
 Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
 
-// Public Social Profile (using the @username format)
+// API for live dropdown search
+Route::get('/api/search', [SearchController::class, 'globalSearch'])->name('api.search');
+
+// Public social profile (using @username format)
 Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.show');
 
 

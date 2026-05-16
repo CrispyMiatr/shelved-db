@@ -28,11 +28,12 @@ $clr-white: #FFFFFF;
 $clr-white-b: #FAF8F3;
 
 $clr-gray-900: #1C1819;
+$clr-gray-800: #333333;
 $clr-gray-600: #797979;
 $clr-gray-500: #9A9A9A;
 $clr-gray-300: #C8C8C8;
 $clr-gray-200: #DADADA;
-$clr-gray-100: #EEEEEE;
+$clr-gray-100: #DDDDDD;
 
 // Brand / Palette
 $color-primary: $clr-black;
@@ -149,10 +150,6 @@ p {
   font-size: $fs-base;
   font-family: $ff-main;
   font-weight: $fw-regular;
-}
-
-a {
-  text-decoration: none;
 }
 
 

@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { NavButton } from "~/components";
+import { NavButton, Searchbar } from "~/components";
 import { PageProps } from '~/types';
 import logo from "~assets/logo-black.svg"
 import header from '~styles/components/layout/header.module.scss'
@@ -12,14 +12,14 @@ export const Header = () => {
         <nav className={header['navbar']}>
             <div className={header['navbar__container']}>
                 <div className={header['navbar__container__top']}>
-
+                    <Searchbar variant="header" />
                 </div>
 
                 <div className={header['navbar__container__bottom']}>
                     <ul className={header['links']}>
                         <li className={header['links__link-item']}>
                             <Link href="/">
-                                <img src={logo} alt="Shelved." className={header['navbar__container__logo']} />
+                                <img src={logo} alt="Shelved." className={header['navbar__container__bottom__logo']} />
                             </Link>
                         </li>
 

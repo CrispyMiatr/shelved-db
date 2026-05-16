@@ -34,8 +34,9 @@ const Collectors = ({ collectors, filters }: any) => {
                 <h1>Collectors</h1>
                 {/* 3. Pass the filter to the search bar so it remembers the query */}
                 <Searchbar
-                    placeholder="Search by name or username..."
-                    initialValue={filters.search || ''}
+                    variant="default"
+                    placeholder="Search collectors..."
+                    initialValue={filters.search}
                 />
             </header>
 

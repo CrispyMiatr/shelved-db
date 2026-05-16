@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 
 #[Fillable(['name', 'website_url', 'logo_path'])]
@@ -30,10 +31,10 @@ class Brand extends Model
         return $this->where('id', $id)->firstOrFail();
     }
 
-    protected function slug(): \Illuminate\Database\Eloquent\Casts\Attribute
+    protected function slug(): Attribute
     {
-        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
-            get: fn () => $this->id . '-' . \Illuminate\Support\Str::slug($this->name),
+        return Attribute::make(
+            get: fn() => $this->id . '-' . Str::slug($this->name),
         );
     }
 

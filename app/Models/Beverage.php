@@ -8,12 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 
 #[Fillable([
-    'brand_id', 'name', 'lineup_flavor', 'country_code', 'sku', 
-    'barcode', 'volume', 'release_date', 
-    'nutrition_100ml', 'nutrition_500ml'
+    'brand_id',
+    'name',
+    'lineup_flavor',
+    'country_code',
+    'sku',
+    'barcode',
+    'volume',
+    'release_date',
+    'nutrition_100ml',
+    'nutrition_500ml'
 ])]
 class Beverage extends Model
 {
@@ -89,10 +97,10 @@ class Beverage extends Model
      * Helper to generate the URL slug in React.
      * Use this in your frontend: beverage.slug
      */
-    protected function slug(): \Illuminate\Database\Eloquent\Casts\Attribute
+    protected function slug(): Attribute
     {
-        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
-            get: fn () => $this->id . '-' . \Illuminate\Support\Str::slug($this->name),
+        return Attribute::make(
+            get: fn() => $this->id . '-' . Str::slug($this->name),
         );
     }
 
