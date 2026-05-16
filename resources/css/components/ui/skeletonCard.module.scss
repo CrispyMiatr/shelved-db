@@ -1,0 +1,81 @@
+@use '~styles/base/general.scss' as *;
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-radius: 8px;
+
+    .shimmer {
+        @include shimmer-effect;
+        z-index: 1;
+    }
+
+    &.empty {
+        opacity: 0.6;
+
+        .shimmer {
+            display: none;
+        }
+    }
+
+    .image-box {
+        background: #e0e0e0;
+        width: 100%;
+        position: relative;
+    }
+
+    .text-line-short,
+    .text-line-long {
+        background: #e0e0e0;
+        height: 12px;
+        margin: 0 10px;
+        border-radius: 4px;
+    }
+
+    .text-line-short {
+        width: 40%;
+    }
+
+    .text-line-long {
+        width: 75%;
+    }
+
+    // Type modifiers
+    &.product {
+        width: 150px;
+
+        .image-box {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
+    &.brand {
+        width: 200px;
+
+        .image-box {
+            aspect-ratio: 1 / 1;
+        }
+    }
+
+    &.profile {
+        width: 150px;
+
+        .image-box {
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            width: 100px;
+            margin: 15px auto 5px;
+        }
+
+        .text-line-short,
+        .text-line-long {
+            align-self: center;
+        }
+    }
+}

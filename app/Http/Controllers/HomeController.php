@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beverage;
-use App\Models\Brand;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -14,12 +13,19 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'newlyAdded' => Beverage::with(['brand', 'englishTranslation'])
                 ->latest()
-                ->take(12)
+                ->take(25)
                 ->get(),
-            'popularBrands' => Brand::withCount('beverages')
-                ->orderBy('beverages_count', 'desc')
-                ->take(6)
-                ->get()
+
+            'newlyReleased' => Beverage::with(['brand', 'englishTranslation'])
+                ->orderBy('release_date', 'desc')
+                ->take(25)
+                ->get(),
+
+            'popularProfiles' => User::query()
+                ->withCount('followers')
+                ->orderBy('followers_count', 'desc')
+                ->take(25)
+                ->get(),
         ]);
     }
 }

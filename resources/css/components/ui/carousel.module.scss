@@ -1,0 +1,85 @@
+@use '~styles/base/general.scss' as *;
+
+.carousel-section {
+    width: 85vw;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none; // Firefox
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    // Chrome/Safari
+    width: 100%;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.carousel-items {
+    display: flex;
+    gap: 15px; // The fixed gap between your fixed cards
+    padding: 10px 0;
+    width: max-content; // IMPORTANT: Prevents items from squishing
+
+    // Ensure cards don't shrink below their defined size
+    &>* {
+        flex: 0 0 auto;
+    }
+}
+
+.nav-btn {
+    position: absolute;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    transition: opacity 0.3s ease, transform 0.2s ease;
+
+    &.left {
+        left: -15px;
+    }
+
+    &.right {
+        right: -15px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    &:hover {
+        background: #fff;
+        transform: scale(1.1);
+    }
+}

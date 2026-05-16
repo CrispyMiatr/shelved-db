@@ -1,26 +1,40 @@
-import { Layout, BrandCard } from '~/components';
+import { Layout, BrandCard, Carousel, SkeletonCard } from '~/components';
 import catalog from '~styles/pages/catalogue.module.scss';
-import icon from "~styles/components/icons.module.scss";
-import chevron from "~assets/icons/chevron-left.svg";
 import { BrandType } from '~/types';
 
-const Catalogue = ({ brands }: { brands: BrandType[] }) => {
+interface CatalogueProps {
+    brands: BrandType[];
+    popularBrands: BrandType[];
+}
+
+const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
+
+    const MIN_CAROUSEL_ITEMS = 10;
+
     return (
         <div className='catalogue-container'>
             <h2>Catalogue</h2>
 
             <div className={catalog['brands']}>
-                <div className={catalog['brands__title']}>
-                    <h3>Popular Brands</h3>
-                </div>
                 <div className={catalog['brands__carousel']}>
-                    <img src={chevron} alt="left" className={icon['chevron']} />
-
-                    <div className={catalog['brands__carousel__items']}>
-                        <BrandCard brand={'Brand Name'} count={9812} img={'https://placehold.co/200x200'} />
-                    </div>
-
-                    <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
+                    <Carousel title="Popular Brands">
+                        {popularBrands.map((brand: any) => (
+                            <BrandCard
+                                key={brand.id}
+                                brand={brand.name}
+                                count={brand.beverages_count}
+                                img={brand.logo_path || 'https://placehold.co/200x200'}
+                                href={`/catalogue/${brand.slug}`}
+                            />
+                        ))}
+                        {popularBrands.length < MIN_CAROUSEL_ITEMS && (
+                            <SkeletonCard
+                                type="brand"
+                                variant="empty"
+                                count={MIN_CAROUSEL_ITEMS - popularBrands.length}
+                            />
+                        )}
+                    </Carousel>
                 </div>
             </div>
 

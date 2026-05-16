@@ -1,10 +1,11 @@
-import { Layout, ProductCard, ProfileCard } from '~/components';
+import { Carousel, Layout, ProductCard, ProfileCard, SkeletonCard } from '~/components';
 import home from '~styles/pages/home.module.scss'
-import icon from '~styles/components/icons.module.scss'
 import banner from '~assets/banner.jpg'
-import chevron from '~assets/icons/chevron-left.svg'
 
-const Home = ({ newlyAdded, popularBrands }: any) => {
+const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
+
+    const MIN_CAROUSEL_ITEMS = 10;
+
     return (
         <div className={home['home-container']}>
             <div className={home['hero']}>
@@ -30,51 +31,34 @@ const Home = ({ newlyAdded, popularBrands }: any) => {
             </div>
 
             <div className={home['released']}>
-                <div className={home['released__header']}>
-                    <div className={home['released__header__title']}>
-                        <h3>Newly Released</h3>
-                    </div>
-
-                    <div className={home['released__header__timestamp']}>
-                        <img src="" alt="clock icon" />
-                        <p>Next refresh in: 16:55:42</p>
-                    </div>
-                </div>
                 <div className={home['released__carousel']}>
-                    <img src={chevron} alt="left" className={icon['chevron']} />
-
-                    <div className={home['released__carousel__items']}>
-                        <ProductCard
-                            name={'Product Name'}
-                            brand={'Brand Name'}
-                            volume={500}
-                            country={'CC'}
-                            img={'https://placehold.co/150x200'}
-                            isSmall={false}
-                            href={''}
-                        />
-                    </div>
-
-                    <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
+                    <Carousel title="Newly Released" headerExtra={<p>Next refresh in: 16:55:42</p>}>
+                        {newlyReleased.map((item: any) => (
+                            <ProductCard
+                                key={item.id}
+                                name={item.name}
+                                brand={item.brand.name}
+                                volume={item.volume}
+                                country={item.country_code}
+                                img={item.img_url || 'https://placehold.co/150x200'}
+                                href={`/catalogue/${item.brand.slug}/${item.slug}`}
+                            />
+                        ))}
+                        {newlyReleased.length < MIN_CAROUSEL_ITEMS && (
+                            <SkeletonCard
+                                type="product"
+                                variant="empty"
+                                count={MIN_CAROUSEL_ITEMS - newlyReleased.length}
+                            />
+                        )}
+                    </Carousel>
                 </div>
 
             </div>
 
             <div className={home['added']}>
-                <div className={home['added__header']}>
-                    <div className={home['added__header__title']}>
-                        <h3>Newly Added</h3>
-                    </div>
-
-                    <div className={home['added__header__timestamp']}>
-                        <img src="" alt="clock icon" />
-                        <p>Next refresh in: 56 s</p>
-                    </div>
-                </div>
                 <div className={home['added__carousel']}>
-                    <img src={chevron} alt="left" className={icon['chevron']} />
-
-                    <div className={home['added__carousel__items']}>
+                    <Carousel title="Newly Added" headerExtra={<p>Next refresh in: 56s</p>}>
                         {newlyAdded.map((item: any) => (
                             <ProductCard
                                 key={item.id}
@@ -83,28 +67,40 @@ const Home = ({ newlyAdded, popularBrands }: any) => {
                                 volume={item.volume}
                                 country={item.country_code}
                                 img={item.img_url || 'https://placehold.co/150x200'}
-                                isSmall={false}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
-                    </div>
-
-                    <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
+                        {newlyAdded.length < MIN_CAROUSEL_ITEMS && (
+                            <SkeletonCard
+                                type="product"
+                                variant="empty"
+                                count={MIN_CAROUSEL_ITEMS - newlyAdded.length}
+                            />
+                        )}
+                    </Carousel>
                 </div>
             </div>
 
             <div className={home['profiles']}>
-                <div className={home['profiles__title']}>
-                    <h3>Popular Profiles</h3>
-                </div>
                 <div className={home['profiles__carousel']}>
-                    <img src={chevron} alt="left" className={icon['chevron']} />
-
-                    <div className={home['profiles__carousel__items']}>
-                        <ProfileCard name={'Name'} username={'user.name'} img={'https://placehold.co/150x150'} />
-                    </div>
-
-                    <img src={chevron} alt="right" className={`${icon['chevron']} ${icon['chevron--right']}`} />
+                    <Carousel title="Popular Profiles">
+                        {popularProfiles.map((user: any) => (
+                            <ProfileCard
+                                key={user.id}
+                                name={user.name}
+                                username={user.username}
+                                img={`https://ui-avatars.com/api/?name=${user.username}`}
+                                href={`/@${user.username}`}
+                            />
+                        ))}
+                        {popularProfiles.length < MIN_CAROUSEL_ITEMS && (
+                            <SkeletonCard
+                                type="profile"
+                                variant="empty"
+                                count={MIN_CAROUSEL_ITEMS - popularProfiles.length}
+                            />
+                        )}
+                    </Carousel>
                 </div>
             </div>
         </div>
