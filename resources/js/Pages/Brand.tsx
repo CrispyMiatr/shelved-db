@@ -1,14 +1,16 @@
-import { Breadcrumbs, Layout, ProductCard } from '~/components';
+import { Breadcrumbs, FilterGroup, Layout, ProductCard } from '~/components';
 import { BeverageType, BrandType } from '~/types';
 import { Link } from '@inertiajs/react';
 import styles from '~styles/pages/brand.module.scss';
-import global from '~styles/app.scss'
 
 interface Props {
-    brand: BrandType & { beverages: BeverageType[] };
+    brand: BrandType;
+    beverages: BeverageType[];
+    filters: any;
+    options: any;
 }
 
-const Brand = ({ brand }: Props) => {
+const Brand = ({ brand, beverages, filters, options }: Props) => {
     return (
         <div className={styles['brand-container']}>
             <div className={styles['breadcrumbs']}>
@@ -34,7 +36,11 @@ const Brand = ({ brand }: Props) => {
                 </div>
 
                 <div className={styles['header__filter']}>
-                    <p>{brand.beverages_count} Items total</p>
+                    {/* The filter component we built */}
+                    <FilterGroup filters={filters} options={options} />
+                    <p className={styles['item-count']}>
+                        {beverages.length} {beverages.length === 1 ? 'Item' : 'Items'} found
+                    </p>
                 </div>
             </div>
 
@@ -46,8 +52,8 @@ const Brand = ({ brand }: Props) => {
                 </div>
 
                 <div className={styles['products__grid']}>
-                    {brand.beverages && brand.beverages.length > 0 ? (
-                        brand.beverages.map((beverage) => (
+                    {beverages && beverages.length > 0 ? (
+                        beverages.map((beverage) => (
                             <ProductCard
                                 key={beverage.id}
                                 name={beverage.name}
@@ -60,7 +66,10 @@ const Brand = ({ brand }: Props) => {
                         ))
                     ) : (
                         <div className={styles['products__empty']}>
-                            <p>No products found for this brand.</p>
+                            <p>No products match your selected filters.</p>
+                            <Link href={window.location.pathname} className={styles['clear-link']}>
+                                Clear all filters
+                            </Link>
                         </div>
                     )}
                 </div>

@@ -1,10 +1,10 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { Layout, ProductCard } from '~/components';
+import { FilterGroup, Layout, ProductCard } from '~/components';
 import { PageProps } from '~/types';
 import profile from '~styles/pages/profile.module.scss';
 
-const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent }: any) => {
+const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent, totalInCollection, filters, options }: any) => {
 
     const { auth } = usePage<PageProps>().props;
 
@@ -136,46 +136,67 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
 
             {!canSeeContent ? (
                 <div className={profile['private-notice']}>
-                    <p>This profile is private. Follow each other to see their collection.</p>
+                    <p>This profile is private.</p>
                 </div>
             ) : (
                 <div className={profile['collection-wrap']}>
                     <div className={profile['collection-wrap__header']}>
                         <h3>My Collection</h3>
-                        <p>{user.collection_count || 0} collectibles</p>
+                        <p>{totalInCollection} items total</p>
 
-                        <div className={profile['collection-wrap__header__buttons']}>
-
-                        </div>
-
-                        <div className={profile['collection-wrap__header__filter']}>
-                            <p>filter dropdowns</p>
-                        </div>
+                        {totalInCollection > 0 && (
+                            <div className={profile['collection-wrap__header__filter']}>
+                                <FilterGroup filters={filters} options={options} />
+                            </div>
+                        )}
                     </div>
 
                     <span className={profile['divider-h']}></span>
 
                     <div className={profile['collection-wrap__products']}>
-                        <div className={profile['collection-wrap__products__sort']}>
-                            <p>sort buttons</p>
-                        </div>
-
-                        <p>products</p>
-                        {collection && collection.length > 0 ? (
-                            collection.map((item: any) => (
-                                <ProductCard
-                                    key={item.id}
-                                    name={item.name}
-                                    brand={item.brand.name}
-                                    volume={item.volume}
-                                    country={item.country_code}
-                                    img={item.img_url || 'https://placehold.co/150x200'}
-                                    isSmall={false}
-                                    href={`/catalogue/${item.brand.slug}/${item.slug}`}
-                                />
-                            ))
+                        {collection.length > 0 ? (
+                            <div className={profile['products__grid']}>
+                                {collection.map((item: any) => (
+                                    <ProductCard
+                                        key={item.id}
+                                        name={item.name}
+                                        brand={item.brand.name}
+                                        volume={item.volume}
+                                        country={item.country_code}
+                                        img={item.img_url || 'https://placehold.co/150x200'}
+                                        isSmall={false}
+                                        href={`/catalogue/${item.brand.slug}/${item.slug}`}
+                                    />
+                                ))}
+                            </div>
                         ) : (
-                            <p>This collection is empty.</p>
+                            /* no items visible */
+                            <div className={profile['empty-state']}>
+                                {totalInCollection > 0 ? (
+                                    /* user has items, but filters hid them */
+                                    <div className={profile['no-matches']}>
+                                        <p>No items match your selected filters.</p>
+                                        <Link
+                                            href={route('profile.show', user.username)}
+                                            className={profile['clear-link']}
+                                        >
+                                            Clear all filters
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    /* user has zero items in database */
+                                    <div className={profile['completely-empty']}>
+                                        <p>This shelf is currently empty.</p>
+                                        {isOwner ? (
+                                            <Link href="/catalogue" className={profile['browse-btn']}>
+                                                Browse Catalogue to add your first beverage or upload a new beverage to the database.
+                                            </Link>
+                                        ) : (
+                                            <p>This collector hasn't added anything yet.</p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                         )}
                     </div>
                 </div>
