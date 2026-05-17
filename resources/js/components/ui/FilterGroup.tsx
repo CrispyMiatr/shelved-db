@@ -1,24 +1,9 @@
 import { router } from '@inertiajs/react';
 import { useState, useRef, useEffect } from 'react';
+import { FilterGroupProps, FilterGroupType } from '~/types';
 import styles from '~styles/components/ui/filterGroup.module.scss';
 
-interface FilterOption {
-    label: string;
-    value: string | number;
-}
-
-interface Props {
-    filters: Record<string, string | number | null>;
-    options: {
-        brands?: FilterOption[];
-        volumes?: FilterOption[];
-        years?: FilterOption[];
-        flavors?: FilterOption[];
-        countries?: FilterOption[];
-    };
-}
-
-export const FilterGroup = ({ filters, options }: Props) => {
+export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +36,7 @@ export const FilterGroup = ({ filters, options }: Props) => {
         setOpenDropdown(null);
     };
 
-    const renderDropdown = (key: string, label: string, data?: FilterOption[], pluralLabel?: string) => {
+    const renderDropdown = (key: string, label: string, data?: FilterGroupType[], pluralLabel?: string) => {
         // only render if there are options available
         if (!data || data.length === 0) return null;
 
