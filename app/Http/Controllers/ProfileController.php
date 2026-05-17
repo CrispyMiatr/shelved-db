@@ -26,29 +26,35 @@ class ProfileController extends Controller
 
         $authUser = $request->user();
 
-        // 1. Determine Permissions
+        // determine permissions
         $isOwner = $authUser && $authUser->id === $user->id;
         $isFollowing = $authUser ? $authUser->following()->where('following_id', $user->id)->exists() : false;
         $followsBack = $authUser ? $user->following()->where('following_id', $authUser->id)->exists() : false;
         $canSeeContent = !$user->is_private || $isOwner || ($isFollowing && $followsBack);
 
-        // 2. Prepare Collection Data
+        // prepare collection data
         $baseCollection = $user->collection();
         $totalInCollection = $baseCollection->count();
 
         $collection = [];
         $options = [];
 
+        $sortField = $request->input('sort', 'created_at');
+        $direction = $request->input('direction', 'desc');
+
+        // apply filters & get dropdown options via helper
         if ($canSeeContent) {
-            // Apply filters via helper
-            $collection = $this->getFilteredCollection($user, $request);
-            // Get dropdown options via helper
+            $collection = $this->getFilteredCollection($user, $request, $sortField, $direction);
             $options = $this->getFilterOptions($baseCollection);
         }
 
         return Inertia::render('Profile/Show', [
             'user' => $user->makeHidden(['email']),
             'collection' => $collection,
+            'sort' => [
+                'field' => $sortField,
+                'direction' => $direction
+            ],
             'totalInCollection' => $totalInCollection,
             'followers' => $canSeeContent ? $this->getSocialList($user, 'followers') : [],
             'following' => $canSeeContent ? $this->getSocialList($user, 'following') : [],
@@ -62,10 +68,14 @@ class ProfileController extends Controller
     }
 
     /**
-     * Helper: Apply filters and get beverages
+     * Helper: apply filters and get beverages
      */
-    private function getFilteredCollection(User $user, Request $request)
+    private function getFilteredCollection(User $user, Request $request, $sort, $direction)
     {
+        $allowedSorts = ['name', 'volume', 'release_date', 'country_code', 'lineup_flavor', 'created_at'];
+        $sort = in_array($sort, $allowedSorts) ? $sort : 'created_at';
+        $direction = in_array($direction, ['asc', 'desc']) ? $direction : 'desc';
+
         return $user->collection()
             ->with(['brand', 'englishTranslation'])
             ->when($request->brand, fn($q, $b) => $q->where('brand_id', $b))
@@ -73,12 +83,12 @@ class ProfileController extends Controller
             ->when($request->year, fn($q, $y) => $q->whereYear('release_date', $y))
             ->when($request->country, fn($q, $c) => $q->where('country_code', $c))
             ->when($request->flavor, fn($q, $f) => $q->where('lineup_flavor', $f))
-            ->latest()
+            ->orderBy($sort, $direction)
             ->get();
     }
 
     /**
-     * Helper: Extract unique options for dropdowns
+     * Helper: extract unique options for dropdowns
      */
     private function getFilterOptions($baseCollection): array
     {
@@ -122,7 +132,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Helper: Get social lists with correct columns
+     * Helper: get social lists with correct columns
      */
     private function getSocialList(User $user, string $type)
     {

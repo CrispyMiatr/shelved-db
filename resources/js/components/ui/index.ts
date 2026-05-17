@@ -4,6 +4,7 @@ export { FilterDropdown } from './FilterDropdown';
 export { Searchbar } from './Searchbar';
 export { Carousel } from './Carousel';
 export { FilterGroup } from './FilterGroup';
+export { SortButton } from './SortButton';
 
 export { BrandCard } from './BrandCard';
 export { ProductCard } from './ProductCard';

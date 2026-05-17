@@ -32,40 +32,75 @@ class BrandController extends Controller
      */
     public function show(Request $request, Brand $brand): Response
     {
-        $query = $brand->beverages();
+        // 1. Determine Sort
+        $sortField = $request->input('sort', 'created_at');
+        $direction = $request->input('direction', 'desc');
 
-        // 1. Apply Filters
-        $query->when($request->input('volume'), fn($q, $v) => $q->where('volume', $v))
-            ->when($request->input('year'), fn($q, $y) => $q->whereYear('release_date', $y))
-            ->when($request->input('flavor'), fn($q, $f) => $q->where('lineup_flavor', $f))
-            ->when($request->input('country'), fn($q, $c) => $q->where('country_code', $c));
-
-        // 2. Get unique options for filters (Performance: Use distinct on indexed columns)
-        $allBeverages = $brand->beverages();
+        // 2. Fetch Data via Helpers
+        $beverages = $this->getFilteredBeverages($brand, $request, $sortField, $direction);
+        $options = $this->getFilterOptions($brand);
 
         return Inertia::render('Brand', [
             'brand' => $brand,
-            'beverages' => $query->with('englishTranslation')->latest()->get(),
+            'beverages' => $beverages,
             'filters' => $request->all(['volume', 'year', 'flavor', 'country']),
-            'options' => [
-                'volumes' => $allBeverages->clone()->distinct()->pluck('volume')->map(fn($v) => ['label' => $v . 'mL', 'value' => $v]),
-                'years' => $allBeverages->clone()->whereNotNull('release_date')->selectRaw('DISTINCT EXTRACT(YEAR FROM release_date) as year')->pluck('year')->map(fn($y) => ['label' => $y, 'value' => $y]),
-                'flavors' => $allBeverages->clone()->whereNotNull('lineup_flavor')->distinct()->pluck('lineup_flavor')->map(fn($f) => ['label' => $f, 'value' => $f]),
-                'countries' => $allBeverages->clone()
-                    ->whereNotNull('country_code')
-                    ->distinct()
-                    ->pluck('country_code')
-                    ->map(function ($code) {
-                        $upperCode = strtoupper($code);
-                        return [
-                            /// converts CC to Country Code
-                            'label' => Countries::exists($upperCode) ? Countries::getName($upperCode) : $upperCode,
-                            'value' => $code
-                        ];
-                    })
-                    ->sortBy('label')
-                    ->values(),
+            'options' => $options,
+            'sort' => [
+                'field' => $sortField,
+                'direction' => $direction
             ]
         ]);
+    }
+
+    /**
+     * Helper: filter and sort beverages.
+     */
+    private function getFilteredBeverages(Brand $brand, Request $request, $sort, $direction)
+    {
+        // Whitelist allowed sort columns
+        $allowedSorts = ['name', 'volume', 'release_date', 'country_code', 'lineup_flavor', 'created_at'];
+        $sort = \in_array($sort, $allowedSorts, true) ? $sort : 'created_at';
+        $direction = \in_array($direction, ['asc', 'desc'], true) ? $direction : 'desc';
+
+        return $brand->beverages()
+            ->with('englishTranslation')
+            ->when($request->input('volume'), fn($q, $v) => $q->where('volume', $v))
+            ->when($request->input('year'), fn($q, $y) => $q->whereYear('release_date', $y))
+            ->when($request->input('flavor'), fn($q, $f) => $q->where('lineup_flavor', $f))
+            ->when($request->input('country'), fn($q, $c) => $q->where('country_code', $c))
+            ->orderBy($sort, $direction)
+            ->get();
+    }
+
+    /**
+     * Helper: unique filter options.
+     */
+    private function getFilterOptions(Brand $brand): array
+    {
+        $base = $brand->beverages();
+
+        return [
+            'volumes' => $base->clone()->distinct()->pluck('volume')
+                ->map(fn($v) => [
+                    'label' => "{$v} mL",
+                    'value' => $v
+                ]),
+            'years' => $base->clone()->whereNotNull('release_date')
+                ->selectRaw('DISTINCT EXTRACT(YEAR FROM release_date) as year')
+                ->pluck('year')->map(fn($y) => [
+                    'label' => (string) $y,
+                    'value' => (int) $y
+                ]),
+            'flavors' => $base->clone()->whereNotNull('lineup_flavor')->distinct()->pluck('lineup_flavor')
+                ->map(fn($f) => [
+                    'label' => $f,
+                    'value' => $f
+                ]),
+            'countries' => $base->clone()->whereNotNull('country_code')->distinct()->pluck('country_code')
+                ->map(fn($c) => [
+                    'label' => Countries::exists(\strtoupper($c)) ? Countries::getName(\strtoupper($c)) : \strtoupper($c),
+                    'value' => $c
+                ])->sortBy('label')->values(),
+        ];
     }
 }

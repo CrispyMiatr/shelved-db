@@ -1,12 +1,13 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { FilterGroup, Layout, ProductCard } from '~/components';
+import { FilterGroup, Layout, ProductCard, SortButton } from '~/components';
 import { PageProps } from '~/types';
 import profile from '~styles/pages/profile.module.scss';
 
-const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent, totalInCollection, filters, options }: any) => {
+const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent, totalInCollection, filters, options, sort }: any) => {
 
     const { auth } = usePage<PageProps>().props;
+    const { field, direction } = sort;
 
     const handleShare = () => {
         navigator.clipboard.writeText(window.location.href);
@@ -150,6 +151,17 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                             </div>
                         )}
                     </div>
+
+                    <div className={profile['collection-wrap__products__sort']}>
+                        <SortButton label="Name" field="name" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Country" field="country_code" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Year" field="release_date" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Volume" field="volume" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Flavour" field="lineup_flavor" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Brand" field="brand_id" currentSort={field} currentDirection={direction} />
+                        <SortButton label="Newest" field="created_at" currentSort={field} currentDirection={direction} />
+                    </div>
+
 
                     <span className={profile['divider-h']}></span>
 

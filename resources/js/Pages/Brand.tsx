@@ -1,4 +1,4 @@
-import { Breadcrumbs, FilterGroup, Layout, ProductCard } from '~/components';
+import { Breadcrumbs, FilterGroup, Layout, ProductCard, SortButton } from '~/components';
 import { BeverageType, BrandType } from '~/types';
 import { Link } from '@inertiajs/react';
 import styles from '~styles/pages/brand.module.scss';
@@ -8,9 +8,15 @@ interface Props {
     beverages: BeverageType[];
     filters: any;
     options: any;
+    sort: {
+        field: string;
+        direction: 'asc' | 'desc';
+    };
 }
 
-const Brand = ({ brand, beverages, filters, options }: Props) => {
+const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
+    const { field, direction } = sort;
+
     return (
         <div className={styles['brand-container']}>
             <div className={styles['breadcrumbs']}>
@@ -36,7 +42,6 @@ const Brand = ({ brand, beverages, filters, options }: Props) => {
                 </div>
 
                 <div className={styles['header__filter']}>
-                    {/* The filter component we built */}
                     <FilterGroup filters={filters} options={options} />
                     <p className={styles['item-count']}>
                         {beverages.length} {beverages.length === 1 ? 'Item' : 'Items'} found
@@ -48,7 +53,12 @@ const Brand = ({ brand, beverages, filters, options }: Props) => {
 
             <div className={styles['products']}>
                 <div className={styles['products__sort']}>
-                    <p>Sorted by: Newest</p>
+                    <SortButton label="Name" field="name" currentSort={field} currentDirection={direction} />
+                    <SortButton label="Country" field="country_code" currentSort={field} currentDirection={direction} />
+                    <SortButton label="Year" field="release_date" currentSort={field} currentDirection={direction} />
+                    <SortButton label="Volume" field="volume" currentSort={field} currentDirection={direction} />
+                    <SortButton label="Flavour" field="lineup_flavor" currentSort={field} currentDirection={direction} />
+                    <SortButton label="Newest" field="created_at" currentSort={field} currentDirection={direction} />
                 </div>
 
                 <div className={styles['products__grid']}>
