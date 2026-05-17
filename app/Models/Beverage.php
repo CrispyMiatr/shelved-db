@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
+use Symfony\Component\Intl\Countries;
 
 #[Fillable([
     'brand_id',
@@ -94,6 +95,19 @@ class Beverage extends Model
     }
 
     /**
+     * Helper to convert CC to Country Code full name.
+     */
+    protected function countryName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $code = strtoupper($this->country_code);
+                return Countries::exists($code) ? Countries::getName($code) : $code;
+            },
+        );
+    }
+
+    /**
      * Helper to generate the URL slug in React.
      * Use this in your frontend: beverage.slug
      */
@@ -105,5 +119,5 @@ class Beverage extends Model
     }
 
     // make sure 'slug' is sent to frontend
-    protected $appends = ['slug'];
+    protected $appends = ['slug', 'country_name'];
 }
