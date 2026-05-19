@@ -2,6 +2,9 @@
 
 .footer {
     background-color: $clr-gray-300;
+    width: 100%;
+
+    display: none;
 
     &__container {
         display: flex;

@@ -4,7 +4,7 @@ import banner from '~assets/banner.jpg'
 
 const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
 
-    const MIN_CAROUSEL_ITEMS = 10;
+    const MIN_CAROUSEL_ITEMS = 20;
 
     return (
         <div className={home['home-container']}>
