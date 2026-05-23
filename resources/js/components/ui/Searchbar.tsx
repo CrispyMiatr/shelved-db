@@ -112,7 +112,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
             {isHeaderMode && isOpen && (results.brands.length > 0 || results.beverages.length > 0) && (
                 <div className={styles['dropdown']}>
                     {results.brands.length > 0 && (
-                        <div className={styles['section']}>
+                        <div className={styles['dropdown__section']}>
                             <label>Brands</label>
                             {results.brands.map((brand, idx) => (
                                 <Link
@@ -128,7 +128,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
                     )}
 
                     {results.beverages.length > 0 && (
-                        <div className={styles['section']}>
+                        <div className={styles['dropdown__section']}>
                             <label>Beverages</label>
                             {results.beverages.map((bev, idx) => {
                                 const globalIdx = results.brands.length + idx;
@@ -139,9 +139,9 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
                                         className={`${styles['item']} ${activeIndex === globalIdx ? styles['active'] : ''}`}
                                         onClick={closeAndClear}
                                     >
-                                        <div className={styles['item-info']}>
-                                            <span className={styles['name']}>{bev.name}</span>
-                                            <span className={styles['brand-tag']}>{bev.brand.name}</span>
+                                        <div className={styles['item__info']}>
+                                            <span className={styles['item__info__name']}>{bev.name}</span>
+                                            <span className={styles['item__info__brand-tag']}>{bev.brand.name}</span>
                                         </div>
                                     </Link>
                                 );
