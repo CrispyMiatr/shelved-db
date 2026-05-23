@@ -22,9 +22,10 @@
     width: 100%;
     max-width: 420px;
     padding: 2rem;
-    gap: 1.25rem;
+    gap: 1rem;
 
     background-color: $bg-card;
+    border: solid 1px $clr-gray-300;
     border-radius: $rad-lg;
     box-shadow: 0 10px 25px $sh-card;
 
@@ -160,6 +161,6 @@
     }
 
     button {
-        @include button;
+        @include btn;
     }
 }
