@@ -27,17 +27,16 @@ const Collectors = ({ collectors, filters }: any) => {
     };
 
     return (
-        <div className={styles['container']}>
-            <Head title="Collectors" />
+        <div className={styles['collector-container']}>
+            <div className={styles['title']}>
+                <h2>Collectors</h2>
+            </div>
 
-            <header className={styles['header']}>
-                <h1>Collectors</h1>
-                <Searchbar
-                    variant="default"
-                    placeholder="Search collectors..."
-                    initialValue={filters.search}
-                />
-            </header>
+            <Searchbar
+                variant="default"
+                placeholder="Search collectors..."
+                initialValue={filters.search}
+            />
 
             <div className={styles['grid']}>
                 {list.length > 0 ? (
@@ -45,19 +44,37 @@ const Collectors = ({ collectors, filters }: any) => {
                         <Link
                             key={collector.id}
                             href={`/@${collector.username}`}
-                            className={styles['card']}
+                            className={styles['grid__card']}
                         >
                             <img
                                 src={`https://ui-avatars.com/api/?name=${collector.username}&background=random`}
-                                alt=""
+                                alt={collector.name}
+                                className={styles['grid__card__avatar']}
                             />
-                            <div className={styles['card-info']}>
-                                <h3>{collector.name}</h3>
-                                <p className={styles['username']}>@{collector.username}</p>
 
-                                <div className={styles['stats']}>
-                                    <span><strong>{collector.collection_count}</strong> Items</span>
-                                    <span><strong>{collector.followers_count}</strong> Followers</span>
+                            <div className={styles['grid__card__info']}>
+                                {/* Name and Username stack vertically */}
+                                <div className={styles['grid__card__info__user']}>
+                                    <h3>{collector.name}</h3>
+                                    <p>@{collector.username}</p>
+                                </div>
+
+                                {/* Stats flow horizontally to the right */}
+                                <div className={styles['grid__card__info__stats']}>
+                                    <div className={styles['stat']}>
+                                        <strong>{collector.collection_count}</strong>
+                                        <span>{collector.collection_count === 1 ? 'item' : 'items'}</span>
+                                    </div>
+
+                                    <div className={styles['stat']}>
+                                        <strong>{collector.followers_count}</strong>
+                                        <span>{collector.followers_count === 1 ? 'follower' : 'followers'}</span>
+                                    </div>
+
+                                    <div className={styles['stat']}>
+                                        <strong>{collector.following_count}</strong>
+                                        <span>following</span>
+                                    </div>
                                 </div>
                             </div>
                         </Link>

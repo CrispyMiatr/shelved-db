@@ -1,1 +1,132 @@
 @use '~styles/base/general.scss' as *;
+
+.collector-container {
+    margin: 20px auto;
+    padding: 0 24px;
+    max-width: 700px;
+}
+
+.title {
+    text-align: center;
+    margin: 30px 0 25px 0;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__card {
+        display: flex;
+        align-items: flex-start;
+        padding: 16px;
+
+        background-color: $bg-card;
+        border: solid 1px $clr-gray-300;
+        border-radius: 10px;
+        box-shadow: 1px 1px 4px $sh-card;
+
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 2px 4px 12px $sh-card;
+        }
+
+        &__avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 12px;
+
+            &__user {
+                h3 {
+                    font-family: $ff-main;
+                    font-size: $fs-md;
+                    font-weight: $fw-semibold;
+                    margin: 0;
+                    line-height: 1.2;
+                }
+
+                p {
+                    font-size: $fs-sm;
+                    color: $clr-gray-600;
+                    margin: 2px 0 0;
+                }
+            }
+
+            &__stats {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+
+                .stat {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 2px;
+
+                    strong {
+                        font-size: $fs-md;
+                    }
+
+                    span {
+                        font-size: $fs-xs;
+                        color: $clr-gray-600;
+                    }
+                }
+            }
+        }
+
+        // DESKTOP LAYOUT
+        @media (min-width: $bp-md) {
+            align-items: center;
+            padding: 12px 20px;
+
+            &__avatar {
+                width: 60px;
+                height: 60px;
+                margin-right: 20px;
+            }
+
+            &__info {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+
+                &__user {
+                    min-width: 150px;
+                }
+
+                &__stats {
+                    gap: 30px;
+                    text-align: center;
+
+                    .stat {
+                        flex-direction: column;
+                        align-items: center;
+                        min-width: 70px;
+                        gap: 0;
+
+                        strong {
+                            font-size: $fs-lg;
+                        }
+
+                        span {
+                            font-size: $fs-sm;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
