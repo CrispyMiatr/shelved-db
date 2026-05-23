@@ -6,11 +6,21 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
-#[Fillable(['name', 'website_url', 'logo_path'])]
+#[Fillable(['company_id', 'name', 'website_url', 'logo_path'])]
 class Brand extends Model
 {
+
+    /**
+     * Get the company that owns the brand.
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     /**
      * Get the beverages for the brand.
      */

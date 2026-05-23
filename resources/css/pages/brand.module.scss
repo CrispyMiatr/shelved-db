@@ -30,6 +30,17 @@
   flex-direction: column;
   align-items: center;
 
+  &__company {
+
+    p {
+      font-size: $fs-xs;
+      font-weight: $fw-light;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: $txt-muted;
+    }
+  }
+
   &__brand-title {
     display: flex;
     flex-direction: row;

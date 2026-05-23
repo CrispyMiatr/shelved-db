@@ -17,7 +17,7 @@ const Product = ({ beverage }: any) => {
     // Mocking 6 images (replace with beverage.media or similar library call)
     const images = beverage.media?.slice(0, 6) || [beverage.img_url, ...Array(5).fill(beverage.img_url)].filter(Boolean);
 
-    const translation = beverage.translations.find((t: any) => t.language_code === activeLang)
+    const translation = beverage.translations.find((trans: any) => trans.language_code === activeLang)
         || beverage.translations[0];
 
     const toggleSection = (section: SectionKey) => {
@@ -82,7 +82,7 @@ const Product = ({ beverage }: any) => {
                     </header>
 
                     <section className={prod['basic-info']}>
-                        <InfoRow label="Company" value={beverage.brand.company_name || 'N/A'} />
+                        <InfoRow label="Company" value={beverage.brand.company?.name || 'N/A'} />
                         <InfoRow label="Brand" value={beverage.brand.name} />
                         <InfoRow label="Name" value={beverage.name} />
                         <InfoRow label="Country" value={`${beverage.country_name} [${beverage.country_code}]`} />
@@ -93,13 +93,13 @@ const Product = ({ beverage }: any) => {
                         <InfoRow label="Barcode" value={beverage.barcode} />
                         <InfoRow label="Website" value={beverage.brand.website} isLink />
 
-                        <div className={prod['producers-row']}>
-                            <label>Producer(s)</label>
+                        <div className={prod['manufacturers-row']}>
+                            <label>Manufacturer(s)</label>
                             <div className={prod['manu-list']}>
                                 {beverage.manufacturers.map((manu: any) => (
                                     <div key={manu.id} className={prod['manu-badge']} title={manu.name}>
                                         {/* <img src={manu.logo_path || '/assets/icons/default-factory.svg'} alt={manu.name} /> */}
-                                        <img src={manu.logo_path || '/assets/icons/default-factory.svg'} />
+                                        <img src={'/assets/logos/Ball-Corporation.svg'} />
                                     </div>
                                 ))}
                             </div>
@@ -155,15 +155,14 @@ const Product = ({ beverage }: any) => {
 
             {beverage.translations.length > 1 && (
                 <div className={prod['language-selector']}>
-                    <span className={prod['lang-label']}>Available Languages:</span>
                     <div className={prod['lang-buttons']}>
-                        {beverage.translations.map((t: any) => (
+                        {beverage.translations.map((trans: any) => (
                             <button
-                                key={t.language_code}
-                                onClick={() => setActiveLang(t.language_code)}
-                                className={activeLang === t.language_code ? prod['active'] : ''}
+                                key={trans.language_code}
+                                onClick={() => setActiveLang(trans.language_code)}
+                                className={activeLang === trans.language_code ? prod['active'] : ''}
                             >
-                                {t.language_code.toUpperCase()}
+                                {trans.language_code.toUpperCase()}
                             </button>
                         ))}
                     </div>

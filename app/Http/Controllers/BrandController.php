@@ -32,6 +32,8 @@ class BrandController extends Controller
      */
     public function show(Request $request, Brand $brand): Response
     {
+        $brand->load('company');
+
         // 1. Determine Sort
         $sortField = $request->input('sort', 'created_at');
         $direction = $request->input('direction', 'desc');

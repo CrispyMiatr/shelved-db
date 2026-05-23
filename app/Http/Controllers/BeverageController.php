@@ -10,7 +10,7 @@ class BeverageController extends Controller
     public function show(string $brandName, Beverage $beverage)
     {
         // eager load all complex data
-        $beverage->load(['brand', 'manufacturers', 'translations']);
+        $beverage->load(['brand', 'brand.company', 'manufacturers', 'translations']);
 
         return Inertia::render('Product', [
             'beverage' => $beverage,

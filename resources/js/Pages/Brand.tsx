@@ -28,6 +28,10 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
             </div>
 
             <div className={styles['header']}>
+                <div className={styles['header__company']}>
+                    <p>{brand.company?.name || 'Independent Brand'}</p>
+                </div>
+
                 <div className={styles['header__brand-title']}>
                     <h3>The</h3>
                     <span className={styles['divider-v']}></span>

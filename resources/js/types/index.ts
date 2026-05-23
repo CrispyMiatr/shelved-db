@@ -1,6 +1,7 @@
 export type { ButtonItem, SortButtonType } from './button.types'
 export type { ProductCardType, BrandCardType, ProfileCardType, SkeletonCardType } from './uiCards.types'
 export type { BrandType } from './brand.types'
+export type { CompanyType } from './company.types'
 export type { BeverageType } from './beverage.types'
 export type { BreadcrumbType } from './breadcrumb.styles'
 export type { SocialLinks, User } from './profile.types'

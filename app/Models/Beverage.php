@@ -51,7 +51,8 @@ class Beverage extends Model
      */
     public function translations(): HasMany
     {
-        return $this->hasMany(BeverageTranslation::class);
+        return $this->hasMany(BeverageTranslation::class)
+            ->orderBy('language_code', 'asc');
     }
 
     /**

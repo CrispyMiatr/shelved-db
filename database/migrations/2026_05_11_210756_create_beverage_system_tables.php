@@ -10,8 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
+
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->index();
+            $table->string('country_code', 2)->nullable(); // ISO codes
+            $table->string('website_url')->nullable();
+            $table->string('logo_path')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('name')->index();
             $table->string('website_url')->nullable();
             $table->string('logo_path')->nullable();
@@ -73,7 +84,8 @@ return new class extends Migration {
         Schema::dropIfExists('beverages');
 
         // Drop independent tables last
-        Schema::dropIfExists('manufacturers');
         Schema::dropIfExists('brands');
+        Schema::dropIfExists('companies');
+        Schema::dropIfExists('manufacturers');
     }
 };
