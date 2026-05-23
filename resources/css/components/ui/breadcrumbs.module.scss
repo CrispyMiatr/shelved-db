@@ -3,9 +3,14 @@
 .breadcrumbs {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 4px;
     font-size: $fs-sm;
-    margin-bottom: 20px;
+    margin: 5px 5px 20px 5px;
+
+    @media (min-width: $bp-md) {
+        justify-content: start;
+    }
 
     a {
         text-decoration: none;
