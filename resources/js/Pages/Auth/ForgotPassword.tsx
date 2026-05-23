@@ -1,6 +1,7 @@
-import { useForm, Head } from '@inertiajs/react';
+import { useForm, Head, Link } from '@inertiajs/react';
 import { Layout } from '~/components';
-import '~styles/pages/login.scss'
+import { Mail, ArrowLeft } from 'lucide-react';
+import auth from '~styles/pages/auth.module.scss';
 
 const ForgotPassword = ({ status }: { status?: string }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -13,27 +14,48 @@ const ForgotPassword = ({ status }: { status?: string }) => {
     };
 
     return (
-        <div className="auth-container">
+        <div className={auth['auth-container']}>
             <Head title="Forgot Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link.
-            </div>
+            <form onSubmit={submit} className={auth['form']}>
+                <div className={auth['form__title']}>
+                    <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />
+                    <h3>Reset Password</h3>
+                    <p><strong>No worries.</strong> <br />Enter your email and we'll send you a link to reset it.</p>
+                </div>
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+                {status && (
+                    <div className={auth['form__status']}>
+                        {status}
+                    </div>
+                )}
 
-            <form onSubmit={submit}>
-                <input
-                    type="email"
-                    value={data.email}
-                    placeholder="Email address"
-                    onChange={(e) => setData('email', e.target.value)}
-                    required
-                />
-                {errors.email && <div className="error">{errors.email}</div>}
+                <div className={auth['form__element']}>
+                    <label htmlFor="email">
+                        <Mail size={14} />
+                        Email Address
+                    </label>
+                    <input
+                        id="email"
+                        type="email"
+                        value={data.email}
+                        placeholder="example@mail.com"
+                        onChange={(e) => setData('email', e.target.value)}
+                        required
+                    />
+                    {errors.email && <div className="error">{errors.email}</div>}
+                </div>
 
-                <button disabled={processing}>Email Password Reset Link</button>
+                <button disabled={processing} className={auth['form__submit']}>
+                    {processing ? 'Sending...' : 'Send Reset Link'}
+                </button>
+
+                <div className={auth['form__footer']}>
+                    <Link href={route('login')}>
+                        <ArrowLeft size={14} />
+                        Back to Sign In
+                    </Link>
+                </div>
             </form>
         </div>
     );

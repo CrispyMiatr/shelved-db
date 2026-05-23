@@ -1,7 +1,8 @@
 import { useForm, Head, usePage } from '@inertiajs/react';
 import { Layout } from '~/components';
 import { PageProps } from '~/types';
-import '~styles/pages/login.scss';
+import { User, AtSign, BookOpen } from 'lucide-react';
+import authS from '~styles/pages/auth.module.scss';
 
 const RegisterSetup = () => {
     const { auth } = usePage<PageProps>().props;
@@ -15,54 +16,67 @@ const RegisterSetup = () => {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        patch(route('profile.update'), {
-            onError: (err) => console.log("Validation Failed:", err)
-        });
+        patch(route('profile.update'));
     };
 
     return (
-        <div className="auth-container">
+        <div className={authS['auth-container']}>
             <Head title="Complete Profile" />
 
-            <form onSubmit={submit}>
-                <h2>Welcome, {auth.user.email}</h2>
-                <p>Let's finish setting up your account.</p>
+            <form onSubmit={submit} className={authS['form--wide']}>
+                <div className={authS['form__title']}>
+                    <img src={'/logo-black.svg'} alt="Shelved." className={authS['form__title__logo']} />
+                    <h3>Welcome!</h3>
+                    <p>Let's finish setting up your account for <br /> <strong>{auth.user.email}</strong></p>
+                </div>
 
-                <div className="field">
-                    <label>Full Name</label>
+                <div className={authS['form__element']}>
+                    <label htmlFor="name">
+                        <User size={14} />
+                        Display Name
+                    </label>
                     <input
-                        placeholder="Your Name"
+                        id="name"
                         type="text"
                         value={data.name}
                         onChange={e => setData('name', e.target.value)}
+                        placeholder="John Doe"
                     />
-                    {errors.name && <div className="error-text" style={{ color: 'red' }}>{errors.name}</div>}
+                    {errors.name && <div className="error">{errors.name}</div>}
                 </div>
 
-                <div className="field">
-                    <label>Username</label>
+                <div className={authS['form__element']}>
+                    <label htmlFor="username">
+                        <AtSign size={14} />
+                        Username
+                    </label>
                     <input
-                        placeholder="Choose a username"
+                        id="username"
                         type="text"
                         value={data.username}
-                        // matches regex: letters, numbers, dots, dashes, underscores
                         pattern="[a-zA-Z0-9\.\-_]+"
                         onChange={e => setData('username', e.target.value)}
+                        placeholder="john.doe"
                     />
-                    {errors.username && <div className="error-text" style={{ color: 'red' }}>{errors.username}</div>}
+                    {errors.username && <div className="error">{errors.username}</div>}
                 </div>
 
-                <div className="field">
-                    <label>Bio</label>
+                <div className={authS['form__element']}>
+                    <label htmlFor="bio">
+                        <BookOpen size={14} />
+                        Bio
+                    </label>
                     <textarea
-                        placeholder="Tell us about your collection..."
+                        id="bio"
                         value={data.bio}
                         onChange={e => setData('bio', e.target.value)}
+                        rows={4}
+                        placeholder="Tell us about yourself..."
                     />
-                    {errors.bio && <div className="error-text" style={{ color: 'red' }}>{errors.bio}</div>}
+                    {errors.bio && <div className="error">{errors.bio}</div>}
                 </div>
 
-                <button type="submit" disabled={processing}>
+                <button type="submit" disabled={processing} className={authS['form__submit']}>
                     {processing ? 'Finishing...' : 'Finish & View Profile'}
                 </button>
             </form>

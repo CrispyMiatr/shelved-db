@@ -1,0 +1,165 @@
+@use '~styles/base/general.scss' as *;
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: calc(100dvh - 120px);
+    padding: 0 24px;
+
+    background-color: $bg-body;
+
+    @media (min-width: $bp-md) {
+        min-height: 95vh;
+        padding: 0;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    gap: 1.25rem;
+
+    background-color: $bg-card;
+    border-radius: $rad-lg;
+    box-shadow: 0 10px 25px $sh-card;
+
+    &--wide {
+        max-width: 460px;
+    }
+
+    &__title {
+        justify-content: center;
+        text-align: center;
+
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+
+        h3 {
+            font-size: $fs-lg;
+            margin: 0;
+        }
+
+        p {
+            font-size: $fs-sm;
+            color: $txt-muted;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+
+            strong {
+                color: $txt-black;
+                word-break: break-all;
+            }
+        }
+
+        &__logo {
+            width: 45px;
+            padding-bottom: 1.5rem;
+        }
+    }
+
+    &__status {
+        background-color: rgba($clr-green, 0.1);
+        color: darken($clr-green, 20%);
+        padding: 0.75rem 1rem;
+        border-radius: $rad-md;
+        font-size: $fs-sm;
+        font-weight: $fw-medium;
+        text-align: center;
+        border: 1px solid rgba($clr-green, 0.2);
+    }
+
+    &__element {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        label {
+            @include label;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            @include input-field;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.4;
+        }
+
+        :global(.error) {
+            color: $color-no;
+            font-size: $fs-xs;
+            font-weight: $fw-medium;
+            margin-top: 0.25rem;
+        }
+    }
+
+    &__checkbox {
+        @include checkbox;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: -0.5rem;
+
+        label {
+            @include label;
+
+            cursor: pointer;
+            user-select: none;
+        }
+
+        a {
+            font-size: $fs-sm;
+            color: $txt-black;
+            text-decoration: underline;
+
+            transition: color 0.2s;
+
+            &:hover {
+                color: $clr-blue;
+            }
+        }
+    }
+
+    &__footer {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            font-size: $fs-sm;
+            margin: 0;
+            color: $txt-muted;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            color: $txt-black;
+            font-size: $fs-sm;
+            text-decoration: underline;
+
+            &:hover {
+                color: $clr-blue;
+            }
+        }
+    }
+
+    button {
+        @include button;
+    }
+}
