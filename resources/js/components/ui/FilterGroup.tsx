@@ -48,7 +48,7 @@ export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
             <div className={styles['dropdown']}>
                 <button
                     type="button"
-                    className={`${styles['dropdown-trigger']} ${currentValue ? styles['is-active'] : ''}`}
+                    className={`${styles['dropdown__trigger']} ${currentValue ? styles['is-active'] : ''}`}
                     onClick={() => setOpenDropdown(openDropdown === key ? null : key)}
                 >
                     <span className={styles['label-text']}>
@@ -58,7 +58,7 @@ export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
                 </button>
 
                 {openDropdown === key && (
-                    <ul className={styles['dropdown-menu']}>
+                    <ul className={styles['dropdown__menu']}>
                         <li
                             className={!currentValue ? styles['selected'] : ''}
                             onClick={() => handleFilterChange(key, null)}

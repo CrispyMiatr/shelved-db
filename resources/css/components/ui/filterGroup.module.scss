@@ -4,65 +4,90 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 15px 0;
+    margin-top: 15px;
+    justify-content: center;
 }
 
 .dropdown {
     position: relative;
 
-    &-trigger {
+    &__trigger {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 6px 14px;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        font-size: 0.9rem;
+        padding: 4px 16px 2px 16px;
+
+        font-size: $fs-xs;
+        font-weight: $fw-medium;
+        font-family: $ff-title;
+
+        background: $bg-card;
+        border: 1px solid $clr-gray-300;
+        border-radius: $rad-md;
+
+        white-space: nowrap;
+
         cursor: pointer;
         transition: all 0.2s;
 
         &:hover {
-            border-color: #bbb;
+            border-color: $clr-gray-600;
         }
 
         &.is-active {
-            background: #fff0f0; // Subtle tint to show it's active
-            border-color: #ffcccc;
-            color: #d32f2f;
-            font-weight: 500;
+            background: rgba($color-yes, 0.1);
+            border-color: rgba($color-yes, 0.5);
+            color: $txt-black;
         }
     }
 
-    &-menu {
+    &__menu {
         position: absolute;
         top: calc(100% + 5px);
-        left: 0;
-        z-index: 50;
-        min-width: 180px;
+        left: 50%;
+        right: auto;
+        z-index: 100;
+
+        padding: 0;
+        min-width: 160px;
+        max-width: calc(100vw - 40px);
         max-height: 300px;
+
         overflow-y: auto;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        overflow-x: hidden;
+
+        background: $bg-card;
+        border: 1px solid $clr-gray-300;
+        border-radius: $rad-md;
+        box-shadow: 0 10px 25px $sh-card;
         list-style: none;
-        padding: 8px 0;
+
+        transform: translateX(-50%);
+
+        @media (min-width: $bp-md) {
+            right: auto;
+            max-width: 280px;
+        }
 
         li {
-            padding: 8px 16px;
-            font-size: 0.9rem;
+            padding: 6px 18px;
+            font-size: $fs-sm;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
             cursor: pointer;
             transition: background 0.1s;
 
             &:hover {
-                background: #f5f5f5;
+                background: $clr-gray-100;
             }
 
             &.selected {
-                background: #f0f0f0;
-                font-weight: bold;
-                color: #000;
+                background: $clr-gray-100;
+                font-weight: $fw-semibold;
+                color: $txt-black;
 
                 &::after {
                     content: ' ✓';
