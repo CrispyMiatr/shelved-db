@@ -8,7 +8,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
 
     return (
         <div className={home['home-container']}>
-            <div className={home['hero']}>
+            <section className={home['hero']} id='hero'>
                 <div className={home['hero__text']}>
                     <div className={home['hero__text__title']}>
                         Shelved.
@@ -28,11 +28,11 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                     src={banner}
                     alt="a wall of old cans"
                 />
-            </div>
+            </section>
 
-            <div className={home['released']}>
+            <section className={home['released']} id='released'>
                 <div className={home['released__carousel']}>
-                    <Carousel title="Newly Released" headerExtra={<p>Next refresh in: 16:55:42</p>}>
+                    <Carousel title="Newly Released" headerExtra={<p>Refresh in: 16:55:42</p>}>
                         {newlyReleased.map((item: any) => (
                             <ProductCard
                                 key={item.id}
@@ -40,7 +40,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 brand={item.brand.name}
                                 volume={item.volume}
                                 country={item.country_code}
-                                img={item.img_url || 'https://placehold.co/150x200'}
+                                img={item.img_url || 'https://placehold.co/175x220'}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
@@ -54,11 +54,11 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                     </Carousel>
                 </div>
 
-            </div>
+            </section>
 
-            <div className={home['added']}>
+            <section className={home['added']} id='added'>
                 <div className={home['added__carousel']}>
-                    <Carousel title="Newly Added" headerExtra={<p>Next refresh in: 56s</p>}>
+                    <Carousel title="Newly Added" headerExtra={<p>Refresh in: 56s</p>}>
                         {newlyAdded.map((item: any) => (
                             <ProductCard
                                 key={item.id}
@@ -79,9 +79,9 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                         )}
                     </Carousel>
                 </div>
-            </div>
+            </section>
 
-            <div className={home['profiles']}>
+            <section className={home['profiles']} id='profiles'>
                 <div className={home['profiles__carousel']}>
                     <Carousel title="Popular Profiles">
                         {popularProfiles.map((user: any) => (
@@ -89,7 +89,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 key={user.id}
                                 name={user.name}
                                 username={user.username}
-                                img={`https://ui-avatars.com/api/?name=${user.username}`}
+                                img={`https://ui-avatars.com/api/?name=${user.username}&background=random`}
                                 href={`/@${user.username}`}
                             />
                         ))}
@@ -102,7 +102,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                         )}
                     </Carousel>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

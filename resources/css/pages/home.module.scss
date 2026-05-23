@@ -1,23 +1,66 @@
 @use '../base/general' as *;
 
-.home-container {}
+.home-container {
+  margin: 0 24px;
+
+  @media (min-width: $bp-sm) {
+    margin: 0 40px;
+  }
+
+  @media (min-width: $bp-md) {
+    margin: 0 60px;
+  }
+
+  // Desktop
+  @media (min-width: $bp-lg) {
+    margin: 0 120px;
+  }
+}
 
 .hero {
 
   &__text {
+    text-align: center;
+    margin: 15px 0;
 
-    &__title {}
+    &__title {
+      font-family: $ff-title;
+      font-size: $fs-2xl;
+    }
 
-    &__subtitle {}
+    &__subtitle {
+      font-family: $ff-title;
+      font-size: $fs-md;
+    }
 
-    &__description {}
+    &__description {
+      font-size: $fs-base;
+    }
   }
 
   &__banner {
     width: 100vw;
-    height: 360px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 10px;
 
+    height: 200px;
     object-fit: cover;
     object-position: center;
+
+    box-shadow: inset 0px 0px 15px $clr-black;
+
+    @media (min-width: $bp-md) {
+      height: 360px;
+    }
   }
+}
+
+.released,
+.added,
+.profiles {
+  margin: 15px 0;
 }
