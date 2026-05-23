@@ -1,6 +1,6 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React, { useRef, useState, useEffect } from 'react';
 import styles from '~styles/components/ui/carousel.module.scss';
-import chevron from '~assets/icons/chevron-left.svg';
 
 interface CarouselProps {
     title: string;
@@ -41,24 +41,32 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
     };
 
     return (
-        <div className={styles['carousel-section']}>
-            <div className={styles['carousel-header']}>
+        <div className={styles['carousel']}>
+            <div className={styles['carousel__header']}>
                 <h3>{title}</h3>
-                {headerExtra}
+
+                {headerExtra && (
+                    <div className={styles['carousel__header__extra']}>
+                        <img src="/assets/icons/icon_clock.svg" alt="" />
+                        <p>{headerExtra}</p>
+                    </div>
+
+                )}
             </div>
 
-            <div className={styles['carousel-container']}>
+            <div className={styles['carousel__container']}>
                 {showLeftArrow && (
                     <button
                         className={`${styles['nav-btn']} ${styles['left']}`}
                         onClick={() => scroll('left')}
                     >
-                        <img src={chevron} alt="Previous" />
+                        <img src="/assets/icons/icon_chevron-left.svg" alt="Previous" />
+                        {/* <ChevronLeft size={24} /> */}
                     </button>
                 )}
 
                 <div
-                    className={styles['carousel-viewport']}
+                    className={styles['carousel__container__viewport']}
                     ref={scrollContainer}
                     onScroll={updateArrows}
                 >
@@ -72,7 +80,8 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
                         className={`${styles['nav-btn']} ${styles['right']}`}
                         onClick={() => scroll('right')}
                     >
-                        <img src={chevron} alt="Next" />
+                        <img src="/assets/icons/icon_chevron-left.svg" alt="Next" />
+                        {/* <ChevronRight size={30} /> */}
                     </button>
                 )}
             </div>

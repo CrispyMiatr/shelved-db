@@ -1,48 +1,60 @@
 @use '~styles/base/general.scss' as *;
 
-.carousel-section {
+.carousel {
     width: 85vw;
     margin: auto;
     margin-bottom: 40px;
-}
 
-.carousel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: -10px;
+        margin-bottom: 5px;
 
-.carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+        &__extra {
+            display: flex;
+            gap: 4px;
+            margin-right: -10px;
 
-.carousel-viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scrollbar-width: none; // Firefox
-
-    &::-webkit-scrollbar {
-        display: none;
+            p {
+                color: $clr-gray-600;
+                font-size: $fs-sm;
+            }
+        }
     }
 
-    // Chrome/Safari
-    width: 100%;
-    cursor: grab;
+    &__container {
+        position: relative;
+        display: flex;
+        align-items: center;
 
-    &:active {
-        cursor: grabbing;
+        &__viewport {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            scrollbar-width: none; // Firefox
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            // Chrome / Safari
+            width: 100%;
+            cursor: grab;
+
+            &:active {
+                cursor: grabbing;
+            }
+        }
     }
 }
 
 .carousel-items {
     display: flex;
-    gap: 15px;
-    padding: 10px 0;
+    gap: 10px;
     width: max-content;
+    margin: 5px 0;
 
     // ensures cards don't shrink below their defined size
     &>* {
@@ -55,7 +67,7 @@
     z-index: 10;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid #ddd;
-    border-radius: 50%;
+    border-radius: 10px;
     width: 40px;
     height: 40px;
     cursor: pointer;
