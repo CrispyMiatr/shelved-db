@@ -1,36 +1,53 @@
 @use '../base/general' as *;
 
-.catalogue-container {}
+.catalogue-container {
+  margin: 0 24px;
+  padding: 30px 0;
 
-brands {
-
-  &__title {}
-
-  &__carousel {
-
-    &__items {}
+  @media (min-width: $bp-sm) {
+    margin: 20px 40px;
   }
+
+  @media (min-width: $bp-md) {
+    margin: 20px 60px;
+  }
+
+
+  @media (min-width: $bp-lg) {
+    margin: 20px 120px;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .index {
   &__header {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   &__alphabet {
     display: block;
     column-gap: 2rem;
+    width: 87vw;
+    margin: 0 auto;
 
     // Mobile
     column-count: 1;
 
     // Tablet
-    @media (min-width: 640px) {
+    @media (min-width: $bp-sm) {
       column-count: 2;
     }
 
+    @media (min-width: $bp-md) {
+      column-count: 3;
+    }
+
     // Desktop
-    @media (min-width: 1024px) {
+    @media (min-width: $bp-lg) {
       column-count: 4;
     }
   }
@@ -40,8 +57,6 @@ brands {
     width: 100%;
     break-inside: avoid;
     margin-bottom: 2rem;
-    background: #f9f9f9;
-    padding: 1rem;
     border-radius: 8px;
   }
 
@@ -58,22 +73,31 @@ brands {
     gap: 0.4rem;
 
     &__item {
-      font-size: 0.95rem;
+      font-size: $fs-base;
+      margin: 0 10px;
 
       a {
         text-decoration: none;
-        color: #333;
-        display: block;
+        color: $clr-gray-800;
+        display: flex;
+        gap: 5px;
+
+        @media (min-width: $bp-md) {
+          justify-content: space-between;
+        }
 
         &:hover {
-          color: var(--primary-color, #007bff);
+          color: var(--primary-color, $clr-blue);
           text-decoration: underline;
         }
 
-        span {
-          color: #888;
-          font-size: 0.8rem;
-          margin-left: 4px;
+        &__name {
+          font-size: $fs-base;
+        }
+
+        &__count {
+          font-size: $fs-sm;
+          margin-left: 40px;
         }
       }
     }
@@ -84,5 +108,6 @@ brands {
     color: #bbb;
     font-size: 0.85rem;
     margin: 0;
+    margin: 0 10px;
   }
 }

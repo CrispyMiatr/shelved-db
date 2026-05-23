@@ -32,10 +32,12 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
     }, [brands]);
 
     return (
-        <div className='catalogue-container'>
-            <h2>Catalogue</h2>
+        <div className={catalog['catalogue-container']}>
+            <div className={catalog['title']}>
+                <h2>Catalogue</h2>
+            </div>
 
-            <div className={catalog['brands']}>
+            <section className={catalog['brands']} id='brands'>
                 <div className={catalog['brands__carousel']}>
                     <Carousel title="Popular Brands">
                         {popularBrands.map((brand: any) => (
@@ -56,9 +58,9 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                         )}
                     </Carousel>
                 </div>
-            </div>
+            </section>
 
-            <div className={catalog['index']}>
+            <section className={catalog['index']} id='index'>
                 <div className={catalog['index__header']}>
                     <h3>All brands</h3>
                 </div>
@@ -73,7 +75,12 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                                     groupedBrands[letter].map(brand => (
                                         <div key={brand.id} className={catalog['index__group__item']}>
                                             <a href={`/catalogue/${brand.slug}`}>
-                                                {brand.name} <span>[{brand.beverages_count}]</span>
+                                                <div className={catalog['index__group__item__name']}>
+                                                    {brand.name}
+                                                </div>
+                                                <div className={catalog['index__group__item__count']}>
+                                                    [{brand.beverages_count}]
+                                                </div>
                                             </a>
                                         </div>
                                     ))
@@ -84,7 +91,7 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                         </section>
                     ))}
                 </div>
-            </div>
+            </section>
         </div>
     );
 };
