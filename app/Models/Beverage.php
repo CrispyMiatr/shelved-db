@@ -32,7 +32,7 @@ class Beverage extends Model
     protected function casts(): array
     {
         return [
-            'release_date' => 'date',
+            'release_date' => 'date:Y-m-d',
             'nutrition_100ml' => 'array',
             'nutrition_500ml' => 'array',
         ];
