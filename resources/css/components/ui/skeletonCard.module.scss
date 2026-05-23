@@ -3,14 +3,12 @@
 .skeleton {
     position: relative;
     overflow: hidden;
-    background: #f0f0f0;
-    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-bottom: 12px;
-    border-radius: 8px;
+    flex: 0 0 auto;
+    transition: all 0.1s ease-in-out;
 
+    // Common Shimmer
     .shimmer {
         @include shimmer-effect;
         z-index: 1;
@@ -24,58 +22,91 @@
         }
     }
 
-    .image-box {
-        background: #e0e0e0;
-        width: 100%;
-        position: relative;
+    // Common Placeholder Box Style
+    .image-box,
+    .text-line-short,
+    .text-line-long {
+        background-color: $clr-gray-300; // Match your card placeholder colors
     }
 
     .text-line-short,
     .text-line-long {
-        background: #e0e0e0;
         height: 12px;
-        margin: 0 10px;
         border-radius: 4px;
     }
 
-    .text-line-short {
-        width: 40%;
-    }
-
-    .text-line-long {
-        width: 75%;
-    }
-
-    // Type modifiers
-    &.product {
-        width: 150px;
-
-        .image-box {
-            aspect-ratio: 3 / 4;
-        }
-    }
-
+    // --- PRODUCT & BRAND SHARED STYLES ---
+    &.product,
     &.brand {
         width: 200px;
+        background-color: $bg-card;
+        border: solid 1px $clr-gray-300;
+        border-radius: 8px;
+        box-shadow: 2px 2px 4px $sh-card;
+        padding-bottom: 12px;
 
-        .image-box {
-            aspect-ratio: 1 / 1;
+        .text-line-short,
+        .text-line-long {
+            margin: 8px 14px 0; // Matching .product-card__info padding
         }
     }
 
+    // --- PRODUCT SPECIFIC ---
+    &.product {
+        .image-box {
+            width: 175px; // Matching product img width
+            height: 230px; // Approximate 3:4 aspect ratio
+            margin: 14px auto 4px; // Matching product padding-top
+            border-radius: 4px;
+        }
+
+        &.small {
+            width: 150px;
+
+            .image-box {
+                width: 130px;
+                height: 170px;
+            }
+        }
+    }
+
+    // --- BRAND SPECIFIC ---
+    &.brand {
+        .image-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            margin-bottom: 8px;
+        }
+
+        .text-line-short {
+            margin-top: 14px; // Space after the border-top simulation
+        }
+    }
+
+    // --- PROFILE SPECIFIC ---
     &.profile {
-        width: 150px;
+        width: 160px;
+        align-items: center;
+        background: transparent; // Profiles don't have a background card
+        border: none;
+        box-shadow: none;
 
         .image-box {
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
             width: 100px;
-            margin: 15px auto 5px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 2px solid $clr-gray-100; // Matching profile img border
         }
 
         .text-line-short,
         .text-line-long {
-            align-self: center;
+            width: 80px;
+            margin: 4px 0;
+        }
+
+        .text-line-short {
+            width: 50px;
         }
     }
 }

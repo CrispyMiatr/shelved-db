@@ -20,13 +20,13 @@ export const ProductCard = ({ name, brand, volume, country, img, isSmall, href }
             </div>
 
             <div className={styles['product-card__info']}>
-                <div className={styles['product-card__info__left']}>
-                    {!isSmall && brand && <p className={styles['product-card__info__left__brand-name']}>{brand}</p>}
-                    <p className={styles['product-card__info__left__product-name']}>{name}</p>
-                    <p className={styles['product-card__info__left__volume']}>{volume} mL</p>
+                <div className={styles['product-card__info__top']}>
+                    {!isSmall && brand && <p className={styles['product-card__info__top__brand-name']}>{brand}</p>}
+                    <p className={styles['product-card__info__top__product-name']}>{name}</p>
                 </div>
-                <div className={styles['product-card__info__country-tag']}>
-                    <p>{country}</p>
+                <div className={styles['product-card__info__bottom']}>
+                    <p className={styles['product-card__info__bottom__volume']}>{volume} mL</p>
+                    <p className={styles['product-card__info__bottom__country-tag']}>{country}</p>
                 </div>
             </div>
         </Link>

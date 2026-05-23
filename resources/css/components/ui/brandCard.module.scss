@@ -4,39 +4,42 @@
     display: flex;
     flex-direction: column;
     width: 200px;
-    text-decoration: none;
-    color: inherit;
-    background-color: #e8f0ff;
-    overflow: hidden;
-    border-radius: 8px;
 
-    transition: 0.1s ease-in-out;
+    text-decoration: none;
+
+    background-color: $bg-card;
+    border: solid 1px $clr-gray-300;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px $sh-card;
+    overflow: hidden;
+
+    transition: all 0.1s ease-in-out;
 
     &:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
     }
 
     img {
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: contain;
-        background-color: #f9f9f9;
+        background-color: $clr-white;
     }
 
     &__info {
-        padding: 12px;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 14px;
+
+        border-top: solid 1px $clr-gray-300;
 
         &__name {
-            font-weight: bold;
-            margin: 0;
-            font-size: 1.1rem;
+            font-size: $fs-sm;
         }
 
         &__count {
-            font-size: 0.85rem;
-            color: #777;
-            margin: 4px 0 0;
+            font-size: $fs-sm;
+            margin: 1px 0 0;
         }
     }
 }
@@ -44,14 +47,14 @@
 .brand-img {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4;
-    background-color: #e0e0e0;
+    aspect-ratio: 1 / 1;
+    background-color: $clr-gray-300;
     overflow: hidden;
 
     .brand-placeholder {
         position: absolute;
         inset: 0;
-        background-color: #eee;
+        background-color: $clr-gray-300;
     }
 
     img {
