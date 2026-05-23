@@ -20,9 +20,7 @@ export const Header = () => {
                                 <Info size={24} />
                             </Link>
 
-                            <div className={header['search-wrapper']}>
-                                <Searchbar variant="header" />
-                            </div>
+                            <Searchbar variant="header" />
 
                             <Link href="/add" className={header['icon-link']}>
                                 <Plus size={24} />
