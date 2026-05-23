@@ -2,4 +2,6 @@
 @use 'catalogue.module' as *;
 @use 'home.module' as *;
 @use 'product.module' as *;
-@use 'profile.module' as *;
+@use 'auth.module' as *;
+@use 'profile/show.module' as *;
+// @use 'profile/edit.module' as *;

@@ -30,30 +30,27 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        // 2. Create a few random users
+        // 2. Create random users
         $users = User::factory(10)->create();
 
-        // 3. Create a Brand
-        $brand = Brand::create([
-            'name' => 'Monster Energy',
-            'website_url' => 'https://www.monsterenergy.com',
-        ]);
+        // 3. Create Brands
+        $brandMonster = Brand::create(['name' => 'Monster Energy', 'website_url' => 'https://www.monsterenergy.com']);
+        $brandRedBull = Brand::create(['name' => 'Red Bull', 'website_url' => 'https://www.redbull.com']);
+        $brandCocaCola = Brand::create(['name' => 'Coca-Cola', 'website_url' => 'https://www.coca-cola.com']);
 
-        // 4. Create a Manufacturer
-        $manufacturer = Manufacturer::create([
-            'name' => 'Ball Corporation',
-            'logo_path' => 'logos/ball_corp.png'
-        ]);
+        // 4. Create Manufacturers
+        $mfgBall = Manufacturer::create(['name' => 'Ball Corporation', 'logo_path' => 'logos/ball_corp.png']);
+        $mfgRauch = Manufacturer::create(['name' => 'Rauch Fruchtsäfte', 'logo_path' => 'logos/rauch.png']);
+        $mfgCcep = Manufacturer::create(['name' => 'Coca-Cola Europacific Partners', 'logo_path' => 'logos/ccep.png']);
 
-        // 5. Create a Beverage with Nutrition JSONB
-        $beverage = Beverage::create([
-            'brand_id' => $brand->id,
+        // 5. BEVERAGE 1: Monster Pipeline Punch (Japan)
+        $bevMonster = Beverage::create([
+            'brand_id' => $brandMonster->id,
             'name' => 'Punch Pipeline Punch',
             'country_code' => 'JP',
-            'volume' => '355mL',
+            'volume' => '355',
             'barcode' => '4897036692134',
             'release_date' => '2019-03-01',
-            // Detailed nutrition for 100ml
             'nutrition_100ml' => [
                 'energy_kj' => 185,
                 'energy_kcal' => 44,
@@ -69,54 +66,74 @@ class DatabaseSeeder extends Seeder
                 'vitamin_b12' => 2.5,
                 'caffeine' => 40,
                 'taurine' => 125,
-            ],
-            // Scale automatically for 500ml (example data)
-            'nutrition_500ml' => [
-                'energy_kj' => 925,
-                'energy_kcal' => 220,
-                'fat' => 0,
-                'fat_saturated' => 0,
-                'carbohydrates' => 50,
-                'sugars' => 50,
-                'protein' => 0,
-                'salt' => 0.3,
-                'vitamin_b2' => 3.5,
-                'vitamin_b3' => 42.5,
-                'vitamin_b6' => 4.0,
-                'vitamin_b12' => 12.5,
-                'caffeine' => 200,
-                'taurine' => 625,
             ]
         ]);
+        $bevMonster->translations()->create(['language_code' => 'jp', 'ingredients' => '高麗人参根エキス...', 'is_original' => true]);
+        $bevMonster->translations()->create(['language_code' => 'en', 'ingredients' => 'Carbonated Water, Sugar...', 'is_original' => false]);
+        $bevMonster->manufacturers()->attach($mfgBall->id);
 
-        // 6. Create Translations for the Beverage
-        // Original (Japanese)
-        $beverage->translations()->create([
-            'language_code' => 'jp',
-            'ingredients' => '高麗人参根エキス、L-カルニチンL-酒石酸塩、塩化ナトリウム、ガラナ種子エキス...',
-            'warning_text' => 'お子様、妊娠中の方、またはカフェインに敏感な方にはお勧めしません。',
-            'is_original' => true,
+        // 6. BEVERAGE 2: Red Bull Energy Drink (Austria)
+        $bevRedBull = Beverage::create([
+            'brand_id' => $brandRedBull->id,
+            'name' => 'Original',
+            'country_code' => 'AT',
+            'volume' => '250',
+            'barcode' => '9002490100070',
+            'release_date' => '1987-04-01',
+            'nutrition_100ml' => [
+                'energy_kj' => 194,
+                'energy_kcal' => 45,
+                'fat' => 0,
+                'fat_saturated' => 0,
+                'carbohydrates' => 11,
+                'sugars' => 11,
+                'protein' => 0,
+                'salt' => 0.1,
+                'vitamin_b3' => 8,
+                'vitamin_b5' => 2,
+                'vitamin_b6' => 2,
+                'vitamin_b12' => 2,
+                'caffeine' => 32,
+                'taurine' => 400,
+            ]
         ]);
+        $bevRedBull->translations()->create(['language_code' => 'de', 'ingredients' => 'Wasser, Saccharose, Glucose, Säuerungsmittel (Citronensäure), Kohlensäure...', 'is_original' => true]);
+        $bevRedBull->translations()->create(['language_code' => 'en', 'ingredients' => 'Water, Sucrose, Glucose, Citric Acid, Carbon Dioxide, Taurine...', 'is_original' => false]);
+        $bevRedBull->manufacturers()->attach($mfgRauch->id);
 
-        // English Translation (What users see by default)
-        $beverage->translations()->create([
+        // 7. BEVERAGE 3: Coca-Cola Classic (USA)
+        $bevCoke = Beverage::create([
+            'brand_id' => $brandCocaCola->id,
+            'name' => 'Classic',
+            'country_code' => 'US',
+            'volume' => '355',
+            'barcode' => '049000028904',
+            'release_date' => '1886-05-08',
+            'nutrition_100ml' => [
+                'energy_kj' => 180,
+                'energy_kcal' => 42,
+                'fat' => 0,
+                'fat_saturated' => 0,
+                'carbohydrates' => 10.6,
+                'sugars' => 10.6,
+                'protein' => 0,
+                'salt' => 0.01,
+                'caffeine' => 10,
+            ]
+        ]);
+        $bevCoke->translations()->create([
             'language_code' => 'en',
-            'ingredients' => 'Carbonated Water, Sugar, Fruit Juices, Glucose, Ginseng Root Extract, L-Carnitine, Caffeine, Guarana...',
-            'warning_text' => 'Not recommended for children, people sensitive to caffeine, pregnant women or women who are nursing.',
-            'is_original' => false,
+            'ingredients' => 'Carbonated Water, High Fructose Corn Syrup, Caramel Color, Phosphoric Acid, Natural Flavors, Caffeine.',
+            'is_original' => true
         ]);
+        $bevCoke->manufacturers()->attach($mfgCcep->id);
 
-        // 7. Establish Connections
-        
-        // Link Manufacturer to Beverage
-        $beverage->manufacturers()->attach($manufacturer->id);
+        // 8. Establish Connections
+        // Add all drinks to Admin collection
+        $admin->collection()->attach([$bevMonster->id, $bevRedBull->id, $bevCoke->id], ['created_at' => now()]);
 
-        // Add drink to Head Admin's and the first user's collection
-        $admin->collection()->attach($beverage->id, ['created_at' => now()]);
-        $users[0]->collection()->attach($beverage->id, ['created_at' => now()]);
-        
         // Follow system test
-        $users[0]->following()->attach($admin->id); // User follows Admin
-        $admin->following()->attach($users[0]->id); // Admin follows User back (Mutual)
+        $users[0]->following()->attach($admin->id);
+        $admin->following()->attach($users[0]->id);
     }
 }
