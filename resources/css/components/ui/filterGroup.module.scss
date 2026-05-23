@@ -3,7 +3,7 @@
 .filter-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 4px;
     margin-top: 15px;
     justify-content: center;
 }
@@ -43,13 +43,13 @@
 
     &__menu {
         position: absolute;
-        top: calc(100% + 5px);
+        top: calc(100% + 4px);
         left: 50%;
         right: auto;
         z-index: 100;
 
         padding: 0;
-        min-width: 160px;
+        min-width: 180px;
         max-width: calc(100vw - 40px);
         max-height: 300px;
 
