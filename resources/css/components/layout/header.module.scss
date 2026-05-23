@@ -11,9 +11,14 @@
         flex-direction: column;
 
         &__top {
-            background-color: $bg-nav-dark;
+            background-color: $bg-nav-link;
             padding: 10px 15px;
+
+            @media (min-width: $bp-lg) {
+                background-color: $bg-nav-dark;
+            }
         }
+
 
         &__bottom {
             display: none;
@@ -21,7 +26,7 @@
 
             background-color: $bg-nav-link;
 
-            @media (min-width: $bp-md) {
+            @media (min-width: $bp-lg) {
                 display: flex;
                 justify-content: center;
             }
@@ -41,16 +46,19 @@
     justify-content: space-between;
     gap: 15px;
 
-    color: $clr-white;
+    color: $clr-black;
 
     .icon-link {
         display: flex;
         align-items: center;
 
-        color: $clr-white;
+        color: $clr-black;
+
+        transition: rotate 0.1s ease-in-out;
 
         &:hover {
             color: $color-accent;
+            // rotate: 90deg;
         }
     }
 
@@ -59,6 +67,16 @@
         display: flex;
         justify-content: center;
         max-width: 500px;
+    }
+}
+
+@media (min-width: $bp-lg) {
+    .mobile-actions {
+        color: $clr-white;
+
+        .icon-link {
+            color: $clr-white;
+        }
     }
 }
 
@@ -76,11 +94,11 @@
     align-items: center;
     padding-bottom: env(safe-area-inset-bottom);
 
-    background-color: $bg-nav-link;
+    background-color: $bg-nav-dark;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 
-    @media (min-width: $bp-md) {
+    @media (min-width: $bp-lg) {
         display: none;
     }
 
@@ -92,7 +110,7 @@
         flex: 1;
         height: 100%;
 
-        color: $txt-black;
+        color: $txt-white;
         transition: opacity 0.2s;
 
         &:active {
