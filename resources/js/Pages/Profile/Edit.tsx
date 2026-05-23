@@ -1,6 +1,8 @@
-import { useForm, usePage, Head } from '@inertiajs/react';
+import { useForm, usePage, Head, Link } from '@inertiajs/react';
 import { PageProps, SocialLinks } from '~/types';
 import { Layout } from '~/components';
+import edit from '~styles/pages/profile/edit.module.scss';
+import { ArrowLeft, ChevronLeft, Pencil, Save } from 'lucide-react';
 
 export default function Edit() {
     const { auth } = usePage<PageProps>().props;
@@ -35,86 +37,125 @@ export default function Edit() {
     };
 
     return (
-        <div className="edit-profile-container">
+        <div className={edit['edit-profile-container']}>
             <Head title="Edit Profile" />
 
-            <form onSubmit={submit} className="edit-form">
-                <section>
-                    <h3>General Information</h3>
-                    <div className="field">
-                        <label>Display Name</label>
+            <div className={edit['title']}>
+                <h2>Profile</h2>
+            </div>
+
+            <form onSubmit={submit} className={edit['edit-form']}>
+                {/* Mobile/Tablet Action Bar */}
+                <div className={edit['action-bar']}>
+                    <Link href={route('profile.show', user.username)} className={edit['action-bar__back']}>
+                        <ArrowLeft size={20} />
+                    </Link>
+
+                    <p className={edit['action-bar__title']}>Edit profile</p>
+
+                    <button
+                        type="submit"
+                        className={edit['action-bar__save']}
+                        disabled={processing}
+                    >
+                        {processing ? '...' : <Save size={20} />}
+                    </button>
+                </div>
+
+                <section className={edit['form-section']}>
+                    <h3 className={edit['section-title']}>General information</h3>
+
+                    <div className={edit['field']}>
+                        <label className={edit['label']}>Display Name</label>
                         <input
                             type="text"
+                            className={edit['input']}
                             value={data.name}
                             onChange={e => setData('name', e.target.value)}
                         />
-                        {errors.name && <span className="error">{errors.name}</span>}
+                        {errors.name && <span className={edit['error']}>{errors.name}</span>}
                     </div>
 
-                    <div className="field">
-                        <label>Username</label>
+                    <div className={edit['field']}>
+                        <label className={edit['label']}>Username</label>
                         <input
                             type="text"
+                            className={edit['input']}
                             value={data.username}
                             onChange={e => setData('username', e.target.value)}
                         />
-                        {errors.username && <span className="error">{errors.username}</span>}
+                        {errors.username && <span className={edit['error']}>{errors.username}</span>}
                     </div>
 
-                    <div className="field">
-                        <label>Email Address</label>
+                    <div className={edit['field']}>
+                        <label className={edit['label']}>Email Address</label>
                         <input
                             type="email"
+                            className={edit['input']}
                             value={data.email}
                             onChange={e => setData('email', e.target.value)}
                         />
-                        {errors.email && <span className="error">{errors.email}</span>}
+                        {errors.email && <span className={edit['error']}>{errors.email}</span>}
                     </div>
 
-                    <div className="field">
-                        <label>Bio</label>
+                    <div className={edit['field']}>
+                        <label className={edit['label']}>Bio</label>
                         <textarea
+                            className={edit['textarea']}
                             value={data.bio}
                             onChange={e => setData('bio', e.target.value)}
                             placeholder="Tell us about your collection..."
                         />
                     </div>
 
-                    <div className="field-checkbox">
+                    <div className={edit['field-checkbox']}>
                         <label>
                             <input
                                 type="checkbox"
                                 checked={data.is_private}
                                 onChange={e => setData('is_private', e.target.checked)}
                             />
-                            Private Profile (Mutual followers only)
+                            <span>Private Profile (Mutual followers only)</span>
                         </label>
                     </div>
                 </section>
 
-                <section className="social-links-section">
-                    <h3>Social Media & Shop Links</h3>
+                <section className={edit['social-links']}>
+                    <h3 className={edit['section-title']}>Social media links</h3>
                     {(Object.keys(emptySocials) as Array<keyof SocialLinks>).map((platform) => {
                         const platformName = platform as string;
                         return (
-                            <div key={platformName} className="field">
-                                <label>{platformName.charAt(0).toUpperCase() + platformName.slice(1)}</label>
+                            <div key={platformName} className={edit['field']}>
+                                <label className={edit['label']}>
+                                    <img
+                                        src={`/assets/icons/icon_${platform}.svg`}
+                                        alt=""
+                                        className={edit['social-icon']}
+                                        onError={(e) => (e.currentTarget.style.display = 'none')}
+                                    />
+                                    {platformName.charAt(0).toUpperCase() + platformName.slice(1)}
+                                </label>
                                 <input
                                     type="url"
+                                    className={edit['input']}
                                     value={data.social_links[platform] || ''}
                                     onChange={e => handleSocialChange(platform, e.target.value)}
                                     placeholder={`Link to your ${platformName}...`}
                                 />
                                 {errors[`social_links.${platform}` as any] && (
-                                    <span className="error">{errors[`social_links.${platform}` as any]}</span>
+                                    <span className={edit['error']}>{errors[`social_links.${platform}` as any]}</span>
                                 )}
                             </div>
                         );
                     })}
                 </section>
 
-                <div className="form-actions">
-                    <button type="submit" disabled={processing}>
+                {/* Desktop Actions */}
+                <div className={edit['form-actions']}>
+                    <Link href={route('profile.show', user.username)} className={edit['btn-cancel']}>
+                        Cancel
+                    </Link>
+                    <button type="submit" className={edit['btn-save']} disabled={processing}>
                         {processing ? 'Saving...' : 'Save Changes'}
                     </button>
                 </div>
