@@ -10,7 +10,7 @@ export const SortButton = ({ label, field, currentSort, currentDirection }: Sort
 
         if (isActive) {
             if (currentDirection === 'asc') nextDirection = 'desc';
-            else if (currentDirection === 'desc') nextDirection = null; // clear sort
+            else if (currentDirection === 'desc') nextDirection = 'asc';
         }
 
         const query: any = {

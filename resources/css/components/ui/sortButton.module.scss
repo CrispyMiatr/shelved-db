@@ -4,19 +4,23 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #fff;
+    padding: 4px 8px;
+    margin: 0 2px;
+
+    font-size: $fs-xs;
+    color: $txt-black;
+
+    background-color: $bg-card;
+    border: 1px solid $clr-gray-300;
+    border-radius: $rad-sm;
+
     cursor: pointer;
-    font-size: 0.85rem;
-    color: #555;
     transition: all 0.2s;
 
     &.active {
-        background: #333;
-        color: #fff;
-        border-color: #333;
+        background: $clr-gray-800;
+        color: $txt-white;
+        border-color: $clr-gray-800;
     }
 
     .icon {
