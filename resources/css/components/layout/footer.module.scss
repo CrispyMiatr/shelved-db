@@ -26,6 +26,12 @@
     }
 }
 
+@media (min-width: $bp-md) {
+    .footer {
+        display: block;
+    }
+}
+
 .links {
     display: flex;
     flex-direction: column;
