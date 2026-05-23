@@ -17,9 +17,12 @@
 
   &:hover,
   &--active {
-    color: $txt-white;
     background-color: $clr-black;
     border: solid 1px $clr-white;
+
+    p {
+      color: $txt-white;
+    }
   }
 
   &__title {
