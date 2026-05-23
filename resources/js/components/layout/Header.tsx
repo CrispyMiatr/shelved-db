@@ -42,9 +42,6 @@ export const Header = () => {
                             <li className={header['links__link-item']}>
                                 <NavButton name="Profile" link={user ? `/@${user.username}` : "/login"} />
                             </li>
-                            {!user && (
-                                <li className={header['links__link-item']}><NavButton name="Sign In" link="/login" /></li>
-                            )}
                         </ul>
                     </div>
                 </div>
