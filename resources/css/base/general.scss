@@ -29,11 +29,14 @@ $clr-white-b: #FAF8F3;
 
 $clr-gray-900: #1C1819;
 $clr-gray-800: #333333;
+$clr-gray-700: #515151;
 $clr-gray-600: #797979;
 $clr-gray-500: #9A9A9A;
 $clr-gray-300: #C8C8C8;
 $clr-gray-200: #DADADA;
 $clr-gray-100: #DDDDDD;
+
+$sh-card: rgba(0, 0, 0, 0.1);
 
 // Brand / Palette
 $color-primary: $clr-black;
@@ -65,6 +68,7 @@ $fw-medium: 500;
 $fw-semibold: 600;
 $fw-bold: 700;
 
+$fs-2xl: 2.5rem; // 40px
 $fs-xl: 2.125rem; // 34px
 $fs-lg: 1.5rem; // 24px
 $fs-md: 1.25rem; // 20px
@@ -101,7 +105,7 @@ body {
 
   background-color: $bg-body;
 
-  padding-bottom: 55px; // height of bottom nav bar
+  padding-bottom: 30px; // height of bottom nav bar
 
   @media (min-width: $bp-md) {
     padding-bottom: 0;
@@ -111,6 +115,7 @@ body {
 button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 a {
@@ -120,14 +125,18 @@ a {
 
 h1 {
   color: $txt-black;
-  font-size: $fs-xl;
+  font-size: $fs-lg;
   font-family: $ff-title;
   font-weight: $fw-regular;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-xl;
+  }
 }
 
 h2 {
   color: $txt-white;
-  font-size: $fs-lg;
+  font-size: $fs-md;
   font-family: $ff-title;
   font-weight: $fw-regular;
 
@@ -135,13 +144,21 @@ h2 {
   background-color: $bg-title;
   padding: 10px 23px 7px 23px;
   border-radius: $rad-md;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-lg;
+  }
 }
 
 h3 {
   color: $txt-black;
-  font-size: $fs-md;
+  font-size: $fs-base;
   font-family: $ff-title;
   font-weight: $fw-regular;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-md;
+  }
 }
 
 h4 {
@@ -171,6 +188,104 @@ p {
       rgba(255, 255, 255, 0.4) 50%,
       rgba(255, 255, 255, 0) 100%);
   animation: shimmer-move 1.5s infinite;
+}
+
+@mixin label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: $txt-muted;
+  font-size: $fs-sm;
+  font-weight: $fw-regular;
+}
+
+@mixin input-field {
+  padding: 0.625rem 1rem;
+
+  color: $txt-black;
+  font-size: $fs-base;
+  font-family: $ff-main;
+
+  background-color: $clr-white;
+  border: 1px solid $clr-gray-300;
+  border-radius: $rad-sm;
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.2);
+  }
+}
+
+@mixin checkbox {
+  label {
+    color: $txt-black;
+    font-weight: $fw-regular;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      accent-color: $color-primary;
+      width: 1rem;
+      height: 1rem;
+      border-radius: $rad-xs;
+    }
+  }
+}
+
+@mixin button {
+  width: 100%;
+  background-color: $color-accent;
+  border: 1px solid $clr-gray-900;
+  color: $txt-black;
+  font-family: $ff-title;
+
+  transition: transform 0.1s, opacity 0.2s;
+
+  @media (min-width: $bp-lg) {
+    &:hover:not(:disabled) {
+      background-color: $clr-gray-900;
+      color: $txt-white;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &.active {
+    background-color: $color-primary;
+    color: $clr-white;
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    background-color: $clr-gray-300;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+@mixin btn-small {
+  @include button;
+
+  padding-top: 0.25rem;
+  padding-bottom: 0.10rem;
+
+  font-size: $fs-xs;
+  border-radius: $rad-sm;
+}
+
+@mixin btn {
+  @include button;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.30rem;
+
+  font-size: $fs-base;
+  border-radius: $rad-sm;
 }
 
 @keyframes shimmer-move {
