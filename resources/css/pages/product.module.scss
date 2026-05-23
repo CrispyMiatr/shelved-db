@@ -1,55 +1,311 @@
 @use '../base/general' as *;
 
-.product-container {}
+.product-container {
+  margin: 0 auto;
+  padding: 10px 24px 40px 24px;
+  max-width: 1200px;
 
-.product-wrap {
+  @media (min-width: $bp-sm) {
+    margin: 0px 40px;
+  }
+}
 
-  &__left {
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 
-    &__images {
+  @media (min-width: $bp-lg) {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: start;
+  }
+}
 
-      &__preview {}
+// --- LEFT COLUMN (CAROUSEL) ---
+.carousel-column {
+  position: relative;
 
-      &__selection {}
+  .main-image-container {
+    position: relative;
+    background: $clr-white;
+    border-radius: $rad-lg;
+    aspect-ratio: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 20px $sh-card;
+
+    .main-image {
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba($clr-white, 0.8);
+      border-radius: 50%;
+      padding: 0.5rem;
+      display: flex;
+      z-index: 2;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $clr-white;
+      }
+
+      &.prev {
+        left: 1rem;
+      }
+
+      &.next {
+        right: 1rem;
+      }
+
+      @media (min-width: $bp-lg) {
+        // Hide swipe behavior hints on desktop if preferred, or keep buttons
+      }
     }
   }
 
-  &__right {
+  .thumbnail-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
 
-    &__title {}
+    .thumb {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: $rad-sm;
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      background: $clr-white;
 
-    &__info {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-      &__basic {}
-
-      &__ingredients {}
-
-      &__warning {}
-
-      &__nutrition {}
+      &.active {
+        border-color: $color-accent;
+      }
     }
   }
 }
 
-.manu-badge {
-  position: relative;
+// --- RIGHT COLUMN (INFO) ---
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-  img {
-    width: 40px;
-    height: 40px;
+.sticky-header {
+  position: sticky;
+  top: 53px;
+  background: $bg-body;
+  z-index: 10;
+  padding-bottom: 12px;
+  padding-top: 10px;
+  border-bottom: 2px solid $clr-gray-500;
+
+  .brand-label {
+    font-family: $ff-main;
+    font-weight: $fw-semibold;
+    text-transform: uppercase;
+    color: $txt-muted;
+    font-size: $fs-sm;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
   }
 
-  .hover-name {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    background: #000;
-    color: #fff;
-    padding: 4px 8px;
-    white-space: nowrap;
+  .product-name {
+    line-height: 1.2;
+  }
+}
+
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $clr-gray-100;
+    padding-bottom: 0.5rem;
+    font-size: $fs-base;
+
+    label {
+      color: $txt-muted;
+      font-weight: $fw-medium;
+    }
+
+    span,
+    a {
+      text-align: right;
+      font-weight: $fw-regular;
+    }
+
+    a {
+      color: $clr-blue;
+      text-decoration: underline;
+    }
+  }
+}
+
+.producers-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    color: $txt-muted;
+    font-weight: $fw-medium;
   }
 
-  &:hover .hover-name {
-    display: block;
+  .manu-list {
+    display: flex;
+    gap: 0.5rem;
+
+    .manu-badge {
+      width: 32px;
+      height: 32px;
+      background: $clr-white;
+      padding: 4px;
+      border-radius: $rad-xs;
+      border: 1px solid $clr-gray-200;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+// --- ACCORDIONS ---
+.collapsibles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accordion {
+  border-radius: $rad-md;
+  background: $clr-white;
+  overflow: hidden;
+  border: 1px solid $clr-gray-200;
+
+  &-trigger {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+
+    .accordion-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: $ff-title;
+      font-size: $fs-sm;
+    }
+
+    .chevron {
+      transition: transform 0.3s;
+      color: $txt-muted;
+    }
+  }
+
+  &-content {
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    background: $clr-white-b;
+
+    .inner {
+      padding: 1rem;
+      font-size: $fs-sm;
+      color: $txt-dark;
+
+      p {
+        font-size: $fs-sm;
+      }
+    }
+  }
+
+  &.open {
+    .chevron {
+      transform: rotate(90deg);
+    }
+
+    .accordion-content {
+      max-height: 500px;
+    }
+  }
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    color: $txt-muted;
+    font-size: $fs-xs;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid $clr-gray-200;
+    text-transform: capitalize;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.warning-text {
+  color: $clr-red;
+  font-weight: $fw-medium;
+}
+
+// --- LANGUAGE FAB ---
+.language-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed $clr-gray-200;
+
+  .lang-label {
+    font-size: $fs-sm;
+    color: $txt-muted;
+    font-weight: $fw-medium;
+    letter-spacing: 0.025em;
+  }
+
+  .lang-buttons {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      @include btn-small;
+      padding: 0.25rem 1rem 0.10rem 1rem;
+      width: auto;
+    }
   }
 }
