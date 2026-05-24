@@ -1,0 +1,84 @@
+import { Breadcrumbs, Layout } from '~/components';
+import { Factory, Globe, ExternalLink } from 'lucide-react';
+import { Head } from '@inertiajs/react';
+import styles from '~styles/pages/manufacturers.module.scss';
+
+interface Manufacturer {
+    id: number;
+    name: string;
+    abbreviation: string | null;
+    website_url: string | null;
+    logo_path: string | null;
+    beverages_count?: number;
+}
+
+interface Props {
+    manufacturers: Manufacturer[];
+}
+
+const Index = ({ manufacturers }: Props) => {
+    return (
+        <>
+            <Head title="Manufacturers" />
+
+            <div className={styles['manufacturer-container']}>
+                <div className={styles['title']}>
+                    <h2>Can Manufacturers</h2>
+                </div>
+
+                <div className={styles['list']}>
+                    {manufacturers.map((manu) => (
+                        <div key={manu.id} className={styles['row']}>
+                            {/* Left: Logo */}
+                            <div className={styles['row__logo']}>
+                                {manu.logo_path ? (
+                                    <img src={manu.logo_path} alt={manu.name} />
+                                ) : (
+                                    <Factory size={24} />
+                                )}
+                            </div>
+
+                            {/* Middle: Name & Abbreviation */}
+                            <div className={styles['row__info']}>
+                                <div className={styles['row__name-group']}>
+                                    <h3 className={styles['row__name']}>{manu.name}</h3>
+                                    {manu.abbreviation && (
+                                        <span className={styles['row__abbrev']}>
+                                            ({manu.abbreviation})
+                                        </span>
+                                    )}
+                                </div>
+                                <span className={styles['row__count']}>
+                                    {manu.beverages_count} {manu.beverages_count === 1 ? 'beverage' : 'beverages'} in database
+                                </span>
+                            </div>
+
+                            {/* Right: Website Link */}
+                            <div className={styles['row__actions']}>
+                                {manu.website_url ? (
+                                    <a href={manu.website_url} target="_blank" rel="noreferrer" className={styles['web-link']}>
+                                        <Globe size={16} className={styles['web-link__icon-globe']} />
+                                        <span className={styles['web-link__label']}>Website</span>
+                                        <ExternalLink size={14} className={styles['web-link__icon-ext']} />
+                                    </a>
+                                ) : (
+                                    <span className={styles['no-web']}>No website available</span>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {manufacturers.length === 0 && (
+                    <div className={styles['empty']}>
+                        <p>No manufacturers found.</p>
+                    </div>
+                )}
+            </div>
+        </>
+    );
+};
+
+Index.layout = (page: React.ReactNode) => <Layout children={page} />;
+
+export default Index;

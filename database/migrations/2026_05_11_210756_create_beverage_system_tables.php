@@ -32,6 +32,8 @@ return new class extends Migration {
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('abbreviation', 10)->nullable();
+            $table->string('website_url')->nullable();
             $table->string('logo_path')->nullable();
             $table->timestamps();
         });

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['name', 'logo_path'])]
+#[Fillable(['name', 'abbreviation', 'website_url', 'logo_path'])]
 class Manufacturer extends Model
 {
     /**

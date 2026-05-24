@@ -10,8 +10,10 @@ class ManufacturerController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Manufacturers/Index', [
-            'manufacturers' => Manufacturer::orderBy('name')->get()
+        return Inertia::render('Manufacturers', [
+            'manufacturers' => Manufacturer::withCount('beverages')
+                ->orderBy('name')
+                ->get()
         ]);
     }
 }

@@ -42,9 +42,24 @@ class DatabaseSeeder extends Seeder
         $brandRedBull = Brand::create(['company_id' => $compRedBull->id, 'name' => 'Red Bull', 'website_url' => 'https://www.redbull.com', 'logo_path' => 'logos/brands/redbull.png']);
 
         // 5. Create Manufacturers
-        $mfgBall = Manufacturer::create(['name' => 'Ball Corporation', 'logo_path' => 'logos/manufacturers/ball.png']);
-        $mfgRauch = Manufacturer::create(['name' => 'Rauch Fruchtsäfte', 'logo_path' => 'logos/manufacturers/rauch.png']);
-        $mfgCcep = Manufacturer::create(['name' => 'Coca-Cola Europacific Partners', 'logo_path' => 'logos/manufacturers/ccep.png']);
+        $mfgBall = Manufacturer::create([
+            'name' => 'Ball Corporation',
+            'abbreviation' => 'Ball',
+            'website_url' => 'https://www.ball.com',
+            'logo_path' => '/assets/logos/Ball-Corporation.svg'
+        ]);
+        $mfgAg = Manufacturer::create([
+            'name' => 'Ardagh Group',
+            'abbreviation' => 'AG',
+            'website_url' => 'https://www.ardaghgroup.com/',
+            'logo_path' => '/assets/logos/Ardagh-Group.png'
+        ]);
+        $mfgREX = Manufacturer::create([
+            'name' => 'Rexam',
+            'abbreviation' => 'Rexam',
+            'website_url' => 'https://www.ball.com/',
+            'logo_path' => '/assets/logos/Rexam.svg'
+        ]);
 
         // Shared Data Strings
         $energyWarning = "High caffeine content. Not recommended for children or pregnant or breast-feeding women. Consume in moderate amounts. Not recommended for people sensitive to caffeine. High sugar content may contribute to tooth decay and weight gain if consumed excessively. Consult a physician if you have heart conditions.";
@@ -73,7 +88,7 @@ class DatabaseSeeder extends Seeder
         $bev->translations()->create(['language_code' => 'en', 'ingredients' => $cokeIngredients, 'warning_text' => 'Contains caffeine.', 'is_original' => true]);
         $bev->translations()->create(['language_code' => 'es', 'ingredients' => 'Agua carbonatada, jarabe de maíz de alta fructosa...', 'warning_text' => 'Contiene cafeína.', 'is_original' => false]);
         $bev->translations()->create(['language_code' => 'fr', 'ingredients' => 'Eau gazéifiée, sirop de maïs à haute teneur en fructose...', 'warning_text' => 'Contient de la caféine.', 'is_original' => false]);
-        $bev->manufacturers()->attach($mfgCcep->id);
+        $bev->manufacturers()->attach($mfgREX->id);
         $allBeverages[] = $bev->id;
 
         // 2. Coke Zero (2 Languages: EN, PL)
@@ -91,7 +106,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $bev->translations()->create(['language_code' => 'en', 'ingredients' => 'Water, Carbon Dioxide, Colour (E150d), Sweeteners (Aspartame, Acesulfame K), Natural Flavorings Including Caffeine, Acidity Regulator (Sodium Citrates).', 'warning_text' => 'Contains a source of phenylalanine.', 'is_original' => false]);
         $bev->translations()->create(['language_code' => 'pl', 'ingredients' => 'Woda, Dwutlenek Węgla, Barwnik (E150d), Kwas (Kwas Fosforowy), Substancje Słodzące (Aspartam, Acesulfam K), Naturalne Aromaty, Aromat Kofeiny, Regulator Kwasowości (Cytryniany Sodu).', 'warning_text' => 'Zawiera źródło fenyloalaniny.', 'is_original' => true]);
-        $bev->manufacturers()->attach($mfgCcep->id);
+        $bev->manufacturers()->attach($mfgREX->id);
         $allBeverages[] = $bev->id;
 
         // 3. Coke Cherry (EN)
@@ -183,7 +198,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $bev->translations()->create(['language_code' => 'de', 'ingredients' => 'Wasser, Saccharose, Glucose, Säuerungsmittel (Citronensäure), Kohlensäure, Taurin (0,4%), Säureregulatoren (Natriumcarbonate, Magnesiumcarbonate), Koffein (0,03%), Vitamine (Niacin, Pantothensäure, B6, B12), Aromen, Farbstoffe (Zuckerkulör, Riboflavine).', 'warning_text' => $energyWarning, 'is_original' => true]);
         $bev->translations()->create(['language_code' => 'en', 'ingredients' => $redBullIngredients, 'warning_text' => $energyWarning, 'is_original' => false]);
-        $bev->manufacturers()->attach($mfgRauch->id);
+        $bev->manufacturers()->attach($mfgAg->id);
         $allBeverages[] = $bev->id;
 
 

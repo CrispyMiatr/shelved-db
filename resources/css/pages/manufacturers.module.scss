@@ -1,0 +1,180 @@
+@use '../base/general' as *;
+
+.manufacturer-container {
+    margin: 20px auto;
+    padding: 0 24px;
+    max-width: 700px;
+
+    @media (min-width: $bp-sm) {
+        padding: 0 60px;
+        min-height: calc(100vh - 130px);
+    }
+}
+
+.title {
+    text-align: center;
+    margin: 30px 0 25px 0;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.row {
+    background: $bg-card;
+    border: 1px solid $clr-gray-300;
+    border-radius: $rad-md;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    @media (min-width: $bp-sm) {
+        padding-right: 1.5rem;
+    }
+
+    &__logo {
+        width: 35px;
+        height: 35px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $clr-white-b;
+        border-radius: $rad-md;
+        border: 1px solid $clr-gray-100;
+        padding: 8px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        svg {
+            color: $clr-gray-300;
+        }
+
+        @media (min-width: $bp-sm) {
+            width: 50px;
+            height: 50px;
+        }
+
+        @media (min-width: $bp-md) {
+            width: 55px;
+            height: 55px;
+        }
+
+        @media (min-width: $bp-lg) {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__name-group {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &__name {
+        font-family: $ff-title;
+        font-size: $fs-base;
+        color: $txt-black;
+        margin: 0;
+    }
+
+    &__abbrev {
+        font-family: $ff-main;
+        font-size: $fs-xs;
+        color: $txt-muted;
+        font-weight: $fw-semibold;
+
+        @media (min-width: $bp-sm) {
+            font-size: $fs-sm;
+        }
+    }
+
+    &__count {
+        font-size: $fs-xs;
+        color: $txt-muted;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 32px;
+    }
+}
+
+.web-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $clr-blue;
+    border: 1px solid rgba($clr-blue, 0.5);
+    transition: all 0.2s;
+
+    // Mobile: Small circular/square icon button
+    padding: 6px;
+    border-radius: $rad-sm;
+    gap: 0;
+
+    &__icon-globe,
+    &__label {
+        display: none; // Hide extra detail on mobile
+    }
+
+    &__icon-ext {
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        background: rgba($clr-blue, 0.05);
+        border-color: $clr-blue;
+    }
+
+    // Desktop: Transition to full pill version
+    @media (min-width: $bp-sm) {
+        padding: 6px 12px;
+        border-radius: $rad-full;
+        gap: 6px;
+
+        &__icon-globe {
+            display: block; // Show globe on desktop
+        }
+
+        &__label {
+            display: inline; // Show text on desktop
+            font-size: $fs-xs;
+        }
+
+        &__icon-ext {
+            width: 12px; // Slightly smaller sub-icon on desktop
+            height: 12px;
+        }
+    }
+}
+
+.no-web {
+    display: none; // Hide "N/A" on mobile to save space
+
+    @media (min-width: $bp-sm) {
+        display: block;
+        font-size: $fs-xs;
+        color: $clr-gray-300;
+        font-style: italic;
+    }
+}
