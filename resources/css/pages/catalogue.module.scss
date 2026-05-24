@@ -6,15 +6,15 @@
   max-width: 1200px;
 
   @media (min-width: $bp-sm) {
-    padding: 50px 40px;
+    padding: 30px 40px;
   }
 
   @media (min-width: $bp-md) {
-    padding: 50px 80px;
+    padding: 30px 80px;
   }
 
   @media (min-width: $bp-lg) {
-    padding: 50px 170px;
+    padding: 30px 170px;
   }
 }
 
