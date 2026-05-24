@@ -15,7 +15,12 @@ const Product = ({ beverage }: any) => {
     });
 
     // Mocking 6 images (replace with beverage.media or similar library call)
-    const images = beverage.media?.slice(0, 6) || [beverage.img_url, ...Array(5).fill(beverage.img_url)].filter(Boolean);
+    const images = Array.from({ length: 6 }, (_, i) =>
+        beverage.img_url
+            ? beverage.img_url
+            : `https://placehold.co/600x800?text=${beverage.name.replace(/\s+/g, '+')}+${i + 1}`
+    );
+    // const images = beverage.media?.slice(0, 6) || [beverage.img_url, ...Array(5).fill(beverage.img_url)].filter(Boolean);
 
     const translation = beverage.translations.find((trans: any) => trans.language_code === activeLang)
         || beverage.translations[0];
@@ -57,9 +62,9 @@ const Product = ({ beverage }: any) => {
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}
                     >
-                        <button className={`${prod['nav-btn']} ${prod['prev']}`} onClick={prevImg}><ChevronLeft /></button>
+                        <button className={`${prod['nav-btn']} ${prod['prev']}`} onClick={prevImg}><ChevronLeft strokeWidth={3} /></button>
                         <img src={images[imgIndex]} alt={beverage.name} className={prod['main-image']} />
-                        <button className={`${prod['nav-btn']} ${prod['next']}`} onClick={nextImg}><ChevronRight /></button>
+                        <button className={`${prod['nav-btn']} ${prod['next']}`} onClick={nextImg}><ChevronRight strokeWidth={3} /></button>
                     </div>
                     <div className={prod['thumbnail-row']}>
                         {images.map((img: string, idx: number) => (
@@ -135,15 +140,24 @@ const Product = ({ beverage }: any) => {
                             <table className={prod['nutrition-table']}>
                                 <thead>
                                     <tr>
-                                        <th>Value</th>
-                                        <th>per 100mL</th>
+                                        <th>VALUE</th>
+                                        <th className={prod['text-right']}>PER 100 mL</th>
+                                        <th className={prod['text-right']}>PER 500 mL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.entries(beverage.nutrition_100ml || {}).map(([key, val]: any) => (
+                                    {/* We map keys from 100ml and look up the matching key in 500ml */}
+                                    {Object.keys(beverage.nutrition_100ml || {}).map((key) => (
                                         <tr key={key}>
-                                            <td>{key.replace(/_/g, ' ')}</td>
-                                            <td>{val}</td>
+                                            <td className={prod['nutrition-label']}>
+                                                {key.replace(/_/g, ' ')}
+                                            </td>
+                                            <td className={prod['text-right']}>
+                                                {beverage.nutrition_100ml[key]}
+                                            </td>
+                                            <td className={prod['text-right']}>
+                                                {beverage.nutrition_500ml?.[key] ?? '-'}
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -152,7 +166,6 @@ const Product = ({ beverage }: any) => {
                     </div>
                 </div>
             </div>
-
             {beverage.translations.length > 1 && (
                 <div className={prod['language-selector']}>
                     <div className={prod['lang-buttons']}>
@@ -197,5 +210,6 @@ const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) 
     );
 };
 
-Product.layout = (page: React.ReactNode) => <Layout children={page} />;
+Product.layout = (page: React.ReactNode) => <Layout children={page} hideFooter={true} />;
+
 export default Product;

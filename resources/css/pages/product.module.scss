@@ -2,42 +2,83 @@
 
 .product-container {
   margin: 0 auto;
-  padding: 10px 24px 40px 24px;
-  max-width: 1200px;
+  padding: 15px 12px 54px 12px;
 
-  @media (min-width: $bp-sm) {
-    margin: 0px 40px;
+  @media (min-width: $bp-lg) {
+    margin: 0px 60px;
+    padding: 15px 0 34px 0;
+
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
+}
+
+.breadcrumbs {
+  flex-shrink: 0;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+
+  background-color: $bg-card;
+  padding: 1.5rem;
+  border: solid 1px $clr-gray-300;
+  border-radius: $rad-xl;
 
   @media (min-width: $bp-lg) {
-    grid-template-columns: 1fr 1.2fr;
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 3rem;
+
+    padding: 2rem;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 }
 
 // --- LEFT COLUMN (CAROUSEL) ---
 .carousel-column {
   position: relative;
+  min-height: 0;
+
+  @media (min-width: $bp-lg) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    height: 100%;
+  }
 
   .main-image-container {
     position: relative;
-    background: $clr-white;
-    border-radius: $rad-lg;
-    aspect-ratio: 4/5;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
-    box-shadow: 0 4px 20px $sh-card;
+    aspect-ratio: 4/5;
+    min-height: 0;
+    max-height: 100%;
+    width: auto;
+
+    margin: 0 auto;
+
+    background: $bg-card;
+    border: solid 1px $clr-gray-300;
+    border-radius: $rad-lg;
+    box-shadow: inset 4px 4px 6px $sh-card;
 
     .main-image {
-      max-height: 90%;
+      width: 100%;
+      height: 100%;
+      max-height: 92%;
       object-fit: contain;
     }
 
@@ -45,9 +86,10 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba($clr-white, 0.8);
-      border-radius: 50%;
-      padding: 0.5rem;
+      background-color: rgba($clr-white, 0.8);
+      border: 1px solid $clr-gray-100;
+      border-radius: $rad-md;
+      padding: 0.25rem;
       display: flex;
       z-index: 2;
       transition: background 0.2s;
@@ -57,29 +99,37 @@
       }
 
       &.prev {
-        left: 1rem;
+        left: 0.5rem;
       }
 
       &.next {
-        right: 1rem;
+        right: 0.5rem;
       }
 
-      @media (min-width: $bp-lg) {
-        // Hide swipe behavior hints on desktop if preferred, or keep buttons
+      @media (min-width: $bp-md) {
+        &.prev {
+          left: 1rem;
+        }
+
+        &.next {
+          right: 1rem;
+        }
       }
     }
   }
 
   .thumbnail-row {
     display: flex;
-    gap: 0.75rem;
+    justify-content: center;
+    gap: 0.5rem;
     margin-top: 1rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    width: 100%;
 
     .thumb {
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
       flex-shrink: 0;
       border-radius: $rad-sm;
       border: 2px solid transparent;
@@ -87,14 +137,24 @@
       cursor: pointer;
       background: $clr-white;
 
+      @media (min-width: $bp-md) {
+        width: 55px;
+        height: 55px;
+      }
+
+      @media (min-width: $bp-lg) {
+        width: 65px;
+        height: 65px;
+      }
+
       img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
       }
 
       &.active {
-        border-color: $color-accent;
+        border-color: $color-primary;
       }
     }
   }
@@ -105,15 +165,37 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  min-height: 0;
+
+  @media (min-width: $bp-lg) {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 1rem; // Padding for the scrollbar and FAB
+    margin-right: 0.5rem;
+    position: relative; // Needed for the sticky child
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $clr-gray-300;
+      border-radius: $rad-full;
+    }
+  }
 }
 
 .sticky-header {
   position: sticky;
-  top: 53px;
-  background: $bg-body;
-  z-index: 10;
+  top: 0;
+  background: $bg-card;
+  z-index: 15;
   padding-bottom: 12px;
-  padding-top: 10px;
+  padding-top: 4px;
   border-bottom: 2px solid $clr-gray-500;
 
   .brand-label {
@@ -144,8 +226,9 @@
     font-size: $fs-base;
 
     label {
-      color: $txt-muted;
-      font-weight: $fw-medium;
+      font-size: $fs-sm;
+      font-family: $ff-title;
+      color: $txt-black;
     }
 
     span,
@@ -167,8 +250,9 @@
   align-items: center;
 
   label {
-    color: $txt-muted;
-    font-weight: $fw-medium;
+    font-size: $fs-sm;
+    font-family: $ff-title;
+    color: $txt-black;
   }
 
   .manu-list {
@@ -248,7 +332,7 @@
     }
 
     .accordion-content {
-      max-height: 500px;
+      max-height: 800px;
     }
   }
 }
@@ -261,43 +345,85 @@
     text-align: left;
     color: $txt-muted;
     font-size: $fs-xs;
-    text-transform: uppercase;
+    padding-bottom: 8px;
   }
 
   td {
-    padding: 0.5rem 0;
+    padding: 0.6rem 0;
     border-bottom: 1px solid $clr-gray-200;
-    text-transform: capitalize;
+    font-size: $fs-sm;
   }
 
   tr:last-child td {
     border-bottom: none;
   }
-}
 
-.warning-text {
-  color: $clr-red;
-  font-weight: $fw-medium;
+  // Label column
+  .nutrition-label {
+    text-transform: capitalize;
+    color: $txt-dark;
+    font-weight: $fw-medium;
+  }
+
+  // Alignment helpers
+  .text-right {
+    text-align: right;
+  }
 }
 
 // --- LANGUAGE FAB ---
 .language-selector {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 0.5rem;
-  border-top: 1px dashed $clr-gray-200;
+  position: relative;
+
+  @media (min-width: $bp-lg) {
+    border-top: none;
+    margin-top: 0;
+    padding: 0;
+
+    // Float it to the bottom right of the info column
+    position: sticky;
+    bottom: 1rem;
+    align-self: flex-end;
+    z-index: 20;
+    pointer-events: none; // Allows clicking things "under" the transparent area
+  }
 
   .lang-buttons {
+    position: absolute;
     display: flex;
+    flex-direction: row;
     gap: 0.5rem;
+    pointer-events: auto;
+
+    left: 50%;
+    transform: translate(-50%);
+    bottom: -18px;
+
+    background-color: $bg-card;
+    padding: 4px;
+    border: solid 1px $clr-gray-300;
+    border-radius: $rad-md;
+
+    @media (min-width: $bp-lg) {
+      flex-direction: column;
+      padding: 6px;
+      border-radius: $rad-md;
+      border: 1px solid $clr-gray-200;
+
+      left: 0;
+      right: -24px;
+      transform: translate(-100%);
+      bottom: 20px;
+    }
 
     button {
       @include btn-small;
-      padding: 0.25rem 1rem 0.10rem 1rem;
-      width: auto;
+      width: 40px;
+      height: 30px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
