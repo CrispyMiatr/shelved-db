@@ -5,13 +5,14 @@
   padding-bottom: 30px;
 
   @media (min-width: $bp-sm) {
-    margin: 20 40px;
+    margin: 0 40px;
+
+    min-height: calc(100vh - 120px);
   }
 
   @media (min-width: $bp-md) {
     margin: 0 60px;
   }
-
 
   @media (min-width: $bp-lg) {
     margin: 0 120px;
@@ -90,6 +91,9 @@
   grid-template-columns: 1fr 3fr;
   column-gap: 20px;
   row-gap: 16px;
+
+  margin: 0 auto;
+  max-width: 900px;
 
   margin-bottom: 15px;
   padding-bottom: 5px;
@@ -217,6 +221,18 @@
   }
 }
 
+.divider-h {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: $clr-gray-300;
+  margin: 10px 0;
+
+  @media (min-width: $bp-md) {
+    margin: 15px 0;
+  }
+}
+
 .collection {
 
   &__header {
@@ -229,11 +245,26 @@
 
   &__products {
 
-    &__sort {}
+    &__sort {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
 
-    &__grid {
+    &__grid__items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      justify-content: center;
 
-      &__items {}
+      gap: 12px;
+      width: 100%;
+
+      @media (min-width: $bp-md) {
+        grid-template-columns: repeat(auto-fill, 150px);
+
+        margin: 0 0;
+      }
     }
   }
 

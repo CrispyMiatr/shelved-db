@@ -190,6 +190,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                         )}
                     </div>
 
+                    <span className={show['divider-h']}></span>
 
                     <div className={show['collection__products']}>
                         {totalInCollection > 0 && (
@@ -203,8 +204,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                 <SortButton label="Newest" field="created_at" currentSort={field} currentDirection={direction} />
                             </div>
                         )}
-
-                        <span className={show['divider-h']}></span>
 
                         <div className={show['collection__products__grid']}>
                             {collection.length > 0 ? (
