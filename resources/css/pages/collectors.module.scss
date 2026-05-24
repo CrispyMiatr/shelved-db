@@ -4,6 +4,20 @@
     margin: 20px auto;
     padding: 0 24px;
     max-width: 700px;
+
+    @media (min-width: $bp-sm) {
+        padding: 0 40px;
+
+        min-height: calc(100vh - 130px);
+    }
+
+    @media (min-width: $bp-md) {
+        padding: 0 60px;
+    }
+
+    @media (min-width: $bp-lg) {
+        padding: 0 120px;
+    }
 }
 
 .title {
@@ -11,10 +25,16 @@
     margin: 30px 0 25px 0;
 }
 
+.load-more {
+    @include btn;
+    margin-bottom: 40px;
+}
+
 .grid {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin-bottom: 40px;
 
     &__card {
         display: flex;
