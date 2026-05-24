@@ -28,7 +28,11 @@ const Index = ({ manufacturers }: Props) => {
 
                 <div className={styles['list']}>
                     {manufacturers.map((manu) => (
-                        <div key={manu.id} className={styles['row']}>
+                        <div
+                            key={manu.id}
+                            id={`manu-${manu.id}`}
+                            className={styles['row']}
+                        >
                             {/* Left: Logo */}
                             <div className={styles['row__logo']}>
                                 {manu.logo_path ? (

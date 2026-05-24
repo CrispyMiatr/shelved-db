@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Breadcrumbs, Layout } from '~/components';
 import { ChevronLeft, ChevronRight, AlertTriangle, List, Table } from 'lucide-react';
 import prod from '~styles/pages/product.module.scss';
+import { Link } from '@inertiajs/react';
 
 const Product = ({ beverage }: any) => {
     type SectionKey = 'ingredients' | 'warning' | 'nutrition';
@@ -102,10 +103,14 @@ const Product = ({ beverage }: any) => {
                             <label>Manufacturer(s)</label>
                             <div className={prod['manu-list']}>
                                 {beverage.manufacturers.map((manu: any) => (
-                                    <div key={manu.id} className={prod['manu-badge']} title={manu.name}>
-                                        {/* <img src={manu.logo_path || '/assets/icons/default-factory.svg'} alt={manu.name} /> */}
-                                        <img src={'/assets/logos/Ball-Corporation.svg'} />
-                                    </div>
+                                    <Link
+                                        key={manu.id}
+                                        href={`/manufacturers#manu-${manu.id}`}
+                                        className={prod['manu-badge']}
+                                        title={manu.name}
+                                    >
+                                        <img src={manu.logo_path || '/assets/icons/default-factory.svg'} alt={manu.name} />
+                                    </Link>
                                 ))}
                             </div>
                         </div>
