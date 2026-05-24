@@ -1,12 +1,16 @@
 import { PropsWithChildren } from 'react';
 import { Footer, Header } from '~/components';
 
-export const Layout = ({ children }: PropsWithChildren) => {
+interface LayoutProps extends PropsWithChildren {
+    hideFooter?: boolean;
+}
+
+export const Layout = ({ children, hideFooter = false }: LayoutProps) => {
     return (
         <div className='container-wrapper'>
             <Header />
             <main>{children}</main>
-            <Footer />
+            {!hideFooter && <Footer />}
         </div>
     );
 }
