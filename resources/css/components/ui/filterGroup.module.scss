@@ -6,6 +6,18 @@
     gap: 4px;
     margin-top: 15px;
     justify-content: center;
+
+    @media (min-width: $bp-sm) {
+        gap: 6px;
+    }
+
+    @media (min-width: $bp-md) {
+        gap: 8px;
+    }
+
+    @media (min-width: $bp-lg) {
+        gap: 10px;
+    }
 }
 
 .dropdown {
@@ -15,7 +27,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 4px 16px 2px 16px;
+        padding: 4px 12px 2px 12px;
 
         font-size: $fs-xs;
         font-weight: $fw-medium;
@@ -49,8 +61,8 @@
         z-index: 100;
 
         padding: 0;
-        min-width: 180px;
-        max-width: calc(100vw - 40px);
+        min-width: 100px;
+        max-width: 140px;
         max-height: 300px;
 
         overflow-y: auto;
@@ -70,7 +82,7 @@
         }
 
         li {
-            padding: 6px 18px;
+            padding: 6px 14px;
             font-size: $fs-sm;
 
             white-space: nowrap;
@@ -88,11 +100,6 @@
                 background: $clr-gray-100;
                 font-weight: $fw-semibold;
                 color: $txt-black;
-
-                &::after {
-                    content: ' ✓';
-                    float: right;
-                }
             }
         }
     }

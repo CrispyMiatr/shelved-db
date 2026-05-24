@@ -33,18 +33,19 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
                 </div>
 
                 <div className={styles['header__brand-title']}>
-                    <h3>The</h3>
+                    <h3 className={styles['header__brand-title__left']}>The</h3>
                     <span className={styles['divider-v']}></span>
 
                     <img
                         // src={brand.logo_path || 'https://placehold.co/100x100?text=Brand Logo'}
-                        src={logo}
+                        src={`https://placehold.co/600x250?text=${brand.name.replace(/\s+/g, '+')}`}
+
                         alt={`${brand.name} logo`}
                         className={styles['header__brand-title__image']}
                     />
 
                     <span className={styles['divider-v']}></span>
-                    <h3>Shelf</h3>
+                    <h3 className={styles['header__brand-title__right']}>Shelf</h3>
                 </div>
 
                 <div className={styles['header__filter']}>

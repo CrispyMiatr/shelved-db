@@ -1,18 +1,19 @@
 @use '../base/general' as *;
 
 .brand-container {
-  margin: 0 24px;
+  margin: 0 12px;
   padding: 15px 0 30px 0;
 
   @media (min-width: $bp-sm) {
-    margin: 0px 40px;
+    margin: 0 40px;
+
+    min-height: calc(100vh - 130px);
   }
 }
 
 .divider-v {
   width: 1px;
-  height: 80px;
-  margin-bottom: 2px;
+  margin: 4px 0;
 
   background-color: $clr-gray-300;
 }
@@ -23,6 +24,10 @@
   height: 1px;
   background-color: $clr-gray-300;
   margin: 10px 0;
+
+  @media (min-width: $bp-md) {
+    margin: 15px 0;
+  }
 }
 
 .header {
@@ -30,24 +35,51 @@
   flex-direction: column;
   align-items: center;
 
-  &__company {
+  margin: 0 12px;
 
-    p {
-      font-size: $fs-xs;
-      font-weight: $fw-light;
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
-      color: $txt-muted;
-    }
+  @media (min-width: $bp-sm) {
+    margin: 0 0;
+  }
+
+  &__company p {
+    font-size: $fs-xs;
+    font-weight: $fw-light;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: $txt-muted;
   }
 
   &__brand-title {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
     justify-content: center;
+    align-items: stretch;
     gap: 10px;
-    margin: 20px 0;
+    margin: 10px 0;
+
+    @media (min-width: $bp-lg) {
+      h3 {
+        font-size: $fs-lg;
+      }
+    }
+
+    &__left,
+    &__right {
+      display: flex;
+      line-height: 1;
+    }
+
+    &__left {
+      align-self: flex-end;
+
+      @media (min-width: $bp-md) {
+        align-self: flex-start;
+      }
+    }
+
+    &__right {
+      align-self: flex-end;
+    }
 
     &__image {
       width: 65%;
@@ -57,6 +89,12 @@
       object-fit: contain;
       object-position: bottom;
       display: block;
+
+      @media (min-width: $bp-md) {
+        width: 100%;
+        max-width: 600px;
+        max-height: 200px;
+      }
     }
   }
 
@@ -85,5 +123,19 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 15px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+
+    gap: 12px;
+    width: 100%;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: repeat(auto-fill, 150px);
+
+      margin: 0 0;
+    }
   }
 }

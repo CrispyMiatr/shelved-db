@@ -100,13 +100,25 @@
     }
 
     &.small {
-        width: 150px;
+        width: 130px;
+
+        @media (min-width: $bp-md) {
+            width: 150px;
+        }
+
+        .product-card {
+            box-shadow: 1px 1px 2px $sh-card;
+        }
 
         .product-card__product-img {
             padding-top: 10px;
 
             img {
-                width: 130px;
+                width: 110px;
+
+                @media (min-width: $bp-md) {
+                    width: 130px;
+                }
             }
         }
 
