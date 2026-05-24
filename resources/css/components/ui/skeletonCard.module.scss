@@ -40,7 +40,6 @@
         border: solid 1px $clr-gray-300;
         border-radius: 8px;
         box-shadow: 2px 2px 4px $sh-card;
-        padding-bottom: 12px;
 
         .text-line-short,
         .text-line-long {
@@ -70,11 +69,14 @@
         .image-box {
             width: 100%;
             aspect-ratio: 1 / 1;
-            margin-bottom: 8px;
         }
 
         .text-line-short {
-            margin-top: 14px;
+            margin: 15px 14px;
+        }
+
+        .text-line-long {
+            display: none;
         }
     }
 

@@ -57,17 +57,19 @@
     &__info {
         display: flex;
         justify-content: space-between;
-        padding: 8px 14px;
+        align-items: center;
+        padding: 10px 14px;
 
         border-top: solid 1px $clr-gray-300;
 
         &__name {
             font-size: $fs-sm;
+            line-height: 1;
         }
 
         &__count {
             font-size: $fs-sm;
-            margin: 1px 0 0;
+            margin: 1px 0;
         }
     }
 }
