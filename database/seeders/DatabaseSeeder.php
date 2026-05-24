@@ -32,33 +32,57 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(10)->create();
 
         // 3. Create Companies
-        $compCoke = Company::create(['name' => 'The Coca-Cola Company', 'country_code' => 'US']);
-        $compMonster = Company::create(['name' => 'Monster Beverage Corporation', 'country_code' => 'US']);
-        $compRedBull = Company::create(['name' => 'Red Bull GmbH', 'country_code' => 'AT']);
+        $compCoke = Company::create([
+            'name' => 'The Coca-Cola Company',
+            'country_code' => 'US'
+        ]);
+        $compMonster = Company::create([
+            'name' => 'Monster Beverage Corporation',
+            'country_code' => 'US'
+        ]);
+        $compRedBull = Company::create([
+            'name' => 'Red Bull GmbH',
+            'country_code' => 'AT'
+        ]);
 
         // 4. Create Brands
-        $brandCoke = Brand::create(['company_id' => $compCoke->id, 'name' => 'Coca-Cola', 'website_url' => 'https://www.coca-cola.com', 'logo_path' => 'logos/brands/coca-cola.png']);
-        $brandMonster = Brand::create(['company_id' => $compMonster->id, 'name' => 'Monster Energy', 'website_url' => 'https://www.monsterenergy.com', 'logo_path' => 'logos/brands/monster.png']);
-        $brandRedBull = Brand::create(['company_id' => $compRedBull->id, 'name' => 'Red Bull', 'website_url' => 'https://www.redbull.com', 'logo_path' => 'logos/brands/redbull.png']);
+        $brandCoke = Brand::create([
+            'company_id' => $compCoke->id,
+            'name' => 'Coca-Cola',
+            'website_url' => 'https://www.coca-cola.com',
+            'logo_path' => '/assets/logos/brand/coca-cola.png'
+        ]);
+        $brandMonster = Brand::create([
+            'company_id' => $compMonster->id,
+            'name' => 'Monster Energy',
+            'website_url' => 'https://www.monsterenergy.com',
+            'logo_path' => '/assets/logos/brand/monster-energy.png'
+        ]);
+        $brandRedBull = Brand::create([
+            'company_id' => $compRedBull->id,
+            'name' => 'Red Bull',
+            'website_url' => 'https://www.redbull.com',
+            'logo_path' => '/assets/logos/brand/red-bull.png'
+        ]);
 
         // 5. Create Manufacturers
         $mfgBall = Manufacturer::create([
             'name' => 'Ball Corporation',
             'abbreviation' => 'Ball',
             'website_url' => 'https://www.ball.com',
-            'logo_path' => '/assets/logos/Ball-Corporation.svg'
+            'logo_path' => '/assets/logos/manu/Ball-Corporation.svg'
         ]);
         $mfgAg = Manufacturer::create([
             'name' => 'Ardagh Group',
             'abbreviation' => 'AG',
             'website_url' => 'https://www.ardaghgroup.com/',
-            'logo_path' => '/assets/logos/Ardagh-Group.png'
+            'logo_path' => '/assets/logos/manu/Ardagh-Group.png'
         ]);
         $mfgREX = Manufacturer::create([
             'name' => 'Rexam',
             'abbreviation' => 'Rexam',
             'website_url' => 'https://www.ball.com/',
-            'logo_path' => '/assets/logos/Rexam.svg'
+            'logo_path' => '/assets/logos/manu/Rexam.svg'
         ]);
 
         // Shared Data Strings
@@ -76,7 +100,7 @@ class DatabaseSeeder extends Seeder
         $bev = Beverage::create([
             'brand_id' => $brandCoke->id,
             'name' => 'Classic',
-            'lineup_flavor' => 'Cola',
+            'lineup_flavor' => 'Classic',
             'country_code' => 'US',
             'sku' => 'CC-CLA-355-US',
             'barcode' => '049000028904',
@@ -113,7 +137,7 @@ class DatabaseSeeder extends Seeder
         $bev = Beverage::create([
             'brand_id' => $brandCoke->id,
             'name' => 'Cherry',
-            'lineup_flavor' => 'Fruit',
+            'lineup_flavor' => 'Cherry',
             'country_code' => 'GB',
             'sku' => 'CC-CHER-500-GB',
             'barcode' => '5449000050205',
@@ -129,7 +153,7 @@ class DatabaseSeeder extends Seeder
         $bev = Beverage::create([
             'brand_id' => $brandCoke->id,
             'name' => 'Vanilla',
-            'lineup_flavor' => 'Fruit',
+            'lineup_flavor' => 'Vanilla',
             'country_code' => 'US',
             'sku' => 'CC-VAN-355-US',
             'barcode' => '049000045277',
@@ -148,7 +172,7 @@ class DatabaseSeeder extends Seeder
         $bev = Beverage::create([
             'brand_id' => $brandMonster->id,
             'name' => 'Pipeline Punch',
-            'lineup_flavor' => 'Juice',
+            'lineup_flavor' => 'Juice(d)/Punch',
             'country_code' => 'JP',
             'sku' => 'MON-PIPEL-355-JP',
             'barcode' => '4897036692134',
@@ -186,7 +210,7 @@ class DatabaseSeeder extends Seeder
         // 7. Original (2 Languages: EN, DE)
         $bev = Beverage::create([
             'brand_id' => $brandRedBull->id,
-            'name' => 'Energy Drink',
+            'name' => 'Original',
             'lineup_flavor' => 'Original',
             'country_code' => 'AT',
             'sku' => 'RB-ORIG-250-AT',

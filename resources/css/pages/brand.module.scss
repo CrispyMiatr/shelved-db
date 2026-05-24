@@ -34,10 +34,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0;
 
   margin: 0 12px;
 
   @media (min-width: $bp-sm) {
+    gap: 0.5rem;
     margin: 0 0;
   }
 
@@ -92,7 +94,7 @@
 
       @media (min-width: $bp-md) {
         width: 100%;
-        max-width: 600px;
+        max-width: 550px;
         max-height: 200px;
       }
     }

@@ -19,11 +19,39 @@
         transform: translateY(-5px);
     }
 
-    img {
+    &__brand-img {
+        position: relative;
         width: 100%;
         aspect-ratio: 1 / 1;
-        object-fit: contain;
-        background-color: $clr-white;
+        background-color: $bg-card;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        .brand-placeholder {
+            position: absolute;
+            inset: 0;
+            background-color: $clr-gray-300;
+            z-index: 1;
+        }
+
+        img {
+            width: 85%;
+            height: 85%;
+
+            object-fit: contain;
+
+            position: relative;
+            z-index: 2;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .shimmer {
+            @include shimmer-effect;
+            z-index: 3;
+        }
     }
 
     &__info {
