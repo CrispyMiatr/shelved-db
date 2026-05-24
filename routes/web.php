@@ -29,6 +29,11 @@ Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('ma
 // Collector search page
 Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
 
+// Static Pages
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
 // API for live dropdown search
 Route::get('/api/search', [SearchController::class, 'globalSearch'])->name('api.search');
 

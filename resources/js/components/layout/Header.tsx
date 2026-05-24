@@ -38,7 +38,6 @@ export const Header = () => {
                             <li className={header['links__link-item']}><NavButton name="Home" link="/" /></li>
                             <li className={header['links__link-item']}><NavButton name="Catalogue" link="/catalogue" /></li>
                             <li className={header['links__link-item']}><NavButton name="Collectors" link="/collectors" /></li>
-                            <li className={header['links__link-item']}><NavButton name="About" link="/about" /></li>
                             <li className={header['links__link-item']}>
                                 <NavButton name="Profile" link={user ? `/@${user.username}` : "/login"} />
                             </li>
