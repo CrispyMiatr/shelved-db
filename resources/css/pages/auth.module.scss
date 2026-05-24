@@ -11,7 +11,7 @@
     background-color: $bg-body;
 
     @media (min-width: $bp-md) {
-        min-height: 95vh;
+        min-height: calc(100dvh - 90px);
         padding: 0;
     }
 }
