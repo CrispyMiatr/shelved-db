@@ -60,8 +60,7 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
                         className={`${styles['nav-btn']} ${styles['left']}`}
                         onClick={() => scroll('left')}
                     >
-                        <img src="/assets/icons/icon_chevron-left.svg" alt="Previous" />
-                        {/* <ChevronLeft size={24} /> */}
+                        <ChevronLeft size={30} strokeWidth={3} />
                     </button>
                 )}
 
@@ -80,8 +79,7 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
                         className={`${styles['nav-btn']} ${styles['right']}`}
                         onClick={() => scroll('right')}
                     >
-                        <img src="/assets/icons/icon_chevron-left.svg" alt="Next" />
-                        {/* <ChevronRight size={30} /> */}
+                        <ChevronRight size={30} strokeWidth={3} />
                     </button>
                 )}
             </div>

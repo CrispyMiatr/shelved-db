@@ -65,7 +65,7 @@
 
     &__status {
         background-color: rgba($clr-green, 0.1);
-        color: darken($clr-green, 20%);
+        color: $clr-green;
         padding: 0.75rem 1rem;
         border-radius: $rad-md;
         font-size: $fs-sm;

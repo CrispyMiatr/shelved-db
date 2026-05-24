@@ -19,7 +19,6 @@
             }
         }
 
-
         &__bottom {
             display: none;
             width: 100%;
@@ -39,7 +38,7 @@
     }
 }
 
-// Mobile top bar layout
+// mobile top bar
 .mobile-actions {
     display: flex;
     align-items: center;
@@ -73,7 +72,7 @@
     }
 }
 
-// Mobile bottom bar
+// mobile bottom bar
 .mobile-nav {
     position: fixed;
     bottom: 0;

@@ -53,13 +53,11 @@ const Collectors = ({ collectors, filters }: any) => {
                             />
 
                             <div className={styles['grid__card__info']}>
-                                {/* Name and Username stack vertically */}
                                 <div className={styles['grid__card__info__user']}>
                                     <h3>{collector.name}</h3>
                                     <p>@{collector.username}</p>
                                 </div>
 
-                                {/* Stats flow horizontally to the right */}
                                 <div className={styles['grid__card__info__stats']}>
                                     <div className={styles['stat']}>
                                         <strong>{collector.collection_count}</strong>

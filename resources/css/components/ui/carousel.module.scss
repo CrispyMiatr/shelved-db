@@ -56,7 +56,6 @@
     width: max-content;
     margin: 5px 0;
 
-    // ensures cards don't shrink below their defined size
     &>* {
         flex: 0 0 auto;
     }

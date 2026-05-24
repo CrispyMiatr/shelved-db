@@ -8,7 +8,6 @@
     flex: 0 0 auto;
     transition: all 0.1s ease-in-out;
 
-    // Common Shimmer
     .shimmer {
         @include shimmer-effect;
         z-index: 1;
@@ -22,11 +21,10 @@
         }
     }
 
-    // Common Placeholder Box Style
     .image-box,
     .text-line-short,
     .text-line-long {
-        background-color: $clr-gray-300; // Match your card placeholder colors
+        background-color: $clr-gray-300;
     }
 
     .text-line-short,
@@ -35,7 +33,6 @@
         border-radius: 4px;
     }
 
-    // --- PRODUCT & BRAND SHARED STYLES ---
     &.product,
     &.brand {
         width: 200px;
@@ -47,16 +44,15 @@
 
         .text-line-short,
         .text-line-long {
-            margin: 8px 14px 0; // Matching .product-card__info padding
+            margin: 8px 14px 0;
         }
     }
 
-    // --- PRODUCT SPECIFIC ---
     &.product {
         .image-box {
-            width: 175px; // Matching product img width
-            height: 230px; // Approximate 3:4 aspect ratio
-            margin: 14px auto 4px; // Matching product padding-top
+            width: 175px;
+            height: 230px;
+            margin: 14px auto 4px;
             border-radius: 4px;
         }
 
@@ -70,7 +66,6 @@
         }
     }
 
-    // --- BRAND SPECIFIC ---
     &.brand {
         .image-box {
             width: 100%;
@@ -79,15 +74,14 @@
         }
 
         .text-line-short {
-            margin-top: 14px; // Space after the border-top simulation
+            margin-top: 14px;
         }
     }
 
-    // --- PROFILE SPECIFIC ---
     &.profile {
         width: 160px;
         align-items: center;
-        background: transparent; // Profiles don't have a background card
+        background: transparent;
         border: none;
         box-shadow: none;
 
@@ -96,7 +90,7 @@
             height: 100px;
             border-radius: 50%;
             margin-bottom: 8px;
-            border: 2px solid $clr-gray-100; // Matching profile img border
+            border: 2px solid $clr-gray-100;
         }
 
         .text-line-short,

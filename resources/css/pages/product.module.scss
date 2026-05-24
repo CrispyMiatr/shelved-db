@@ -41,7 +41,6 @@
   }
 }
 
-// --- LEFT COLUMN (CAROUSEL) ---
 .carousel-column {
   position: relative;
   min-height: 0;
@@ -160,7 +159,6 @@
   }
 }
 
-// --- RIGHT COLUMN (INFO) ---
 .info-column {
   display: flex;
   flex-direction: column;
@@ -170,9 +168,9 @@
   @media (min-width: $bp-lg) {
     overflow-y: auto;
     height: 100%;
-    padding-right: 1rem; // Padding for the scrollbar and FAB
+    padding-right: 1rem;
     margin-right: 0.5rem;
-    position: relative; // Needed for the sticky child
+    position: relative;
 
     &::-webkit-scrollbar {
       width: 3px;
@@ -358,20 +356,17 @@
     border-bottom: none;
   }
 
-  // Label column
   .nutrition-label {
     text-transform: capitalize;
     color: $txt-dark;
     font-weight: $fw-medium;
   }
 
-  // Alignment helpers
   .text-right {
     text-align: right;
   }
 }
 
-// --- LANGUAGE FAB ---
 .language-selector {
   position: relative;
 
@@ -380,12 +375,11 @@
     margin-top: 0;
     padding: 0;
 
-    // Float it to the bottom right of the info column
     position: sticky;
     bottom: 1rem;
     align-self: flex-end;
     z-index: 20;
-    pointer-events: none; // Allows clicking things "under" the transparent area
+    pointer-events: none;
   }
 
   .lang-buttons {

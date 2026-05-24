@@ -256,7 +256,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                 </div>
             )}
 
-            {/* modal */}
             {modalConfig.show && (
                 <div className={show['modal']} onClick={() => setModalConfig({ ...modalConfig, show: false })}>
                     <div className={show['modal__content']} onClick={e => e.stopPropagation()}>

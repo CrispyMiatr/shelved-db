@@ -56,7 +56,6 @@ const Product = ({ beverage }: any) => {
             </div>
 
             <div className={prod['product-grid']}>
-                {/* LEFT: CAROUSEL */}
                 <div className={prod['carousel-column']}>
                     <div
                         className={prod['main-image-container']}
@@ -80,7 +79,6 @@ const Product = ({ beverage }: any) => {
                     </div>
                 </div>
 
-                {/* RIGHT: INFO */}
                 <div className={prod['info-column']}>
                     <header className={prod['sticky-header']}>
                         <div className={prod['brand-label']}>{beverage.brand.name}</div>
@@ -151,7 +149,6 @@ const Product = ({ beverage }: any) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* We map keys from 100ml and look up the matching key in 500ml */}
                                     {Object.keys(beverage.nutrition_100ml || {}).map((key) => (
                                         <tr key={key}>
                                             <td className={prod['nutrition-label']}>

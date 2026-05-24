@@ -33,7 +33,6 @@ const Index = ({ manufacturers }: Props) => {
                             id={`manu-${manu.id}`}
                             className={styles['row']}
                         >
-                            {/* Left: Logo */}
                             <div className={styles['row__logo']}>
                                 {manu.logo_path ? (
                                     <img src={manu.logo_path} alt={manu.name} />
@@ -42,7 +41,6 @@ const Index = ({ manufacturers }: Props) => {
                                 )}
                             </div>
 
-                            {/* Middle: Name & Abbreviation */}
                             <div className={styles['row__info']}>
                                 <div className={styles['row__name-group']}>
                                     <h3 className={styles['row__name']}>{manu.name}</h3>
@@ -57,7 +55,6 @@ const Index = ({ manufacturers }: Props) => {
                                 </span>
                             </div>
 
-                            {/* Right: Website Link */}
                             <div className={styles['row__actions']}>
                                 {manu.website_url ? (
                                     <a href={manu.website_url} target="_blank" rel="noreferrer" className={styles['web-link']}>
