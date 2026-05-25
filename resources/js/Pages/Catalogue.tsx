@@ -68,7 +68,7 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                 <div className={catalog['index__alphabet']}>
                     {ALPHABET.map((letter) => (
                         <section key={letter} className={catalog['index__section']}>
-                            <h3 className={catalog['index__letter-title']}>{letter}</h3>
+                            <h4 className={catalog['index__letter-title']}>{letter}</h4>
 
                             <div className={catalog['index__group']}>
                                 {groupedBrands[letter].length > 0 ? (

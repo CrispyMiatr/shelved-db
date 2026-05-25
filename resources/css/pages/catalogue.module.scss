@@ -6,15 +6,15 @@
   max-width: 1200px;
 
   @media (min-width: $bp-sm) {
-    padding: 30px 40px;
+    padding: 30px 40px 20px 40px;
   }
 
   @media (min-width: $bp-md) {
-    padding: 30px 80px;
+    padding: 30px 80px 40px 80px;
   }
 
   @media (min-width: $bp-lg) {
-    padding: 30px 170px;
+    padding: 30px 170px 50px 170px;
   }
 }
 
@@ -32,6 +32,7 @@
     display: block;
     column-gap: 95px;
     margin: 0 auto;
+    padding: 8px;
 
     // mobile
     column-count: 1;
