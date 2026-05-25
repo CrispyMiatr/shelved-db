@@ -30,7 +30,7 @@
   border-radius: $rad-xl;
 
   @media (min-width: $bp-lg) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
     gap: 3rem;
 
@@ -44,27 +44,31 @@
 .carousel-column {
   position: relative;
   min-height: 0;
+  min-width: 0;
 
   @media (min-width: $bp-lg) {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
 
     height: 100%;
+    width: 100%;
   }
 
   .main-image-container {
     position: relative;
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
     aspect-ratio: 4/5;
     min-height: 0;
+    min-width: 0;
     max-height: 100%;
+    max-width: 100%;
     width: auto;
 
     margin: 0 auto;
@@ -215,6 +219,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  padding: 0 8px;
 
   .info-row {
     display: flex;
@@ -222,11 +227,13 @@
     border-bottom: 1px solid $clr-gray-100;
     padding-bottom: 0.5rem;
     font-size: $fs-base;
+    align-items: center;
 
     label {
       font-size: $fs-sm;
       font-family: $ff-title;
       color: $txt-black;
+      line-height: 0;
     }
 
     span,
@@ -238,6 +245,14 @@
     a {
       color: $clr-blue;
       text-decoration: underline;
+    }
+  }
+
+  @media (min-width: $bp-md) {
+    gap: 0.875rem;
+
+    .info-row {
+      padding-bottom: 0.625rem;
     }
   }
 }
@@ -374,11 +389,12 @@
     border-top: none;
     margin-top: 0;
     padding: 0;
+    z-index: 20;
 
     position: sticky;
     bottom: 1rem;
     align-self: flex-end;
-    z-index: 20;
+
     pointer-events: none;
   }
 
@@ -405,19 +421,18 @@
       border: 1px solid $clr-gray-200;
 
       left: 0;
-      right: -24px;
-      transform: translate(-100%);
       bottom: 20px;
     }
 
     button {
       @include btn-small;
-      width: 40px;
-      height: 30px;
-      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      width: 40px;
+      height: 30px;
+      padding: 0;
     }
   }
 }
