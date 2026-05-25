@@ -161,9 +161,13 @@ h3 {
 
 h4 {
   color: $txt-black;
-  font-size: $fs-base;
+  font-size: $fs-sm;
   font-family: $ff-title;
   font-weight: $fw-regular;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-base;
+  }
 }
 
 p {

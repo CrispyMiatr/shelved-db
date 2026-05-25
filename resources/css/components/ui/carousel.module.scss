@@ -8,7 +8,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-left: -10px;
+        // margin-left: -10px;
         margin-bottom: 5px;
 
         &__extra {
@@ -27,6 +27,7 @@
         position: relative;
         display: flex;
         align-items: center;
+        margin: 0 10px;
 
         &__viewport {
             overflow-x: auto;
