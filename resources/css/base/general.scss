@@ -248,7 +248,7 @@ p {
 
   @media (min-width: $bp-lg) {
     &:hover:not(:disabled) {
-      background-color: $clr-gray-900;
+      background-color: $clr-gray-800;
       color: $txt-white;
     }
   }
@@ -274,7 +274,7 @@ p {
   @include button;
 
   padding-top: 0.25rem;
-  padding-bottom: 0.10rem;
+  padding-bottom: 0.05rem;
 
   font-size: $fs-xs;
   border-radius: $rad-sm;
@@ -284,9 +284,9 @@ p {
   @include button;
 
   padding-top: 0.5rem;
-  padding-bottom: 0.30rem;
+  padding-bottom: 0.3rem;
 
-  font-size: $fs-base;
+  font-size: $fs-sm;
   border-radius: $rad-sm;
 }
 

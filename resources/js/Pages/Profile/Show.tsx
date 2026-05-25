@@ -56,9 +56,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                     <p className={show['action-bar__username']}>@{user.username}</p>
 
                     <div className={show['action-bar__right']}>
-                        <button onClick={handleShare} className={show['share-btn']}>
-                            <Share2 size={20} />
-                        </button>
                         <Link href={route('profile.edit')}>
                             <Pencil size={20} />
                         </Link>
@@ -79,41 +76,39 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                     <img src={`https://ui-avatars.com/api/?name=${user.username}&background=random`} alt="avatar" />
                 </div>
 
-                <div className={show['info__details']}>
-                    <div className={show['info__details__header']}>
-                        <div className={show['info__details__header__names']}>
-                            <p className={show['username']}>@{user.username}</p>
-                            <h4 className={show['display-name']}>{user.name}</h4>
-                        </div>
-                    </div>
-
-                    <div className={show['info__details__stats']}>
-                        <div className={show['stat-box']}>
-                            <span className={show['stat-value']}>{user.collection_count || 0} </span>
-                            <span className={show['stat-label']}>items</span>
-                        </div>
-                        <div
-                            className={`${show['stat-box']} ${canSeeContent ? show['clickable'] : ''}`}
-                            onClick={() => openModal('followers')}
-                        >
-                            <span className={show['stat-value']}>{user.followers_count} </span>
-                            <span className={show['stat-label']}>followers</span>
-                        </div>
-                        <div
-                            className={`${show['stat-box']} ${canSeeContent ? show['clickable'] : ''}`}
-                            onClick={() => openModal('following')}
-                        >
-                            <span className={show['stat-value']}>{user.following_count} </span>
-                            <span className={show['stat-label']}>following</span>
-                        </div>
+                <div className={show['info__header']}>
+                    <div className={show['info__header__names']}>
+                        <p className={show['username']}>@{user.username}</p>
+                        <h3 className={show['display-name']}>{user.name}</h3>
                     </div>
                 </div>
 
-                {user.bio && (
-                    <div className={show['info__bio']}>
-                        <p>{user.bio}</p>
+                <div className={show['info__stats']}>
+                    <div className={show['stat-box']}>
+                        <span className={show['stat-value']}>{user.collection_count || 0} </span>
+                        <span className={show['stat-label']}>items</span>
                     </div>
-                )}
+                    <div
+                        className={`${show['stat-box']} ${canSeeContent ? show['clickable'] : ''}`}
+                        onClick={() => openModal('followers')}
+                    >
+                        <span className={show['stat-value']}>{user.followers_count} </span>
+                        <span className={show['stat-label']}>followers</span>
+                    </div>
+                    <div
+                        className={`${show['stat-box']} ${canSeeContent ? show['clickable'] : ''}`}
+                        onClick={() => openModal('following')}
+                    >
+                        <span className={show['stat-value']}>{user.following_count} </span>
+                        <span className={show['stat-label']}>following</span>
+                    </div>
+                </div>
+
+                <div className={show['info__bio']}>
+                    <p className={!user.bio ? show['info__bio--empty'] : ''}>
+                        {user.bio || 'No bio yet.'}
+                    </p>
+                </div>
 
                 {user.social_links && Object.values(user.social_links).some(link => link && String(link).trim() !== '') && (
                     <div className={show['info__socials']}>
@@ -143,29 +138,35 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                 );
                             })}
                         </div>
-                        <button onClick={handleShare} className={show['share-btn']}>Share Profile</button>
                     </div>
                 )}
 
                 <div className={show['info__actions']}>
                     {isOwner ? (
-                        <div className={show['profile-actions']}>
-                            <Link href={route('profile.edit')}><button>Edit Profile</button></Link>
-                            <button onClick={handleLogout} className={show['logout-btn']}>Log Out</button>
+                        /* Owner view: Edit + Share */
+                        <div className={show['action-group']}>
+                            <Link href={route('profile.edit')} className={show['flex-1']}>
+                                <button className={show['profile-actions__edit-btn']}>Edit Profile</button>
+                            </Link>
+                            <button onClick={handleShare} className={show['profile-actions__share-btn']}>Share Profile</button>
                         </div>
                     ) : (
-                        !auth.user ? (
-                            <Link href={route('login')}>
-                                <button className={show['btn-follow']}>Follow</button>
-                            </Link>
-                        ) : (
-                            <button
-                                onClick={toggleFollow}
-                                className={isFollowing ? show['btn-unfollow'] : show['btn-follow']}
-                            >
-                                {isFollowing ? 'Unfollow' : 'Follow'}
-                            </button>
-                        )
+                        /* Visitor view: Follow + Share */
+                        <div className={show['action-group']}>
+                            {!auth.user ? (
+                                <Link href={route('login')} className={show['flex-1']}>
+                                    <button className={show['btn-follow']}>Follow</button>
+                                </Link>
+                            ) : (
+                                <button
+                                    onClick={toggleFollow}
+                                    className={isFollowing ? show['btn-unfollow'] : show['btn-follow']}
+                                >
+                                    {isFollowing ? 'Unfollow' : 'Follow'}
+                                </button>
+                            )}
+                            <button onClick={handleShare} className={show['btn-share']}>Share</button>
+                        </div>
                     )}
                 </div>
             </div>

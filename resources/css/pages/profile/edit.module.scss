@@ -109,9 +109,21 @@
         @include input-field;
     }
 
+    .label-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .char-counter {
+        font-size: $fs-xs;
+        color: $txt-muted;
+    }
+
     .textarea {
+        @include input-field;
         min-height: 100px;
-        resize: vertical;
+        resize: none;
     }
 
     .error {

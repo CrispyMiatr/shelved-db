@@ -99,13 +99,21 @@ export default function Edit() {
                     </div>
 
                     <div className={edit['field']}>
-                        <label className={edit['label']}>Bio</label>
+                        <div className={edit['label-group']}>
+                            <label className={edit['label']}>Bio</label>
+                            <span className={edit['char-counter']}>
+                                {data.bio.length}/200
+                            </span>
+                        </div>
                         <textarea
                             className={edit['textarea']}
                             value={data.bio}
                             onChange={e => setData('bio', e.target.value)}
                             placeholder="Tell us about your collection..."
+                            maxLength={200}
+                            rows={4}
                         />
+                        {errors.bio && <span className={edit['error']}>{errors.bio}</span>}
                     </div>
 
                     <div className={edit['field-checkbox']}>
