@@ -23,7 +23,7 @@ const RegisterSetup = () => {
         <div className={authS['auth-container']}>
             <Head title="Complete Profile" />
 
-            <form onSubmit={submit} className={authS['form--wide']}>
+            <form onSubmit={submit} className={authS['form']}>
                 <div className={authS['form__title']}>
                     <img src={'/logo-black.svg'} alt="Shelved." className={authS['form__title__logo']} />
                     <h3>Welcome!</h3>

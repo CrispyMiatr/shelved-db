@@ -34,6 +34,7 @@ const Login = () => {
                         type="text"
                         value={data.email}
                         onChange={e => setData('email', e.target.value)}
+                        placeholder='email or username'
                     />
                     {errors.email && <div className="error">{errors.email}</div>}
                 </div>

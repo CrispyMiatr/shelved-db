@@ -29,10 +29,6 @@
     border-radius: $rad-lg;
     box-shadow: 0 10px 25px $sh-card;
 
-    &--wide {
-        max-width: 460px;
-    }
-
     &__title {
         justify-content: center;
         text-align: center;
