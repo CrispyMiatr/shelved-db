@@ -229,7 +229,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                         <div className={show['empty-state__no-matches']}>
                                             <p>No items match your selected filters.</p>
                                             <Link
-                                                href={route('profile.show', user.username)}
+                                                href={window.location.pathname}
                                                 className={show['empty-state__clear-link']}
                                             >
                                                 Clear all filters

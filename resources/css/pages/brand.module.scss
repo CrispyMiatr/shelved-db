@@ -137,15 +137,32 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    // grid-template-columns: repeat(auto-fill, 130px);
+    grid-template-columns: repeat(auto-fit, 130px);
 
-    gap: 12px;
+    justify-content: center;
+    gap: 4px;
     width: 100%;
 
     @media (min-width: $bp-md) {
-      grid-template-columns: repeat(auto-fill, 150px);
+      // grid-template-columns: repeat(auto-fill, 150px);
+      grid-template-columns: repeat(auto-fit, 150px);
 
+      gap: 12px;
       margin: 0 0;
+    }
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 0;
+
+    .clear-link {
+      color: $clr-blue;
+      text-decoration: underline;
+      display: block;
+      margin-top: 10px;
     }
   }
 }
