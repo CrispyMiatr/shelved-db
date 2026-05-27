@@ -49,7 +49,7 @@ $bg-body: $clr-white-b;
 $bg-card: $clr-white;
 $bg-title: $clr-black;
 $bg-nav-link: $clr-yellow;
-$bg-nav-dark: $clr-black;
+$bg-nav-dark: $clr-gray-900;
 
 // Text
 $txt-black: $clr-black;
@@ -91,6 +91,7 @@ $rad-full: 9999px;
 $bp-sm: 640px;
 $bp-md: 768px;
 $bp-lg: 1024px;
+$bp-xl: 1300px;
 
 // --------== GLOBAL BASE ==--------
 html {

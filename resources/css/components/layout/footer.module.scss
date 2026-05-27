@@ -1,40 +1,142 @@
 @use '~styles/base/general.scss' as *;
 
 .footer {
-    background-color: $clr-gray-300;
-    width: 100%;
-
+    background-color: $bg-nav-dark;
     display: none;
+
+    @media (min-width: $bp-lg) {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 60px 120px;
+    }
 
     &__container {
         display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
 
-        &__brand {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
 
-            &__logo {
-                width: 85px;
-            }
+        h4 {
+            color: $txt-white;
+            margin-bottom: 8px;
+        }
+    }
 
-            &__text {}
+    &__copyright {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-top: 10px;
+        margin-top: 10px;
+
+        color: $txt-white;
+        font-size: $fs-xs;
+
+        border-top: 1px solid rgba($clr-white, 0.1);
+    }
+
+    &__brand,
+    &__socials,
+    &__legal,
+    &__pages {
+        flex: 0 0 auto;
+    }
+
+    &__brand {
+        a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+
+            text-decoration: none;
         }
 
-        &__socials {}
+        &__logo {
+            width: 100px;
+            height: auto;
+        }
 
-        &__legal {}
+        &__text {
+            h3 {
+                color: $txt-white;
+            }
 
-        &__pages {}
+            p {
+                color: $txt-white;
+                font-size: $fs-sm;
+                line-height: 1.4;
+            }
+        }
     }
-}
 
-@media (min-width: $bp-lg) {
-    .footer {
-        display: flex;
+    &__pages {
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+
+            list-style: none;
+
+            a {
+                color: $txt-white;
+                font-size: $fs-sm;
+                text-decoration: none;
+
+                transition: color 0.1s ease;
+
+                &:hover {
+                    color: $color-accent;
+                }
+            }
+        }
     }
 }
 
 .links {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 
-    &__link-item {}
+    list-style: none;
+
+    &__link-item {
+        display: flex;
+        align-items: center;
+        padding: 2px;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: $txt-white;
+            font-size: $fs-sm;
+            text-decoration: none;
+
+            transition: color 0.1s ease;
+
+            &:hover {
+                color: $color-accent;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+                transition: filter 0.1s ease;
+            }
+
+            &:hover {
+                color: $color-accent;
+
+                img {
+                    filter: invert(1);
+                }
+            }
+        }
+    }
 }
