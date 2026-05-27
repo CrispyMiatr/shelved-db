@@ -6,7 +6,10 @@
     justify-content: center;
     gap: 4px;
     font-size: $fs-sm;
+
+    margin: 0 auto;
     margin-bottom: 15px;
+    max-width: 1800px;
 
     @media (min-width: $bp-lg) {
         justify-content: start;

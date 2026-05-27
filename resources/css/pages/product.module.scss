@@ -13,6 +13,18 @@
     flex-direction: column;
     box-sizing: border-box;
   }
+
+  @media (min-width: $bp-sm) {
+    margin: 0 40px;
+  }
+
+  @media (min-width: $bp-md) {
+    margin: 0 60px;
+  }
+
+  @media (min-width: $bp-lg) {
+    margin: 0 120px;
+  }
 }
 
 .breadcrumbs {
@@ -28,6 +40,9 @@
   padding: 1.5rem;
   border: solid 1px $clr-gray-300;
   border-radius: $rad-xl;
+
+  margin: 0 auto;
+  max-width: 1800px;
 
   @media (min-width: $bp-lg) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

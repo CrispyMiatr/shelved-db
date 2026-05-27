@@ -1,19 +1,19 @@
 @use '~styles/base/general.scss' as *;
 
 .profile-container {
-  margin: 0 24px;
-  padding-bottom: 80px;
+  margin: 0 auto;
+  max-width: 1800px;
 
   @media (min-width: $bp-sm) {
-    margin: 0 40px;
+    padding: 0 40px;
   }
 
   @media (min-width: $bp-md) {
-    margin: 0 60px;
+    padding: 0 60px;
   }
 
   @media (min-width: $bp-lg) {
-    margin: 0 120px;
+    padding: 0 120px;
 
     min-height: 110vh;
   }

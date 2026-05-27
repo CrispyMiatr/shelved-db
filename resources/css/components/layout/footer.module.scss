@@ -7,12 +7,12 @@
     @media (min-width: $bp-lg) {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        padding: 60px 80px;
+        gap: 20px;
+        padding: 50px 80px 10px 80px;
     }
 
     @media (min-width: $bp-xl) {
-        padding: 60px 120px;
+        padding: 50px 120px 10px 120px;
     }
 
     &__container {
