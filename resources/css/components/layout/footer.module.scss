@@ -8,6 +8,10 @@
         display: flex;
         flex-direction: column;
         gap: 30px;
+        padding: 60px 80px;
+    }
+
+    @media (min-width: $bp-xl) {
         padding: 60px 120px;
     }
 
@@ -77,7 +81,7 @@
     &__pages {
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(80px, auto));
             gap: 4px;
 
             list-style: none;
