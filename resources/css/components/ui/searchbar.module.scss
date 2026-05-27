@@ -24,16 +24,18 @@
         max-width: 400px;
         margin: 0 auto;
 
+
         .search-input {
             width: 100%;
             padding: 8px 15px;
             background: $clr-white;
-            border: 1px solid $clr-black;
+            border: 2px solid $clr-black;
             color: #000;
-
 
             &:focus {
                 background: $clr-white;
+
+                border: 2px solid $color-accent;
             }
         }
     }
@@ -44,7 +46,7 @@
     box-sizing: border-box;
     border-radius: $rad-md;
     outline: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease-in-out;
 }
 
 .dropdown {

@@ -9,7 +9,7 @@ export const NavButton = ({ name, link }: ButtonItem) => {
     return (
         <Link
             href={link}
-            className={`nav-button ${isActive ? 'button--active' : ''}`}
+            className={`nav-button ${isActive ? 'nav-button--active' : ''}`}
         >
             <p className='nav-button__title'>{name}</p>
         </Link>

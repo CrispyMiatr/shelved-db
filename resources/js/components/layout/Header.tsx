@@ -30,11 +30,11 @@ export const Header = () => {
 
                     <div className={header['navbar__container__bottom']}>
                         <ul className={header['links']}>
-                            <li className={header['links__link-item']}>
+                            {/* <li className={header['links__link-item']}>
                                 <Link href="/">
                                     <img src={logo} alt="Shelved." className={header['navbar__container__bottom__logo']} />
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className={header['links__link-item']}><NavButton name="Home" link="/" /></li>
                             <li className={header['links__link-item']}><NavButton name="Catalogue" link="/catalogue" /></li>
                             <li className={header['links__link-item']}><NavButton name="Collectors" link="/collectors" /></li>
