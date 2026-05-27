@@ -14,7 +14,7 @@
   }
 
   @media (min-width: $bp-lg) {
-    padding: 30px 170px 50px 170px;
+    padding: 30px 120px 50px 120px;
   }
 }
 
@@ -30,7 +30,7 @@
 
   &__alphabet {
     display: block;
-    column-gap: 95px;
+    column-gap: 90px;
     margin: 0 auto;
     padding: 8px;
 
@@ -42,13 +42,15 @@
       column-count: 2;
     }
 
-    @media (min-width: $bp-md) {
+    @media (min-width: $bp-lg) {
       column-count: 3;
+      column-gap: 120px;
     }
 
     // desktop
-    @media (min-width: $bp-lg) {
+    @media (min-width: $bp-xl) {
       column-count: 4;
+      column-gap: 130px;
     }
   }
 
