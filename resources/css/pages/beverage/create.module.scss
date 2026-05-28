@@ -1,0 +1,372 @@
+@use '~styles/base/general.scss' as *;
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.form-header {
+    text-align: center;
+    margin: 30px 0 25px 0;
+}
+
+// Titles
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $clr-gray-100;
+
+    svg {
+        color: $clr-blue;
+    }
+}
+
+// Layout Grids
+.field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Images
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+
+    @media (min-width: $bp-md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.slot-label {
+    margin-bottom: 5px;
+}
+
+.upload-box {
+    aspect-ratio: 3 / 4;
+    background: $bg-body;
+    border: 2px dashed $clr-gray-300;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    // max-width: 200px;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        cursor: pointer;
+    }
+
+    &:hover {
+        border-color: $clr-blue;
+        background-color: lighten($clr-blue, 45%);
+    }
+}
+
+// Fields & Inputs
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    label {
+        font-weight: bold;
+        font-size: 0.85rem;
+        color: $clr-gray-700;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 12px;
+        border: 1px solid $clr-gray-100;
+        border-radius: 8px;
+        background: $bg-card;
+        font-family: inherit;
+
+        &:focus {
+            outline: none;
+            border-color: $clr-blue;
+            box-shadow: 0 0 0 3px rgba($clr-blue, 0.1);
+        }
+    }
+}
+
+// Input with "New" / "Cancel" buttons
+.input-group {
+    display: flex;
+    gap: 8px;
+
+    input,
+    select {
+        flex: 1;
+    }
+
+    .add-inline,
+    .cancel-inline {
+        padding: 0 15px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        cursor: pointer;
+        border: 1px solid $clr-gray-100;
+    }
+
+    .add-inline {
+        background: white;
+        color: $clr-blue;
+
+        &:hover {
+            background: $clr-blue;
+            color: white;
+            border-color: $clr-blue;
+        }
+    }
+
+    .cancel-inline {
+        background: $clr-gray-100;
+        color: $clr-gray-700;
+
+        &:hover {
+            background: $clr-gray-200;
+        }
+    }
+}
+
+// Manufacturer Grid
+.manufacturer-selector {
+    margin-bottom: 30px;
+
+    label {
+        display: block;
+        margin-bottom: 12px;
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
+}
+
+.manufacturer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.m-card {
+    background: $bg-card;
+    border: 1px solid $clr-gray-100;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+
+    .m-logo {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        overflow: hidden;
+
+        img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .placeholder {
+            color: $clr-gray-300;
+        }
+    }
+
+    .m-name {
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &:hover {
+        border-color: $clr-blue;
+        transform: translateY(-2px);
+    }
+
+    &.selected {
+        border-color: $clr-blue;
+        background-color: lighten($clr-blue, 45%);
+        box-shadow: 0 0 0 1px $clr-blue;
+    }
+}
+
+.new-m-toggle {
+    margin-top: 10px;
+
+    .text-btn {
+        background: none;
+        border: none;
+        color: $clr-blue;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Translations
+.translation-block {
+    background: $bg-body;
+    border: 1px solid $clr-gray-100;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.translation-header {
+    display: flex;
+    gap: 10px;
+
+    // input {
+    //     flex: 1;
+    //     padding: 8px 12px;
+    //     border: 1px solid $clr-gray-100;
+    //     border-radius: 6px;
+    // }
+
+    select {
+        padding: 12px;
+        border: 1px solid $clr-gray-100;
+        border-radius: 8px;
+        background: $bg-card;
+        font-family: inherit;
+
+        width: 100%;
+
+        &:focus {
+            outline: none;
+            border-color: $clr-blue;
+            box-shadow: 0 0 0 3px rgba($clr-blue, 0.1);
+        }
+    }
+
+    button {
+        background: #fff5f5;
+        color: #e03131;
+        border: 1px solid #ffc9c9;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+            background: #ffe3e3;
+        }
+    }
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    input {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+// Actions
+.add-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px dashed $clr-blue;
+    background: transparent;
+    color: $clr-blue;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 30px;
+
+    &:hover {
+        background: lighten($clr-blue, 45%);
+    }
+}
+
+.manual-btn,
+.save-btn {
+    @include btn;
+}
+
+.error {
+    color: #e03131;
+    font-size: 0.8rem;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.error-banner {
+    background: #fff5f5;
+    color: #e03131;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ffc9c9;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.upload-box.has-error {
+    border-color: #e03131;
+    background-color: #fff5f5;
+}
+
+.error-text {
+    color: #e03131;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    font-weight: 600;
+}

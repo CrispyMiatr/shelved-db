@@ -94,6 +94,12 @@ $bp-lg: 1024px;
 $bp-xl: 1300px;
 
 // --------== GLOBAL BASE ==--------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 100%;
 
@@ -108,7 +114,7 @@ body {
 
   background-color: $bg-body;
 
-  padding-bottom: 30px; // height of bottom nav bar
+  padding-bottom: 49px; // height of bottom nav bar
 
   @media (min-width: $bp-md) {
     padding-bottom: 0;

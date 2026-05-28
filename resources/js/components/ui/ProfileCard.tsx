@@ -6,7 +6,7 @@ import styles from '~styles/components/ui/profileCard.module.scss'
 export const ProfileCard = ({ name, username, img, href }: ProfileCardType) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const displayImg = img || '/assets/images/placeholder_profile.png';
+    const displayImg = img || `https://ui-avatars.com/api/?name=${username}&background=random`;
 
     return (
         <Link href={href} className={styles['profile-card']}>

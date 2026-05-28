@@ -6,7 +6,7 @@ import styles from '~styles/components/ui/brandCard.module.scss'
 export const BrandCard = ({ brand, count, img, href }: BrandCardType) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const displayImg = img || '/assets/images/placeholder_brand.png';
+    const displayImg = img || `https://placehold.co/200x200?text=${brand}`;
 
     return (
         <Link href={href} className={styles['brand-card']}>

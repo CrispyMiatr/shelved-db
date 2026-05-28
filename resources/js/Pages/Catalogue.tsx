@@ -45,7 +45,7 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                                 key={brand.id}
                                 brand={brand.name}
                                 count={brand.beverages_count}
-                                img={brand.logo_path || 'https://placehold.co/200x200'}
+                                img={brand.logo_path}
                                 href={`/catalogue/${brand.slug}`}
                             />
                         ))}

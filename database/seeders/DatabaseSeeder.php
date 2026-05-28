@@ -106,6 +106,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '049000028904',
             'volume' => '355',
             'release_date' => '1886-05-08',
+            'release_date_precision' => 2,
             'nutrition_100ml' => ['energy_kj' => 180, 'energy_kcal' => 42, 'fat' => 0, 'carbohydrates' => 10.6, 'sugars' => 10.6, 'protein' => 0, 'salt' => 0.01],
             'nutrition_500ml' => ['energy_kj' => 900, 'energy_kcal' => 210, 'fat' => 0, 'carbohydrates' => 53, 'sugars' => 53, 'protein' => 0, 'salt' => 0.05],
         ]);
@@ -125,6 +126,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '5449000133335',
             'volume' => '330',
             'release_date' => '2005-06-01',
+            'release_date_precision' => 1,
             'nutrition_100ml' => ['energy_kj' => 0.8, 'energy_kcal' => 0.2, 'fat' => 0, 'carbohydrates' => 0, 'sugars' => 0, 'protein' => 0, 'salt' => 0.02],
             'nutrition_500ml' => ['energy_kj' => 4, 'energy_kcal' => 1, 'fat' => 0, 'carbohydrates' => 0, 'sugars' => 0, 'protein' => 0, 'salt' => 0.1],
         ]);
@@ -143,6 +145,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '5449000050205',
             'volume' => '500',
             'release_date' => '1985-02-01',
+            'release_date_precision' => 0,
             'nutrition_100ml' => ['energy_kj' => 190, 'energy_kcal' => 45, 'fat' => 0, 'carbohydrates' => 11.2, 'sugars' => 11.2, 'protein' => 0, 'salt' => 0.01],
             'nutrition_500ml' => ['energy_kj' => 950, 'energy_kcal' => 225, 'fat' => 0, 'carbohydrates' => 56, 'sugars' => 56, 'protein' => 0, 'salt' => 0.05],
         ]);
@@ -159,6 +162,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '049000045277',
             'volume' => '355',
             'release_date' => '2002-05-15',
+            'release_date_precision' => 2,
             'nutrition_100ml' => ['energy_kj' => 185, 'energy_kcal' => 44, 'fat' => 0, 'carbohydrates' => 11, 'sugars' => 11, 'protein' => 0, 'salt' => 0.01],
             'nutrition_500ml' => ['energy_kj' => 925, 'energy_kcal' => 220, 'fat' => 0, 'carbohydrates' => 55, 'sugars' => 55, 'protein' => 0, 'salt' => 0.05],
         ]);
@@ -178,6 +182,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '4897036692134',
             'volume' => '355',
             'release_date' => '2019-03-01',
+            'release_date_precision' => 1,
             'nutrition_100ml' => ['energy_kj' => 185, 'energy_kcal' => 44, 'fat' => 0, 'carbohydrates' => 10, 'sugars' => 10, 'protein' => 0, 'salt' => 0.06, 'caffeine' => 40],
             'nutrition_500ml' => ['energy_kj' => 925, 'energy_kcal' => 220, 'fat' => 0, 'carbohydrates' => 50, 'sugars' => 50, 'protein' => 0, 'salt' => 0.3, 'caffeine' => 200],
         ]);
@@ -197,6 +202,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '070847022847',
             'volume' => '473',
             'release_date' => '2012-09-01',
+            'release_date_precision' => 2,
             'nutrition_100ml' => ['energy_kj' => 12, 'energy_kcal' => 3, 'fat' => 0, 'carbohydrates' => 0.9, 'sugars' => 0, 'protein' => 0, 'salt' => 0.19, 'caffeine' => 32],
             'nutrition_500ml' => ['energy_kj' => 60, 'energy_kcal' => 15, 'fat' => 0, 'carbohydrates' => 4.5, 'sugars' => 0, 'protein' => 0, 'salt' => 0.95, 'caffeine' => 160],
         ]);
@@ -217,6 +223,7 @@ class DatabaseSeeder extends Seeder
             'barcode' => '9002490100070',
             'volume' => '250',
             'release_date' => '1987-04-01',
+            'release_date_precision' => 0,
             'nutrition_100ml' => ['energy_kj' => 194, 'energy_kcal' => 45, 'fat' => 0, 'carbohydrates' => 11, 'sugars' => 11, 'protein' => 0, 'salt' => 0.1, 'caffeine' => 32],
             'nutrition_500ml' => ['energy_kj' => 970, 'energy_kcal' => 225, 'fat' => 0, 'carbohydrates' => 55, 'sugars' => 55, 'protein' => 0, 'salt' => 0.5, 'caffeine' => 160],
         ]);

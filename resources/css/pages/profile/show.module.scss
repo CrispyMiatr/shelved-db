@@ -2,18 +2,23 @@
 
 .profile-container {
   margin: 0 auto;
+  padding: 0 12px;
+  padding-bottom: 18px;
   max-width: 1800px;
 
   @media (min-width: $bp-sm) {
     padding: 0 40px;
+    padding-bottom: 40px;
   }
 
   @media (min-width: $bp-md) {
     padding: 0 60px;
+    padding-bottom: 800px;
   }
 
   @media (min-width: $bp-lg) {
     padding: 0 120px;
+    padding-bottom: 80px;
 
     min-height: 110vh;
   }
@@ -41,8 +46,8 @@
   align-items: center;
   margin-bottom: 30px;
 
-  margin-left: -24px;
-  margin-right: -24px;
+  margin-left: -12px;
+  margin-right: -12px;
   padding: 8px 15px;
 
   color: $txt-white;
@@ -386,7 +391,7 @@
         // grid-template-columns: repeat(auto-fill, 150px);
         grid-template-columns: repeat(auto-fit, 150px);
 
-        gap: 12px;
+        gap: 8px;
         margin: 0 0;
       }
     }

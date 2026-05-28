@@ -22,7 +22,7 @@ export const Header = () => {
 
                             <Searchbar variant="header" />
 
-                            <Link href="/add" className={header['icon-link']}>
+                            <Link href={user ? route('beverage.create') : route('login')} className={header['icon-link']} title="Add New Beverage">
                                 <Plus size={24} />
                             </Link>
                         </div>

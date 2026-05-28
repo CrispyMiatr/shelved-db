@@ -6,7 +6,9 @@ import styles from '~styles/components/ui/productCard.module.scss';
 export const ProductCard = ({ name, brand, volume, country, img, isSmall, href }: ProductCardType) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const cardClasses = `${styles['product-card']} ${isSmall ? styles['small'] : ''}`;
-    const displayImg = img || '/assets/images/placeholder_product.png';
+
+    const text = encodeURIComponent(`${brand}\n${name}`);
+    const displayImg = img || `https://placehold.co/300x400?text=${text}`;
 
     return (
         <Link href={href} className={cardClasses}>

@@ -15,13 +15,17 @@ const Product = ({ beverage }: any) => {
         nutrition: false
     });
 
-    // Mocking 6 images (replace with beverage.media or similar library call)
-    const images = Array.from({ length: 6 }, (_, i) =>
-        beverage.img_url
-            ? beverage.img_url
-            : `https://placehold.co/600x800?text=${beverage.name.replace(/\s+/g, '+')}+${i + 1}`
-    );
-    // const images = beverage.media?.slice(0, 6) || [beverage.img_url, ...Array(5).fill(beverage.img_url)].filter(Boolean);
+    // image logic
+    const imageOrder = ['front', 'right', 'back', 'left', 'top', 'bottom'];
+    const loadImages = imageOrder
+        .map((slot) => beverage.image_urls[slot])
+        .filter((url) => url !== null);
+    const displayImages = loadImages.length > 1
+        ? loadImages
+        : ['/assets/images/placeholder_product.png'];
+
+    const nextImg = () => setImgIndex((prev) => (prev + 1) % displayImages.length);
+    const prevImg = () => setImgIndex((prev) => (prev - 1 + displayImages.length) % displayImages.length);
 
     const translation = beverage.translations.find((trans: any) => trans.language_code === activeLang)
         || beverage.translations[0];
@@ -32,9 +36,6 @@ const Product = ({ beverage }: any) => {
             [section]: !prev[section]
         }));
     };
-
-    const nextImg = () => setImgIndex((prev) => (prev + 1) % images.length);
-    const prevImg = () => setImgIndex((prev) => (prev - 1 + images.length) % images.length);
 
     // Touch Swipe Logic for Mobile
     const touchStart = useRef(0);
@@ -63,11 +64,15 @@ const Product = ({ beverage }: any) => {
                         onTouchEnd={handleTouchEnd}
                     >
                         <button className={`${prod['nav-btn']} ${prod['prev']}`} onClick={prevImg}><ChevronLeft strokeWidth={3} /></button>
-                        <img src={images[imgIndex]} alt={beverage.name} className={prod['main-image']} />
+                        <img
+                            src={displayImages[imgIndex]}
+                            alt={beverage.name}
+                            className={prod['main-image']}
+                        />
                         <button className={`${prod['nav-btn']} ${prod['next']}`} onClick={nextImg}><ChevronRight strokeWidth={3} /></button>
                     </div>
                     <div className={prod['thumbnail-row']}>
-                        {images.map((img: string, idx: number) => (
+                        {displayImages.map((img: string, idx: number) => (
                             <div
                                 key={idx}
                                 className={`${prod['thumb']} ${imgIndex === idx ? prod['active'] : ''}`}
@@ -92,7 +97,7 @@ const Product = ({ beverage }: any) => {
                         <InfoRow label="Country" value={`${beverage.country_name} [${beverage.country_code}]`} />
                         <InfoRow label="Line-up / Flavour" value={beverage.lineup_flavor} />
                         <InfoRow label="SKU" value={beverage.sku || 'N/A'} />
-                        <InfoRow label="Date" value={beverage.release_date || 'Unknown'} />
+                        <InfoRow label="Date" value={beverage.release_date_formatted || 'Unknown'} />
                         <InfoRow label="Volume" value={`${beverage.volume} mL`} />
                         <InfoRow label="Barcode" value={beverage.barcode} />
                         <InfoRow label="Website" value={beverage.brand.website} isLink />
@@ -107,7 +112,7 @@ const Product = ({ beverage }: any) => {
                                         className={prod['manu-badge']}
                                         title={manu.name}
                                     >
-                                        <img src={manu.logo_path || '/assets/icons/default-factory.svg'} alt={manu.name} />
+                                        <img src={manu.logo_path || `<CircleQuestionMark />`} alt={manu.name} />
                                     </Link>
                                 ))}
                             </div>

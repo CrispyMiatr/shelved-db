@@ -11,63 +11,65 @@ use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
-| Public Routes (Available to everyone)
+| Public Routes
 |--------------------------------------------------------------------------
 */
 
-// Homepage - Shows carousels
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Search
+Route::get('/api/search', [SearchController::class, 'globalSearch'])->name('api.search');
+Route::get('/search', [SearchController::class, 'index'])->name('search.results');
 
 // Catalogue & Brands
 Route::get('/catalogue', [BrandController::class, 'index'])->name('catalogue');
 Route::get('/catalogue/{brand}', [BrandController::class, 'show'])->name('brand.show');
 Route::get('/catalogue/{brand}/{beverage}', [BeverageController::class, 'show'])->name('beverage.show');
 
-// Manufacturers list
+// Manufacturers
 Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('manufacturers.index');
+Route::get('/manufacturers/{manufacturer}', [ManufacturerController::class, 'show'])->name('manufacturers.show');
 
-// Collector search page
+// Collectors
 Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
 
-// Static Pages
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
-// API for live dropdown search
-Route::get('/api/search', [SearchController::class, 'globalSearch'])->name('api.search');
-
-// Public social Profile (using @username format)
-Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.show');
-
-
 /*
 |--------------------------------------------------------------------------
-| Protected Routes (Login required)
+| Protected Routes (Auth Required)
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
 
-    // Profile Editing (Breeze Defaults)
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Profile Setup
     Route::get('/setup', function () {
         return Inertia::render('Auth/RegisterSetup');
     })->name('register.setup');
 
-    // Social Actions
+    // Social
     Route::post('/follow/{user}', [ProfileController::class, 'toggleFollow'])->name('follow.toggle');
 
-    // Adding/Editing Beverages (OCR flow)
+    // Beverages & OCR
     Route::get('/beverages/create', [BeverageController::class, 'create'])->name('beverage.create');
     Route::post('/beverages', [BeverageController::class, 'store'])->name('beverage.store');
+    Route::post('/beverages/analyze', [BeverageController::class, 'analyze'])->name('beverage.analyze');
 
-    // User Collection
+    // Collection Management
     Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');
+    Route::delete('/collection/remove/{beverage}', [BeverageController::class, 'removeFromCollection'])->name('collection.remove');
 });
 
-// Include standard Breeze Auth routes (Login, Register, etc.)
+/*
+|--------------------------------------------------------------------------
+| Catch-All
+|--------------------------------------------------------------------------
+*/
+Route::get('/@{username}', [ProfileController::class, 'show'])->name('profile.show');
+
 require __DIR__ . '/auth.php';

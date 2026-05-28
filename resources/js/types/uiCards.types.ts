@@ -3,7 +3,7 @@ export interface ProductCardType {
     brand?: string;
     volume: string | number;
     country: string;
-    img: string;
+    img: string | null;
     isSmall?: boolean;
     href: string;
 }

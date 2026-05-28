@@ -40,7 +40,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 brand={item.brand.name}
                                 volume={item.volume}
                                 country={item.country_code}
-                                img={item.img_url || 'https://placehold.co/175x220'}
+                                img={item.image_urls.front}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
@@ -66,7 +66,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 brand={item.brand.name}
                                 volume={item.volume}
                                 country={item.country_code}
-                                img={item.img_url || 'https://placehold.co/150x200'}
+                                img={item.image_urls.front}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
@@ -89,7 +89,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 key={user.id}
                                 name={user.name}
                                 username={user.username}
-                                img={`https://ui-avatars.com/api/?name=${user.username}&background=random`}
+                                img={user.avatar}
                                 href={`/@${user.username}`}
                             />
                         ))}

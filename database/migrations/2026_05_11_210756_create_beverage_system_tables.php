@@ -48,6 +48,7 @@ return new class extends Migration {
             $table->string('barcode')->nullable();
             $table->string('volume')->nullable();
             $table->date('release_date')->nullable();
+            $table->tinyInteger('release_date_precision')->default(2); // precision column
             $table->timestamps();
         });
 

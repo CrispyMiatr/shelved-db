@@ -2,7 +2,6 @@ import { Breadcrumbs, FilterGroup, Layout, ProductCard, SortButton } from '~/com
 import { BeverageType, BrandType } from '~/types';
 import { Link } from '@inertiajs/react';
 import styles from '~styles/pages/brand.module.scss';
-import logo from '~assets/logo_coca-cola.png'
 
 interface Props {
     brand: BrandType;
@@ -74,7 +73,7 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
                                 name={beverage.name}
                                 volume={beverage.volume}
                                 country={beverage.country_code}
-                                img={beverage.img_url || 'https://placehold.co/130x160'}
+                                img={beverage.image_urls.front}
                                 isSmall={true}
                                 href={`/catalogue/${brand.slug}/${beverage.slug}`}
                             />

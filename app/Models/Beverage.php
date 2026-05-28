@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Symfony\Component\Intl\Countries;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 #[Fillable([
     'brand_id',
@@ -21,11 +25,14 @@ use Symfony\Component\Intl\Countries;
     'barcode',
     'volume',
     'release_date',
+    'release_date_precision',
     'nutrition_100ml',
     'nutrition_500ml'
 ])]
-class Beverage extends Model
+class Beverage extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     /**
      * Get the attributes that should be cast.
      */
@@ -119,6 +126,72 @@ class Beverage extends Model
         );
     }
 
-    // make sure 'slug' is sent to frontend
-    protected $appends = ['slug', 'country_name'];
+    /**
+     * Define the 6 specific image slots.
+     */
+    public function registerMediaCollections(): void
+    {
+        $slots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
+
+        foreach ($slots as $slot) {
+            $this->addMediaCollection($slot)
+                ->singleFile() // each slot only holds one image
+                ->useFallbackUrl('/assets/images/placeholder_product.png');
+        }
+    }
+
+    /**
+     * Automatically generate optimized versions (thumbnails).
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(200)
+            ->height(300)
+            ->sharpen(10)
+            ->nonQueued();
+
+        $this->addMediaConversion('card')
+            ->width(400)
+            ->height(600);
+    }
+
+    /**
+     * Accessor to get all image URLs for the frontend easily.
+     */
+    protected function imageUrls(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $slots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
+                $urls = [];
+                foreach ($slots as $slot) {
+                    $urls[$slot] = $this->hasMedia($slot)
+                        ? $this->getFirstMediaUrl($slot, 'card')
+                        : null;
+                }
+                return $urls;
+            },
+        );
+    }
+
+    protected function releaseDateFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->release_date)
+                    return null;
+
+                $date = Carbon::parse($this->release_date);
+
+                return match ($this->release_date_precision) {
+                    0 => $date->format('Y'),             // "2014"
+                    1 => $date->format('m-Y'),           // "05-2014"
+                    default => $date->format('d-m-Y'),   // "15-05-2014"
+                };
+            },
+        );
+    }
+
+    protected $appends = ['slug', 'country_name', 'image_urls', 'release_date_formatted'];
 }

@@ -216,7 +216,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                             brand={item.brand.name}
                                             volume={item.volume}
                                             country={item.country_code}
-                                            img={item.img_url || 'https://placehold.co/150x200'}
+                                            img={item.image_urls.front}
                                             isSmall={true}
                                             href={`/catalogue/${item.brand.slug}/${item.slug}`}
                                         />
