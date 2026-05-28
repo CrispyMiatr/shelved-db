@@ -17,6 +17,7 @@
 
     &:hover {
         transform: translateY(-5px);
+        border: solid 1px $clr-gray-800;
     }
 
     &__brand-img {

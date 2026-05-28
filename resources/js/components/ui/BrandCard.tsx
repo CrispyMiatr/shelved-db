@@ -4,15 +4,16 @@ import { BrandCardType } from '~/types/uiCards.types';
 import styles from '~styles/components/ui/brandCard.module.scss'
 
 export const BrandCard = ({ brand, count, img, href }: BrandCardType) => {
-
     const [isLoaded, setIsLoaded] = useState(false);
+
+    const displayImg = img || '/assets/images/placeholder_brand.png';
 
     return (
         <Link href={href} className={styles['brand-card']}>
             <div className={styles['brand-card__brand-img']}>
                 {!isLoaded && <div className={styles['brand-placeholder']} />}
                 <img
-                    src={img}
+                    src={displayImg}
                     alt={`${brand} logo`}
                     onLoad={() => setIsLoaded(true)}
                     style={{ opacity: isLoaded ? 1 : 0 }}

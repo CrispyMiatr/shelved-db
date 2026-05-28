@@ -50,7 +50,9 @@
     &.product {
         .image-box {
             width: 175px;
-            height: 230px;
+            height: auto;
+            aspect-ratio: 3 / 4;
+
             margin: 14px auto 4px;
             border-radius: 4px;
         }
@@ -59,8 +61,13 @@
             width: 150px;
 
             .image-box {
-                width: 130px;
-                height: 170px;
+                width: 110px;
+                height: auto;
+                aspect-ratio: 3 / 4;
+
+                @media (min-width: $bp-md) {
+                    width: 130px;
+                }
             }
         }
     }

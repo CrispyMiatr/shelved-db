@@ -4,15 +4,16 @@ import { ProfileCardType } from '~/types/uiCards.types';
 import styles from '~styles/components/ui/profileCard.module.scss'
 
 export const ProfileCard = ({ name, username, img, href }: ProfileCardType) => {
-
     const [isLoaded, setIsLoaded] = useState(false);
+
+    const displayImg = img || '/assets/images/placeholder_profile.png';
 
     return (
         <Link href={href} className={styles['profile-card']}>
             <div className={styles['profile-card__avatar-img']}>
                 {!isLoaded && <div className={styles['avatar-placeholder']} />}
                 <img
-                    src={img}
+                    src={displayImg}
                     alt={name}
                     onLoad={() => setIsLoaded(true)}
                     style={{ opacity: isLoaded ? 1 : 0 }}

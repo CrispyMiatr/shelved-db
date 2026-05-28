@@ -13,7 +13,12 @@
     box-shadow: 2px 2px 4px $sh-card;
     overflow: hidden;
 
-    transition: 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+        transform: translateY(-5px);
+        border: solid 1px $clr-gray-800;
+    }
 
     &__product-img {
         position: relative;
@@ -31,11 +36,13 @@
 
         img {
             display: block;
-            object-fit: cover;
+            object-fit: contain;
             justify-self: center;
 
-            width: 175px;
+            width: 174px;
             height: auto;
+            aspect-ratio: 3 / 4;
+
             margin: 0 auto;
             border-radius: 4px;
             display: block;
@@ -54,10 +61,6 @@
         .shimmer {
             @include shimmer-effect;
         }
-    }
-
-    &:hover {
-        transform: translateY(-5px);
     }
 
     &__info {
@@ -114,10 +117,12 @@
             padding-top: 10px;
 
             img {
-                width: 110px;
+                width: 111px;
+                height: auto;
+                aspect-ratio: 3 / 4;
 
                 @media (min-width: $bp-md) {
-                    width: 130px;
+                    width: 132px;
                 }
             }
         }
