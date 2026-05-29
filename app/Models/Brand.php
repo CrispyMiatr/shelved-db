@@ -41,11 +41,27 @@ class Brand extends Model
         return $this->where('id', $id)->firstOrFail();
     }
 
+    /**
+     * Create url slug for brand.
+     */
     protected function slug(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->id . '-' . Str::slug($this->name),
         );
+    }
+
+    /**
+     * Create brand logo path.
+     */
+    protected static function booted()
+    {
+        static::creating(function ($brand) {
+            if (!$brand->logo_path) {
+                $slug = Str::slug($brand->name);
+                $brand->logo_path = "/assets/logos/brand/{$slug}.png";
+            }
+        });
     }
 
     protected $appends = ['slug'];

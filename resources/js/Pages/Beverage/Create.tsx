@@ -16,19 +16,19 @@ export default function Create({ brands, companies, manufacturers, countries, la
     const [showForm, setShowForm] = useState(false);
     const [previews, setPreviews] = useState<Record<string, string>>({});
 
-    // UI Toggles for New Brand/Company/Manufacturer
+    // UI toggles for new brand/company/manufacturer
     const [isNewCompany, setIsNewCompany] = useState(false);
     const [isNewBrand, setIsNewBrand] = useState(false);
     const [isNewManufacturer, setIsNewManufacturer] = useState(false);
 
     const { data, setData, post, processing, errors } = useForm({
-        // Brand/Company Logic
+        // brand/company logic
         company_id: '',
         new_company_name: '',
         brand_id: '',
         new_brand_name: '',
 
-        // Basic Info
+        // basic info
         name: '',
         country_code: '',
         lineup_flavor: '',
@@ -39,7 +39,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
         manufacturer_ids: [] as number[],
         new_manufacturer_name: '',
 
-        // Images
+        // images
         img_front: null as File | null,
         img_back: null as File | null,
         img_left: null as File | null,
@@ -56,7 +56,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
         add_to_collection: false,
     });
 
-    // Filter brands based on selected company
+    // filter brands based on selected company
     const filteredBrands = brands.filter(b => !data.company_id || b.company_id === Number(data.company_id));
 
     const requiredSlots = ['front', 'back', 'left', 'right'];
@@ -95,7 +95,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
             <form onSubmit={submit} className={styles['main-form']}>
 
-                {/* STEP 1: UPLOAD ZONE */}
                 <section className={styles['upload-section']}>
                     {(errors.img_front || errors.img_back || errors.img_left || errors.img_right) && (
                         <div className={styles['error-banner']}>
@@ -137,7 +136,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
                 {showForm && (
                     <div className={styles['form-details']}>
 
-                        {/* BRAND & COMPANY SECTION */}
                         <div className={styles['section-title']}>
                             <Building2 size={20} /> <h4>Brand & Company</h4>
                         </div>
@@ -182,7 +180,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
                             </div>
                         </div>
 
-                        {/* PRODUCT DETAILS */}
                         <div className={styles['section-title']}>
                             <FileText size={20} /> <h4>Beverage Details</h4>
                         </div>
@@ -260,7 +257,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                 ))}
                             </div>
 
-                            {/* Rare Scenario: New Manufacturer */}
                             <div className={styles['new-m-toggle']}>
                                 {!isNewManufacturer ? (
                                     <button type="button" className={styles['text-btn']} onClick={() => setIsNewManufacturer(true)}>
@@ -282,7 +278,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
                             </div>
                         </div>
 
-                        {/* TRANSLATIONS */}
                         <div className={styles['section-title']}>
                             <Globe size={20} /> <h4>Ingredients & Language</h4>
                         </div>
@@ -304,7 +299,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                                 {lang.name} ({lang.code})
                                             </option>
                                         ))}
-                                        {/* You would need to add logic here if you want them to be able to add a "New" language */}
                                     </select>
 
                                     {/* <input

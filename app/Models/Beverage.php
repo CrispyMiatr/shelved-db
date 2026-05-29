@@ -64,7 +64,6 @@ class Beverage extends Model implements HasMedia
 
     /**
      * Helper to get the English translation specifically.
-     * Use this in your React frontend: beverage.english_translation
      */
     public function englishTranslation(): HasOne
     {
@@ -117,7 +116,6 @@ class Beverage extends Model implements HasMedia
 
     /**
      * Helper to generate the URL slug in React.
-     * Use this in your frontend: beverage.slug
      */
     protected function slug(): Attribute
     {
@@ -185,9 +183,9 @@ class Beverage extends Model implements HasMedia
                 $date = Carbon::parse($this->release_date);
 
                 return match ($this->release_date_precision) {
-                    0 => $date->format('Y'),             // "2014"
-                    1 => $date->format('m-Y'),           // "05-2014"
-                    default => $date->format('d-m-Y'),   // "15-05-2014"
+                    0 => $date->format('Y'),           // "2014"
+                    1 => $date->format('m-Y'),         // "05-2014"
+                    default => $date->format('d-m-Y'), // "15-05-2014"
                 };
             },
         );

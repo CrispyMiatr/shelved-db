@@ -116,7 +116,7 @@ body {
 
   padding-bottom: 49px; // height of bottom nav bar
 
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-lg) {
     padding-bottom: 0;
   }
 }

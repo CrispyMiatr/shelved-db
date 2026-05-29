@@ -37,7 +37,32 @@ const Product = ({ beverage }: any) => {
         }));
     };
 
-    // Touch Swipe Logic for Mobile
+    const InfoRow = ({ label, value, isLink }: any) => {
+        if (!value) return null;
+        return (
+            <div className={prod['info-row']}>
+                <label>{label}</label>
+                {isLink ? <a href={value} target="_blank" rel="noreferrer">{value.replace('https://', '')}</a> : <span>{value}</span>}
+            </div>
+        );
+    };
+
+    const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) => {
+        if (disabled) return null;
+        return (
+            <div className={`${prod['accordion']} ${isOpen ? prod['open'] : ''}`}>
+                <button onClick={onClick} className={prod['accordion-trigger']}>
+                    <span className={prod['accordion-title']}>{icon} {title}</span>
+                    <ChevronRight className={prod['chevron']} />
+                </button>
+                <div className={prod['accordion-content']}>
+                    <div className={prod['inner']}>{children}</div>
+                </div>
+            </div>
+        );
+    };
+
+    // touch swipe logic for mobile
     const touchStart = useRef(0);
     const handleTouchStart = (e: React.TouchEvent) => touchStart.current = e.touches[0].clientX;
     const handleTouchEnd = (e: React.TouchEvent) => {
@@ -188,31 +213,6 @@ const Product = ({ beverage }: any) => {
                     </div>
                 </div>
             )}
-        </div>
-    );
-};
-
-const InfoRow = ({ label, value, isLink }: any) => {
-    if (!value) return null;
-    return (
-        <div className={prod['info-row']}>
-            <label>{label}</label>
-            {isLink ? <a href={value} target="_blank" rel="noreferrer">{value.replace('https://', '')}</a> : <span>{value}</span>}
-        </div>
-    );
-};
-
-const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) => {
-    if (disabled) return null;
-    return (
-        <div className={`${prod['accordion']} ${isOpen ? prod['open'] : ''}`}>
-            <button onClick={onClick} className={prod['accordion-trigger']}>
-                <span className={prod['accordion-title']}>{icon} {title}</span>
-                <ChevronRight className={prod['chevron']} />
-            </button>
-            <div className={prod['accordion-content']}>
-                <div className={prod['inner']}>{children}</div>
-            </div>
         </div>
     );
 };

@@ -59,13 +59,13 @@ class BeverageController extends Controller
         $request->replace($input);
 
         $request->validate([
-            // Brand/Company Logic
+            // Brand/Company logic
             'company_id' => 'nullable|required_without:new_company_name|exists:companies,id',
             'new_company_name' => 'nullable|string|max:255',
             'brand_id' => 'nullable|required_without:new_brand_name|exists:brands,id',
             'new_brand_name' => 'nullable|string|max:255',
 
-            // Basic Info
+            // basic info
             'name' => 'required|string|max:255',
             'lineup_flavor' => 'nullable|string',
             'country_code' => 'required|string|size:2',
@@ -78,7 +78,7 @@ class BeverageController extends Controller
             'manufacturer_ids.*' => 'exists:manufacturers,id',
             'new_manufacturer_name' => 'nullable|string|max:255',
 
-            // Translations: language_code set to max 10 to allow codes like 'en-US' or 'jp'
+            // translations: language_code set to max 10 to allow codes like 'en-US' or 'jp'
             'translations' => 'required|array|min:1',
             'translations.*.language_code' => 'required|string|max:10',
             'translations.*.ingredients' => 'required|string',
@@ -101,14 +101,18 @@ class BeverageController extends Controller
 
         return DB::transaction(function () use ($request) {
 
-            // 1. Resolve Company
+            // resolve company
             $companyId = $request->company_id;
             if ($request->filled('new_company_name')) {
-                $company = Company::firstOrCreate(['name' => $request->new_company_name]);
+                $company = Company::firstOrCreate([
+                    'name' => $request->new_company_name
+                ], [
+                    'country_code' => $request->country_code
+                ]);
                 $companyId = $company->id;
             }
 
-            // 2. Resolve Brand
+            // resolve brand
             $brandId = $request->brand_id;
             if ($request->filled('new_brand_name')) {
                 $brand = Brand::firstOrCreate([
@@ -118,30 +122,29 @@ class BeverageController extends Controller
                 $brandId = $brand->id;
             }
 
-            // 3. Flexible Date Normalization
-            // Logic: DB requires YYYY-MM-DD. We fill missing info with January 1st.
+            // flexible date normalization
+            // DB requires YYYY-MM-DD. We fill missing info with January 1st
             $rawDate = $request->release_date;
             $parsedDate = null;
-            $precision = 2; // Default to full date (day)
+            $precision = 2;
 
             if (preg_match('/^\d{4}$/', $rawDate)) {
                 $parsedDate = "$rawDate-01-01";
-                $precision = 0; // Year only
+                $precision = 0; // year only
             } elseif (preg_match('/^\d{2}-\d{4}$/', $rawDate)) {
                 [$m, $y] = explode('-', $rawDate);
                 $parsedDate = "$y-$m-01";
-                $precision = 1; // Month only
+                $precision = 1; // month only
             } elseif (preg_match('/^\d{2}-\d{2}-\d{4}$/', $rawDate)) {
                 [$d, $m, $y] = explode('-', $rawDate);
                 $parsedDate = "$y-$m-$d";
-                $precision = 2; // Full date
+                $precision = 2; // full date
             } else {
-                // Fallback
                 $parsedDate = now()->toDateString();
                 $precision = 2;
             }
 
-            // 4. Create Beverage
+            // create beverage
             $beverage = Beverage::create([
                 'brand_id' => $brandId,
                 'name' => $request->name,
@@ -156,7 +159,7 @@ class BeverageController extends Controller
                 'nutrition_500ml' => $request->nutrition_500ml,
             ]);
 
-            // 5. Sync Manufacturers
+            // sync manufacturers
             $mIds = $request->manufacturer_ids ?? [];
             if ($request->filled('new_manufacturer_name')) {
                 $newM = Manufacturer::firstOrCreate(['name' => $request->new_manufacturer_name]);
@@ -164,12 +167,12 @@ class BeverageController extends Controller
             }
             $beverage->manufacturers()->sync($mIds);
 
-            // 6. Save Translations
+            // save translations
             foreach ($request->translations as $trans) {
                 $beverage->translations()->create($trans);
             }
 
-            // 7. Attach Media
+            // attach media
             $slots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
             foreach ($slots as $slot) {
                 if ($request->hasFile("img_$slot")) {
