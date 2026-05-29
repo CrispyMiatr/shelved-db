@@ -3,7 +3,6 @@ import home from '~styles/pages/home.module.scss'
 import banner from '~assets/banner.jpg'
 
 const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
-
     const MIN_CAROUSEL_ITEMS = 20;
 
     return (
@@ -32,7 +31,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
 
             <section className={home['released']} id='released'>
                 <div className={home['released__carousel']}>
-                    <Carousel title="Newly Released" headerExtra={<p>Refresh in: 16:55:42</p>}>
+                    <Carousel title="Newly Released">
                         {newlyReleased.map((item: any) => (
                             <ProductCard
                                 key={item.id}
@@ -58,7 +57,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
 
             <section className={home['added']} id='added'>
                 <div className={home['added__carousel']}>
-                    <Carousel title="Newly Added" headerExtra={<p>Refresh in: 56s</p>}>
+                    <Carousel title="Newly Added">
                         {newlyAdded.map((item: any) => (
                             <ProductCard
                                 key={item.id}

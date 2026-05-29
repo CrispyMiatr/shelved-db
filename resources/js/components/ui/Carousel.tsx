@@ -47,10 +47,8 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
 
                 {headerExtra && (
                     <div className={styles['carousel__header__extra']}>
-                        <img src="/assets/icons/icon_clock.svg" alt="" />
                         <p>{headerExtra}</p>
                     </div>
-
                 )}
             </div>
 

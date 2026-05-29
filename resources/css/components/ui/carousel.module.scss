@@ -8,13 +8,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // margin-left: -10px;
         margin-bottom: 5px;
 
         &__extra {
             display: flex;
             gap: 4px;
-            margin-right: -10px;
 
             p {
                 color: $clr-gray-600;
