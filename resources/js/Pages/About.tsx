@@ -10,6 +10,11 @@ const About = () => {
             <Head title="About the Project" />
 
             <div className={styles['about-container']}>
+
+                <div className={styles['title']}>
+                    <h2>Add New Beverage</h2>
+                </div>
+
                 <header className={styles['hero']}>
                     <img
                         src={logo}

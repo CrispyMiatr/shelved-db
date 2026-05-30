@@ -188,7 +188,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
         <div className={styles['container']}>
             <Head title="Add Beverage" />
 
-            <div className={styles['form-header']}>
+            <div className={styles['title']}>
                 <h2>Add New Beverage</h2>
                 <p>Upload photos of all sides.</p>
             </div>
