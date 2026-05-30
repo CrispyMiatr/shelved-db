@@ -93,7 +93,7 @@
 
     label {
         font-weight: bold;
-        font-size: 0.85rem;
+        font-size: $fs-sm;
         color: $txt-black;
     }
 
@@ -129,7 +129,7 @@
         padding: 0 15px;
         border-radius: 8px;
         font-weight: 600;
-        font-size: 0.8rem;
+        font-size: $fs-sm;
         cursor: pointer;
         border: 1px solid $clr-gray-100;
     }
@@ -163,7 +163,7 @@
         display: block;
         margin-bottom: 12px;
         font-weight: bold;
-        font-size: 0.85rem;
+        font-size: $fs-sm;
     }
 }
 
@@ -210,7 +210,7 @@
     }
 
     .m-name {
-        font-size: 0.75rem;
+        font-size: $fs-xs;
         font-weight: 600;
         line-height: 1.2;
     }
@@ -234,7 +234,7 @@
         background: none;
         border: none;
         color: $clr-blue;
-        font-size: 0.85rem;
+        font-size: $fs-sm;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -304,7 +304,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.85rem;
+    font-size: $fs-sm;
     cursor: pointer;
 
     input {
@@ -339,9 +339,17 @@
     @include btn;
 }
 
+.hint-text {
+    font-size: $fs-sm;
+    color: $clr-gray-500;
+    margin-top: 10px;
+    font-style: italic;
+    text-align: center;
+}
+
 .error {
     color: #e03131;
-    font-size: 0.8rem;
+    font-size: $fs-sm;
     margin-top: -15px;
     margin-bottom: 10px;
 }
@@ -357,7 +365,7 @@
     align-items: center;
     gap: 10px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: $fs-sm;
 }
 
 .upload-box.has-error {
@@ -368,7 +376,7 @@
 .error-text {
     color: #e03131;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: $fs-sm;
     margin-top: 10px;
     font-weight: 600;
 }
@@ -394,7 +402,7 @@
         }
 
         th {
-            font-size: 0.85rem;
+            font-size: $fs-sm;
             color: $txt-black;
             font-weight: bold;
         }
@@ -406,7 +414,7 @@
             border-radius: 8px;
             background: $bg-body;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: $fs-sm;
 
             &:focus {
                 outline: none;
@@ -451,7 +459,7 @@
         padding: 10px 15px;
         border-radius: 8px;
         font-weight: 600;
-        font-size: 0.85rem;
+        font-size: $fs-sm;
         cursor: pointer;
         display: flex;
         align-items: center;

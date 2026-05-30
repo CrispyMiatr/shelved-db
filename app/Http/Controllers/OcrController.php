@@ -10,7 +10,7 @@ class OcrController extends Controller
     public function process(Request $request)
     {
         $request->validate([
-            'images' => 'required|array|min:1|max:4',
+            'images' => 'required|array|min:3|max:4',
             'images.*' => 'image|max:5120',
         ]);
 

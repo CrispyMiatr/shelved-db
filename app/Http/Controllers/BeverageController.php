@@ -92,15 +92,23 @@ class BeverageController extends Controller
             'nutrition_items.*.per_500ml' => 'nullable|string|max:50',
 
             'img_front' => 'required|image|max:5120',
-            'img_back' => 'required|image|max:5120',
-            'img_left' => 'required|image|max:5120',
-            'img_right' => 'required|image|max:5120',
+            'img_back' => 'nullable|image|max:5120',
+            'img_left' => 'nullable|image|max:5120',
+            'img_right' => 'nullable|image|max:5120',
             'img_top' => 'nullable|image|max:5120',
             'img_bottom' => 'nullable|image|max:5120',
 
             // add to personal collection
             'add_to_collection' => 'boolean'
         ]);
+
+        $imageCount = collect(['img_front', 'img_back', 'img_left', 'img_right', 'img_top', 'img_bottom'])
+            ->filter(fn($slot) => $request->hasFile($slot))
+            ->count();
+
+        if ($imageCount < 3) {
+            return back()->withErrors(['img_front' => 'At least 3 images of different sides are required.']);
+        }
 
         return DB::transaction(function () use ($request) {
 

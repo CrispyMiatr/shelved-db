@@ -155,6 +155,8 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
     const requiredSlots = ['front', 'back', 'left', 'right'];
     const imageSlots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
+    const uploadedCount = imageSlots.filter(slot => data[`img_${slot}` as keyof typeof data]).length;
+    const canExtract = data.img_front && uploadedCount >= 3;
 
     const handleImageChange = (slot: string, file: File | null) => {
         setData(`img_${slot}` as any, file);
@@ -206,7 +208,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
                         {imageSlots.map(slot => (
                             <div key={slot} className={styles['slot-card']}>
                                 <label className={styles['slot-label']}>
-                                    {slot.toUpperCase()} {requiredSlots.includes(slot) ? '*' : ''}
+                                    {slot.toUpperCase()} {slot === 'front' ? '*' : ''}
                                 </label>
                                 <div
                                     className={`${styles['upload-box']} ${errors[`img_${slot}` as keyof typeof errors] ? styles['has-error'] : ''}`}
@@ -217,7 +219,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                         type="file"
                                         accept="image/*"
                                         onChange={e => handleImageChange(slot, e.target.files?.[0] || null)}
-                                        required={requiredSlots.includes(slot)}
+                                        required={slot === 'front'}
                                     />
                                 </div>
                             </div>
@@ -230,14 +232,18 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                 type="button"
                                 onClick={handleOcr}
                                 className={styles['ocr-btn']}
-                                disabled={isOcrLoading || !data.img_front}
+                                // Dynamic disable logic
+                                disabled={isOcrLoading || !canExtract}
                             >
                                 {isOcrLoading ? (
                                     <span className={styles['loader-container']}>
-                                        <div className={styles['spinner']} /> Extracting Info...
+                                        <div className={styles['spinner']} /> Extracting...
                                     </span>
                                 ) : 'Extract Info'}
                             </button>
+                            <p className={styles['hint-text']}>
+                                {!canExtract && "Upload Front + at least 2 other info-containing sides to extract info."}
+                            </p>
 
                             {/* <button type="button" onClick={() => setShowForm(true)} className={styles['manual-btn']}>
                                 Fill Manually
