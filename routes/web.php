@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OcrController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -33,6 +34,7 @@ Route::get('/manufacturers/{manufacturer}', [ManufacturerController::class, 'sho
 // Collectors
 Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
 
+// About (static page)
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
@@ -59,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/beverages/create', [BeverageController::class, 'create'])->name('beverage.create');
     Route::post('/beverages', [BeverageController::class, 'store'])->name('beverage.store');
     Route::post('/beverages/analyze', [BeverageController::class, 'analyze'])->name('beverage.analyze');
+    Route::post('/api/beverage/ocr', [OcrController::class, 'process'])->name('beverage.ocr');
 
     // Collection Management
     Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');

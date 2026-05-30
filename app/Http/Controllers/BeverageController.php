@@ -83,10 +83,13 @@ class BeverageController extends Controller
             'translations.*.language_code' => 'required|string|max:10',
             'translations.*.ingredients' => 'required|string',
             'translations.*.warning_text' => 'nullable|string',
+            'translations.*.extra_info' => 'nullable|string',
             'translations.*.is_original' => 'boolean',
 
-            'nutrition_100ml' => 'nullable|array',
-            'nutrition_500ml' => 'nullable|array',
+            'nutrition_items' => 'nullable|array',
+            'nutrition_items.*.name' => 'required|string|max:100',
+            'nutrition_items.*.per_100ml' => 'nullable|string|max:50',
+            'nutrition_items.*.per_500ml' => 'nullable|string|max:50',
 
             'img_front' => 'required|image|max:5120',
             'img_back' => 'required|image|max:5120',
@@ -144,6 +147,17 @@ class BeverageController extends Controller
                 $precision = 2;
             }
 
+            // convert dynamic flat list from form back to DB layout
+            $nutrition100 = [];
+            $nutritionFull = [];
+            if ($request->has('nutrition_items')) {
+                foreach ($request->nutrition_items as $item) {
+                    if (!empty($item['name'])) {
+                        $nutrition100[$item['name']] = $item['per_100ml'] ?? '';
+                        $nutritionFull[$item['name']] = $item['per_full_volume'] ?? '';
+                    }
+                }
+            }
             // create beverage
             $beverage = Beverage::create([
                 'brand_id' => $brandId,
@@ -155,8 +169,8 @@ class BeverageController extends Controller
                 'release_date_precision' => $precision,
                 'lineup_flavor' => $request->lineup_flavor,
                 'sku' => $request->sku,
-                'nutrition_100ml' => $request->nutrition_100ml,
-                'nutrition_500ml' => $request->nutrition_500ml,
+                'nutrition_100ml' => $nutrition100,
+                'nutrition_500ml' => $nutritionFull,
             ]);
 
             // sync manufacturers

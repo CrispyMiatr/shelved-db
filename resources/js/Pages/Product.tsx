@@ -1,18 +1,19 @@
 import { useState, useRef } from 'react';
 import { Breadcrumbs, Layout } from '~/components';
-import { ChevronLeft, ChevronRight, AlertTriangle, List, Table } from 'lucide-react';
+import { ChevronLeft, ChevronRight, AlertTriangle, List, Table, Info } from 'lucide-react';
 import prod from '~styles/pages/product.module.scss';
 import { Link } from '@inertiajs/react';
 
 const Product = ({ beverage }: any) => {
-    type SectionKey = 'ingredients' | 'warning' | 'nutrition';
+    type SectionKey = 'ingredients' | 'warning' | 'nutrition' | 'extra_info';
 
     const [activeLang, setActiveLang] = useState('en');
     const [imgIndex, setImgIndex] = useState(0);
     const [openSections, setOpenSections] = useState<Record<SectionKey, boolean>>({
         ingredients: true,
         warning: false,
-        nutrition: false
+        nutrition: false,
+        extra_info: false
     });
 
     // image logic
@@ -154,15 +155,27 @@ const Product = ({ beverage }: any) => {
                             <p>{translation?.ingredients || 'No ingredients listed.'}</p>
                         </Collapsible>
 
-                        <Collapsible
-                            title="Warning"
-                            isOpen={openSections.warning}
-                            onClick={() => toggleSection('warning')}
-                            icon={<AlertTriangle size={18} />}
-                            disabled={!translation?.warning_text}
-                        >
-                            <p className={prod['warning-text']}>{translation?.warning_text || 'No ingredients listed.'}</p>
-                        </Collapsible>
+                        {translation?.warning_text && (
+                            <Collapsible
+                                title="Warning"
+                                isOpen={openSections.warning}
+                                onClick={() => toggleSection('warning')}
+                                icon={<AlertTriangle size={18} />}
+                            >
+                                <p className={prod['warning-text']}>{translation.warning_text}</p>
+                            </Collapsible>
+                        )}
+
+                        {translation?.extra_info && (
+                            <Collapsible
+                                title="Extra Information"
+                                isOpen={openSections.extra_info}
+                                onClick={() => toggleSection('extra_info')}
+                                icon={<Info size={18} />}
+                            >
+                                <p>{translation.extra_info}</p>
+                            </Collapsible>
+                        )}
 
                         <Collapsible
                             title="Nutrition Table"
@@ -175,14 +188,14 @@ const Product = ({ beverage }: any) => {
                                     <tr>
                                         <th>VALUE</th>
                                         <th className={prod['text-right']}>PER 100 mL</th>
-                                        <th className={prod['text-right']}>PER 500 mL</th>
+                                        <th className={prod['text-right']}>PER {beverage.volume || 'FULL'} mL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {Object.keys(beverage.nutrition_100ml || {}).map((key) => (
                                         <tr key={key}>
                                             <td className={prod['nutrition-label']}>
-                                                {key.replace(/_/g, ' ')}
+                                                {key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ')}
                                             </td>
                                             <td className={prod['text-right']}>
                                                 {beverage.nutrition_100ml[key]}

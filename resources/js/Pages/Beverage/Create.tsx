@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm, Head } from '@inertiajs/react';
 import { Layout } from '~/components';
-import { Upload, FileText, Plus, Trash2, AlertCircle, Building2, Globe, Barcode as BarcodeIcon, ImageIcon } from 'lucide-react';
+import { Upload, FileText, Plus, Trash2, AlertCircle, Building2, Globe, ImageIcon } from 'lucide-react';
+import axios from 'axios';
 import styles from '~styles/pages/beverage/create.module.scss';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function Create({ brands, companies, manufacturers, countries, languages }: Props) {
+    const [isOcrLoading, setIsOcrLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [previews, setPreviews] = useState<Record<string, string>>({});
 
@@ -47,14 +49,106 @@ export default function Create({ brands, companies, manufacturers, countries, la
         img_top: null as File | null,
         img_bottom: null as File | null,
 
-        translations: [
-            { language_code: 'en', ingredients: '', warning_text: '', is_original: false }
-        ],
-        nutrition_100ml: {} as Record<string, string>,
-        nutrition_500ml: {} as Record<string, string>,
+        translations: [{
+            language_code: 'en',
+            ingredients: '',
+            warning_text: '',
+            extra_info: '',
+            is_original: false,
+            can_delete: false
+        }],
+
+        nutrition_items: [
+            { name: 'Energy', per_100ml: '', per_full_volume: '' },
+            { name: 'Fat', per_100ml: '', per_full_volume: '' },
+            { name: 'Sugars', per_100ml: '', per_full_volume: '' },
+            { name: 'Protein', per_100ml: '', per_full_volume: '' },
+            { name: 'Salt', per_100ml: '', per_full_volume: '' },
+        ] as { name: string, per_100ml: string, per_full_volume: string, can_delete: boolean }[],
 
         add_to_collection: false,
     });
+
+    const handleOcr = async () => {
+        if (!data.img_front) return alert("Upload at least the front image first!");
+
+        setIsOcrLoading(true);
+        const formData = new FormData();
+
+        ['front', 'back', 'left', 'right'].forEach(slot => {
+            const file = (data as any)[`img_${slot}`];
+            if (file) formData.append('images[]', file);
+        });
+
+        try {
+            const response = await axios.post('/api/beverage/ocr', formData);
+            const ai = response.data;
+
+            setIsNewBrand(true);
+            setIsNewCompany(true);
+
+            setData(prev => ({
+                ...prev,
+                name: ai.name || prev.name,
+                volume: ai.volume_ml || prev.volume,
+                barcode: ai.barcode || prev.barcode,
+                new_brand_name: ai.brand_name || '',
+                new_company_name: ai.company_name || '',
+                translations: ai.translations ? ai.translations.map((trans: any) => ({
+                    language_code: trans.lang.toLowerCase(),
+                    ingredients: trans.ingredients || '',
+                    warning_text: trans.warning_text || '',
+                    extra_info: trans.extra_info || '',
+                    is_original: trans.lang.toLowerCase() !== 'en', // English translations marked non-original
+                    can_delete: false
+                })) : prev.translations,
+                nutrition_items: ai.nutrition_items ? ai.nutrition_items.map((item: any) => ({
+                    name: item.name,
+                    per_100ml: item.per_100ml,
+                    per_full_volume: item.per_total_volume,
+                    can_delete: false
+                })) : prev.nutrition_items,
+            }));
+
+            setShowForm(true);
+        } catch (err) {
+            alert("Extraction failed. Please fill manually.");
+        } finally {
+            setIsOcrLoading(false);
+        }
+    };
+
+    // functions to modify rows dynamically
+    const handleNutritionChange = (index: number, field: 'name' | 'per_100ml' | 'per_full_volume', value: string) => {
+        const updated = [...data.nutrition_items];
+        updated[index][field] = value;
+        setData('nutrition_items', updated);
+    };
+
+    const addNutritionRow = () => {
+        setData('nutrition_items', [
+            ...data.nutrition_items,
+            { name: '', per_100ml: '', per_full_volume: '', can_delete: true }
+        ]);
+    };
+
+    const addTranslation = () => {
+        setData('translations', [
+            ...data.translations,
+            {
+                language_code: '',
+                ingredients: '',
+                warning_text: '',
+                extra_info: '',
+                is_original: false,
+                can_delete: true
+            }
+        ]);
+    };
+
+    const removeNutritionRow = (index: number) => {
+        setData('nutrition_items', data.nutrition_items.filter((_, i) => i !== index));
+    };
 
     // filter brands based on selected company
     const filteredBrands = brands.filter(b => !data.company_id || b.company_id === Number(data.company_id));
@@ -66,6 +160,12 @@ export default function Create({ brands, companies, manufacturers, countries, la
         setData(`img_${slot}` as any, file);
         if (file) {
             setPreviews(prev => ({ ...prev, [slot]: URL.createObjectURL(file) }));
+        } else {
+            setPreviews(prev => {
+                const newPreviews = { ...prev };
+                delete newPreviews[slot];
+                return newPreviews;
+            });
         }
     };
 
@@ -126,15 +226,28 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
                     {!showForm && (
                         <div className={styles['step-actions']}>
-                            <button type="button" onClick={() => setShowForm(true)} className={styles['manual-btn']}>
-                                Fill Manually
+                            <button
+                                type="button"
+                                onClick={handleOcr}
+                                className={styles['ocr-btn']}
+                                disabled={isOcrLoading || !data.img_front}
+                            >
+                                {isOcrLoading ? (
+                                    <span className={styles['loader-container']}>
+                                        <div className={styles['spinner']} /> Extracting Info...
+                                    </span>
+                                ) : 'Extract Info'}
                             </button>
+
+                            {/* <button type="button" onClick={() => setShowForm(true)} className={styles['manual-btn']}>
+                                Fill Manually
+                            </button> */}
                         </div>
                     )}
                 </section>
 
                 {showForm && (
-                    <div className={styles['form-details']}>
+                    <div className={`${styles['form-details']} ${isOcrLoading ? styles['fade'] : ''}`}>
 
                         <div className={styles['section-title']}>
                             <Building2 size={20} /> <h4>Brand & Company</h4>
@@ -301,30 +414,11 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                         ))}
                                     </select>
 
-                                    {/* <input
-                                        list="languages-list" // Link to the datalist ID
-                                        placeholder="Search language (e.g. English or ja)"
-                                        value={trans.language_code}
-                                        onChange={e => {
-                                            const val = e.target.value;
-                                            const newTrans = [...data.translations];
-
-                                            // Logic: If user selects "English (en)", we might want just "en"
-                                            // but for a datalist, it's simplest to let them type/select.
-                                            newTrans[index].language_code = val;
-                                            setData('translations', newTrans);
-                                        }}
-                                    />
-                                    <datalist id="languages-list">
-                                        {languages.map(lang => (
-                                            <option key={lang.code} value={lang.code}>
-                                                {lang.name}
-                                            </option>
-                                        ))}
-                                    </datalist> */}
-
-                                    {index > 0 && (
-                                        <button type="button" onClick={() => setData('translations', data.translations.filter((_, i) => i !== index))}>
+                                    {trans.can_delete && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setData('translations', data.translations.filter((_, i) => i !== index))}
+                                        >
                                             <Trash2 size={16} />
                                         </button>
                                     )}
@@ -361,11 +455,89 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                         setData('translations', newTrans);
                                     }}
                                 />
+                                <textarea
+                                    placeholder="Extra info (optional)..." // Fixed duplicate placeholder
+                                    value={trans.extra_info}
+                                    onChange={e => {
+                                        const newTrans = [...data.translations];
+                                        newTrans[index].extra_info = e.target.value;
+                                        setData('translations', newTrans);
+                                    }}
+                                />
                             </div>
                         ))}
-                        <button type="button" onClick={() => setData('translations', [...data.translations, { language_code: '', ingredients: '', warning_text: '', is_original: false }])} className={styles['add-btn']}>
+                        <button type="button" onClick={addTranslation} className={styles['add-btn']}>
                             <Plus size={16} /> Add Language
                         </button>
+
+                        {/* DYNAMIC NUTRITION INFORMATION */}
+                        <div className={styles['section-title']}>
+                            <FileText size={20} /> <h4>Nutrition Information</h4>
+                        </div>
+
+                        <div className={styles['nutrition-editor']}>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nutrient / Compound</th>
+                                        <th>Per 100 mL</th>
+                                        <th>Per {data.volume || 'Full'} mL</th>
+                                        <th style={{ width: '50px' }}></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.nutrition_items.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={item.name}
+                                                    onChange={e => handleNutritionChange(index, 'name', e.target.value)}
+                                                    placeholder="e.g. Vitamin B12"
+                                                    className={styles['nutrient-name-input']}
+                                                    disabled={!item.can_delete}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={item.per_100ml}
+                                                    onChange={e => handleNutritionChange(index, 'per_100ml', e.target.value)}
+                                                    placeholder="-"
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={item.per_full_volume}
+                                                    onChange={e => handleNutritionChange(index, 'per_full_volume', e.target.value)}
+                                                    placeholder="-"
+                                                />
+                                            </td>
+                                            <td style={{ textAlign: 'center' }}>
+                                                {item.can_delete && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeNutritionRow(index)}
+                                                        className={styles['delete-row-btn']}
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+
+                            <button
+                                type="button"
+                                onClick={addNutritionRow}
+                                className={styles['add-row-btn']}
+                            >
+                                <Plus size={14} /> Add Nutrient Row
+                            </button>
+                        </div>
 
                         <div className={styles['submit-zone']}>
                             <label className={styles['checkbox-label']} style={{ marginBottom: '20px', justifyContent: 'center' }}>

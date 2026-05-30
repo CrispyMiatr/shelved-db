@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('language_code', 2); // 'en', 'jp', 'hu'
             $table->text('ingredients');
             $table->text('warning_text')->nullable();
+            $table->text('extra_info')->nullable();
             $table->boolean('is_original')->default(false);
             $table->timestamps();
         });
