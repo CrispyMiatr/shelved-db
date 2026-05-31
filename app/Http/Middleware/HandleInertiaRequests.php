@@ -40,7 +40,8 @@ class HandleInertiaRequests extends Middleware
                     'email',
                     'bio',
                     'is_private',
-                    'social_links'
+                    'social_links',
+                    'avatar_url',
                 ]) : null,
             ],
             'ziggy' => fn() => [

@@ -86,6 +86,65 @@
     padding-bottom: 10px;
 }
 
+.avatar-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    &__wrapper {
+        position: relative;
+        width: 150px;
+        height: 150px;
+
+        border: solid 1px $clr-gray-300;
+        border-radius: 50%;
+
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &__overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            input[type="file"] {
+                display: none;
+            }
+        }
+    }
+
+    &__info {
+        p {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    }
+}
+
 .field {
     display: flex;
     flex-direction: column;

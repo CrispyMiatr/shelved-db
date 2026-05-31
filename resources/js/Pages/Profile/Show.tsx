@@ -73,7 +73,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
             <div className={show['info']}>
 
                 <div className={show['info__avatar']}>
-                    <img src={`https://ui-avatars.com/api/?name=${user.username}&background=random`} alt="avatar" />
+                    <img src={user.avatar_url} alt="avatar" />
                 </div>
 
                 <div className={show['info__header']}>
@@ -149,6 +149,10 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                 <button className={show['profile-actions__edit-btn']}>Edit Profile</button>
                             </Link>
                             <button onClick={handleShare} className={show['profile-actions__share-btn']}>Share Profile</button>
+
+                            <button onClick={handleLogout} className={show['profile-actions__logout-btn']}>
+                                <LogOut size={15} />
+                            </button>
                         </div>
                     ) : (
                         /* Visitor view: Follow + Share */
@@ -273,7 +277,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                     className={show['user-item']}
                                     onClick={() => setModalConfig({ ...modalConfig, show: false })}
                                 >
-                                    <img src={`https://ui-avatars.com/api/?name=${user.username}&background=random`} alt="" />
+                                    <img src={user.avatar_url} alt="Avatar" />
                                     <div className={show['user-item__name']}>
                                         <p className={show['user-item__name__display-name']}>{user.name}</p>
                                         <p className={show['user-item__name__username']}>@{user.username}</p>

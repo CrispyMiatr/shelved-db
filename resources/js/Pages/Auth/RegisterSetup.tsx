@@ -1,22 +1,44 @@
 import { useForm, Head, usePage } from '@inertiajs/react';
 import { Layout } from '~/components';
 import { PageProps } from '~/types';
-import { User, AtSign, BookOpen } from 'lucide-react';
+import { User, AtSign, BookOpen, Camera } from 'lucide-react';
 import authS from '~styles/pages/auth.module.scss';
+import { useEffect, useState } from 'react';
 
 const RegisterSetup = () => {
+    const [preview, setPreview] = useState<string | null>(null);
+
     const { auth } = usePage<PageProps>().props;
 
-    const { data, setData, patch, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         username: '',
         bio: '',
         email: auth.user.email,
+        avatar: null as File | null,
+        _method: 'patch', // spoof patch for file upload compatibility
     });
+
+    useEffect(() => {
+        if (!data.avatar) {
+            setPreview(null);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(data.avatar);
+        setPreview(objectUrl);
+
+        // free memory when this component unmounts or file changes
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [data.avatar]);
+
+    const namePlaceholder = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.username || 'New User')}&background=random`;
+    const avatarUrl = auth.user?.avatar_url || '';
+    const isUsingPlaceholder = avatarUrl.includes('ui-avatars.com') || avatarUrl === '';
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        patch(route('profile.update'));
+        post(route('profile.update'));
     };
 
     return (
@@ -28,6 +50,26 @@ const RegisterSetup = () => {
                     <img src={'/logo-black.svg'} alt="Shelved." className={authS['form__title__logo']} />
                     <h3>Welcome!</h3>
                     <p>Let's finish setting up your account for <br /> <strong>{auth.user.email}</strong></p>
+                </div>
+
+                <div className={authS['form__avatar']}>
+                    <div className={authS['form__avatar__preview']}>
+                        <img
+                            src={preview || (isUsingPlaceholder ? namePlaceholder : avatarUrl)}
+                            alt="Avatar preview"
+                        />
+                        <label htmlFor="avatar-input" className={authS['form__avatar__label']}>
+                            <Camera size={20} />
+                            <input
+                                id="avatar-input"
+                                type="file"
+                                accept="image/*"
+                                onChange={e => setData('avatar', e.target.files?.[0] || null)}
+                                hidden
+                            />
+                        </label>
+                    </div>
+                    {errors.avatar && <div className="error">{errors.avatar}</div>}
                 </div>
 
                 <div className={authS['form__element']}>

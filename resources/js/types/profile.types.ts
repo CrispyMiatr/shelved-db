@@ -13,9 +13,14 @@ export interface SocialLinks {
 export interface User {
     id: number;
     name: string;
-    email: string;
     username: string;
-    bio: string | null;
+    email: string;
+    bio?: string | null;
+    avatar_url: string;
     is_private: boolean;
     social_links: SocialLinks | null;
+    role: 'user' | 'admin' | 'head_admin';
+    followers_count?: number;
+    following_count?: number;
+    collection_count?: number;
 }

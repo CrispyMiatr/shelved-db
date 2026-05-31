@@ -2,9 +2,12 @@ import { useForm, usePage, Head, Link } from '@inertiajs/react';
 import { PageProps, SocialLinks } from '~/types';
 import { Layout } from '~/components';
 import edit from '~styles/pages/profile/edit.module.scss';
-import { ArrowLeft, ChevronLeft, Pencil, Save } from 'lucide-react';
+import { ArrowLeft, Camera, Save } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function Edit() {
+    const [preview, setPreview] = useState<string | null>(null);
+
     const { auth } = usePage<PageProps>().props;
     const user = auth.user;
 
@@ -14,15 +17,33 @@ export default function Edit() {
         youtube: '', ebay: ''
     };
 
-    const { data, setData, patch, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: user.name,
         username: user.username,
         email: user.email,
         bio: user.bio || '',
         is_private: user.is_private,
-        // using fallback emptySocials in case user never set them
-        social_links: user.social_links || emptySocials,
+        social_links: user.social_links || emptySocials, // using fallback emptySocials in case user never set them
+        avatar: null as File | null,
+        _method: 'patch', // method spoofing for files
     });
+
+    useEffect(() => {
+        if (!data.avatar) {
+            setPreview(null);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(data.avatar);
+        setPreview(objectUrl);
+
+        // free memory when this component unmounts or file changes
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [data.avatar]);
+
+    const dynamicInitials = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'New User')}&background=random`;
+    const avatarUrl = user?.avatar_url || '';
+    const isUsingPlaceholder = avatarUrl.includes('ui-avatars.com') || avatarUrl === '';
 
     const handleSocialChange = (platform: keyof SocialLinks, value: string) => {
         setData('social_links', {
@@ -33,7 +54,7 @@ export default function Edit() {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        patch(route('profile.update'));
+        post(route('profile.update'));
     };
 
     return (
@@ -64,6 +85,30 @@ export default function Edit() {
 
                 <section className={edit['form-section']}>
                     <h3 className={edit['section-title']}>General information</h3>
+
+                    <div className={edit['avatar-edit']}>
+                        <div className={edit['avatar-edit__wrapper']}>
+                            <img
+                                src={preview || (isUsingPlaceholder ? dynamicInitials : avatarUrl)}
+                                alt='Avatar preview'
+                                className={edit['avatar-img']}
+                            />
+                            <label className={edit['avatar-edit__wrapper__overlay']}>
+                                <Camera size={20} />
+                                <input
+                                    type="file"
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={e => setData('avatar', e.target.files?.[0] || null)}
+                                    hidden
+                                />
+                            </label>
+                        </div>
+                        <div className={edit['avatar-edit__info']}>
+                            <p>Profile Picture</p>
+                            <span>PNG, JPG, WEBP up to 2MB</span>
+                        </div>
+                    </div>
 
                     <div className={edit['field']}>
                         <label className={edit['label']}>Display Name</label>

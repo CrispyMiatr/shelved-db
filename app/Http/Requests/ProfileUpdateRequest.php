@@ -37,6 +37,7 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'bio' => ['nullable', 'string', 'max:500'],
             'is_private' => ['boolean'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'social_links' => ['nullable', 'array'],
             'social_links.facebook' => ['nullable', 'url'],
             'social_links.instagram' => ['nullable', 'url'],
@@ -50,12 +51,14 @@ class ProfileUpdateRequest extends FormRequest
     }
 
     /**
-     * Custom error messages for the regex
+     * Custom error messages for the regex.
      */
     public function messages(): array
     {
         return [
             'username.regex' => 'The username may only contain letters, numbers, dots, dashes, and underscores.',
+            'avatar.max' => 'The avatar image must not be larger than 2MB.',
+            'avatar.image' => 'The file uploaded must be an image.',
         ];
     }
 }

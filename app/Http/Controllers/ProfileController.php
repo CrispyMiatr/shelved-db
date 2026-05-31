@@ -166,6 +166,10 @@ class ProfileController extends Controller
 
         $user->save();
 
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+
         return Redirect::route('profile.show', [
             'username' => $user->username
         ]);

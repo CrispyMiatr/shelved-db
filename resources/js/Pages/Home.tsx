@@ -88,7 +88,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 key={user.id}
                                 name={user.name}
                                 username={user.username}
-                                img={user.avatar}
+                                img={user.avatar_url}
                                 href={`/@${user.username}`}
                             />
                         ))}

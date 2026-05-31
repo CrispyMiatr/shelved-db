@@ -11,12 +11,40 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 #[Fillable(['name', 'username', 'email', 'password', 'role', 'bio', 'social_links', 'is_private'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, InteractsWithMedia;
+    protected $appends = ['avatar_url'];
+
+    /**
+     * Ensures only one avatar exists at a time.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatar')->singleFile();
+    }
+
+    /**
+     * Get the avatar URL or a placeholder.
+     */
+    protected function avatarUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->hasMedia('avatar')) {
+                    return $this->getFirstMediaUrl('avatar');
+                }
+
+                $name = urlencode($this->name ?: 'New User');
+                return "https://ui-avatars.com/api/?name={$name}&background=random";
+            },
+        );
+    }
 
     /**
      * Get the attributes that should be cast.
