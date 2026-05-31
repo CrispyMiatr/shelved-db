@@ -170,13 +170,11 @@ class ProfileController extends Controller
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
-        return Redirect::route('profile.show', [
-            'username' => $user->username
-        ]);
+        return back()->with('status', 'profile-updated');
     }
 
     /**
-     * Follow/Unfollow Logic
+     * Follow/Unfollow Logic.
      */
     public function toggleFollow(User $user): RedirectResponse
     {
@@ -190,6 +188,16 @@ class ProfileController extends Controller
         $authUser->following()->toggle($user->id);
 
         return back();
+    }
+
+    /**
+     * Settings page logic.
+     */
+    public function settings(Request $request): Response
+    {
+        return Inertia::render('Profile/Settings', [
+            'status' => session('status'),
+        ]);
     }
 
     /**

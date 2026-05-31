@@ -1,11 +1,11 @@
-import { useForm, usePage, Head, Link } from '@inertiajs/react';
+import { useForm, usePage, Head, Link, router } from '@inertiajs/react';
 import { PageProps, SocialLinks } from '~/types';
 import { Layout } from '~/components';
 import edit from '~styles/pages/profile/edit.module.scss';
 import { ArrowLeft, Camera, Save } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export default function Edit() {
+const Edit = () => {
     const [preview, setPreview] = useState<string | null>(null);
 
     const { auth } = usePage<PageProps>().props;
@@ -54,7 +54,12 @@ export default function Edit() {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('profile.update'));
+
+        post(route('profile.update'), {
+            onSuccess: () => {
+                router.visit(route('profile.show', data.username));
+            },
+        });
     };
 
     return (
@@ -62,13 +67,13 @@ export default function Edit() {
             <Head title="Edit Profile" />
 
             <div className={edit['title']}>
-                <h2>Profile</h2>
+                <h2>Edit Profile</h2>
             </div>
 
             <form onSubmit={submit} className={edit['edit-form']}>
                 {/* Mobile/Tablet Action Bar */}
                 <div className={edit['action-bar']}>
-                    <Link href={route('profile.show', user.username)} className={edit['action-bar__back']}>
+                    <Link href={route('profile.show', user.username)} className={edit['action-bar__left']}>
                         <ArrowLeft size={20} />
                     </Link>
 
@@ -76,7 +81,7 @@ export default function Edit() {
 
                     <button
                         type="submit"
-                        className={edit['action-bar__save']}
+                        className={edit['action-bar__right']}
                         disabled={processing}
                     >
                         {processing ? '...' : <Save size={20} />}
@@ -160,17 +165,6 @@ export default function Edit() {
                         />
                         {errors.bio && <span className={edit['error']}>{errors.bio}</span>}
                     </div>
-
-                    <div className={edit['field-checkbox']}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={data.is_private}
-                                onChange={e => setData('is_private', e.target.checked)}
-                            />
-                            <span>Private Profile (Mutual followers only)</span>
-                        </label>
-                    </div>
                 </section>
 
                 <section className={edit['social-links']}>
@@ -218,3 +212,5 @@ export default function Edit() {
 }
 
 Edit.layout = (page: React.ReactNode) => <Layout children={page} />;
+
+export default Edit;

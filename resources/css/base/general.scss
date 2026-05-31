@@ -35,6 +35,7 @@ $clr-gray-500: #9A9A9A;
 $clr-gray-300: #C8C8C8;
 $clr-gray-200: #DADADA;
 $clr-gray-100: #DDDDDD;
+$clr-gray-50: #EEEEEE;
 
 $sh-card: rgba(0, 0, 0, 0.1);
 
@@ -256,7 +257,7 @@ p {
   color: $txt-black;
   font-family: $ff-title;
 
-  transition: transform 0.1s, opacity 0.2s;
+  transition: all 0.1s ease-in-out;
 
   @media (min-width: $bp-lg) {
     &:hover:not(:disabled) {

@@ -13,7 +13,7 @@
 
   @media (min-width: $bp-md) {
     padding: 0 60px;
-    padding-bottom: 800px;
+    padding-bottom: 60px;
   }
 
   @media (min-width: $bp-lg) {
@@ -66,10 +66,12 @@
     line-height: 1
   }
 
-  &__right {
+  &__left {
     display: flex;
-    flex-direction: row;
-    gap: 8px;
+  }
+
+  &__right {
+    width: 20px;
   }
 
   @media (min-width: $bp-sm) {
@@ -226,9 +228,9 @@
       gap: 10px;
       width: 100%;
 
-      .flex-1 {
-        flex: 6;
-        display: flex;
+      .edit-btn,
+      .share-btn {
+        flex: 1;
       }
 
       button {
@@ -243,24 +245,16 @@
         }
       }
 
-      .profile-actions {
-        &__share-btn {
-          flex: 6;
-        }
+      .settings-btn {
+        display: none;
 
-        &__logout-btn {
-          display: none;
-          flex: 1;
-          justify-content: center;
-          align-items: center;
+        flex: 0 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding: 0.25rem 0;
 
-          padding: 0.25rem 0;
-
-          background-color: $clr-white;
-
-          @media (min-width: $bp-lg) {
-            display: flex;
-          }
+        @media (min-width: $bp-lg) {
+          display: flex;
         }
       }
     }

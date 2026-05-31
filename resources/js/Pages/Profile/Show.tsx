@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { LogOut, Pencil, Share2, X } from 'lucide-react';
+import { LogOut, Pencil, Settings, Share2, X } from 'lucide-react';
 import { useState } from 'react';
 import { FilterGroup, Layout, ProductCard, SortButton } from '~/components';
 import { PageProps } from '~/types';
@@ -50,16 +50,13 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
 
             {isOwner ? (
                 <div className={show['action-bar']}>
-                    <button onClick={handleLogout} className={show['logout-btn']}>
-                        <LogOut size={20} />
-                    </button>
+                    <Link href={route('profile.settings')} className={show['action-bar__left']}>
+                        <Settings size={20} />
+                    </Link>
+
                     <p className={show['action-bar__username']}>@{user.username}</p>
 
-                    <div className={show['action-bar__right']}>
-                        <Link href={route('profile.edit')}>
-                            <Pencil size={20} />
-                        </Link>
-                    </div>
+                    <div className={show['action-bar__right']}></div>
                 </div>
             ) : (
                 <div className={show['action-bar']}>
@@ -145,14 +142,15 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                     {isOwner ? (
                         /* Owner view: Edit + Share */
                         <div className={show['action-group']}>
-                            <Link href={route('profile.edit')} className={show['flex-1']}>
-                                <button className={show['profile-actions__edit-btn']}>Edit Profile</button>
+                            <Link href={route('profile.edit')} className={show['edit-btn']}>
+                                <button>Edit Profile</button>
                             </Link>
-                            <button onClick={handleShare} className={show['profile-actions__share-btn']}>Share Profile</button>
 
-                            <button onClick={handleLogout} className={show['profile-actions__logout-btn']}>
-                                <LogOut size={15} />
-                            </button>
+                            <button onClick={handleShare} className={show['share-btn']}>Share Profile</button>
+
+                            <Link href={route('profile.settings')} className={show['settings-btn']}>
+                                <Settings size={20} />
+                            </Link>
                         </div>
                     ) : (
                         /* Visitor view: Follow + Share */
