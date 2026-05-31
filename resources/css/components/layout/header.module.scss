@@ -47,17 +47,23 @@
 
     color: $clr-black;
 
-    .icon-link {
+    .icon-info,
+    .icon-plus {
         display: flex;
         align-items: center;
-
-        color: $clr-black;
 
         transition: rotate 0.1s ease-in-out;
 
         &:hover {
             color: $color-accent;
-            // rotate: 90deg;
+        }
+    }
+
+    .icon-plus {
+        transition: rotate 0.2s ease-in-out;
+
+        &:hover {
+            rotate: 90deg;
         }
     }
 }

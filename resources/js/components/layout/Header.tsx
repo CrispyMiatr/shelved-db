@@ -16,13 +16,13 @@ export const Header = () => {
 
                     <div className={header['navbar__container__top']}>
                         <div className={header['mobile-actions']}>
-                            <Link href="/about" className={header['icon-link']}>
+                            <Link href="/about" className={header['icon-info']}>
                                 <Info size={24} />
                             </Link>
 
                             <Searchbar variant="header" />
 
-                            <Link href={user ? route('beverage.create') : route('login')} className={header['icon-link']} title="Add New Beverage">
+                            <Link href={user ? route('beverage.create') : route('login')} className={header['icon-plus']} title="Add New Beverage">
                                 <Plus size={24} />
                             </Link>
                         </div>
