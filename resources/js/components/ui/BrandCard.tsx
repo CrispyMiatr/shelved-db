@@ -4,18 +4,24 @@ import { BrandCardType } from '~/types/uiCards.types';
 import styles from '~styles/components/ui/brandCard.module.scss'
 
 export const BrandCard = ({ brand, count, img, href }: BrandCardType) => {
+    const fallback = `https://placehold.co/200x200?text=${brand}`;
+    const [imgSrc, setImgSrc] = useState(img || fallback);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const displayImg = img || `https://placehold.co/200x200?text=${brand}`;
+    const handleError = () => {
+        setImgSrc(fallback);
+        setIsLoaded(true);
+    };
 
     return (
         <Link href={href} className={styles['brand-card']}>
             <div className={styles['brand-card__brand-img']}>
                 {!isLoaded && <div className={styles['brand-placeholder']} />}
                 <img
-                    src={displayImg}
+                    src={imgSrc}
                     alt={`${brand} logo`}
                     onLoad={() => setIsLoaded(true)}
+                    onError={handleError}
                     style={{ opacity: isLoaded ? 1 : 0 }}
                 />
             </div>
