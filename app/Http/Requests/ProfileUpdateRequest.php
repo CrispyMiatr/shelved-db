@@ -37,7 +37,7 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'bio' => ['nullable', 'string', 'max:500'],
             'is_private' => ['boolean'],
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
             'social_links' => ['nullable', 'array'],
             'social_links.facebook' => ['nullable', 'url'],
             'social_links.instagram' => ['nullable', 'url'],
