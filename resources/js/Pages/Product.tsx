@@ -58,7 +58,7 @@ const Product = ({ beverage }: any) => {
         return (
             <div className={prod['info-row']}>
                 <label>{label}</label>
-                {isLink ? <a href={value} target="_blank" rel="noreferrer">{value.replace('https://', '')}</a> : <span>{value}</span>}
+                {isLink ? <a href={value} target="_blank" rel="noreferrer">{value.replace('https://', '')}</a> : <p>{value}</p>}
             </div>
         );
     };

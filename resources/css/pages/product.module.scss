@@ -254,10 +254,10 @@
       line-height: 0;
     }
 
-    span,
+    p,
     a {
       text-align: right;
-      font-weight: $fw-regular;
+      padding-left: 40px;
     }
 
     a {

@@ -26,7 +26,7 @@ class Manufacturer extends Model
         static::creating(function ($manufacturer) {
             if (!$manufacturer->logo_path) {
                 $slug = Str::slug($manufacturer->name);
-                $manufacturer->logo_path = "/assets/logos/manufacturer/{$slug}.png";
+                $manufacturer->logo_path = "/assets/logos/manu/{$slug}.png";
             }
         });
     }

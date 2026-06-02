@@ -70,11 +70,19 @@
             &__brand-name {
                 font-size: $fs-sm;
                 font-weight: $fw-semibold;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             &__product-name {
                 font-size: $fs-sm;
                 margin: 2px 0;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             &__volume {
@@ -89,15 +97,17 @@
 
             &__volume {
                 font-size: $fs-sm;
+                flex-shrink: 0;
             }
 
             &__country-tag {
                 font-size: $fs-sm;
                 margin-right: 2px;
 
-                // background: rgba(0, 0, 0, 0.05);
-                // display: inline-block;
-                // padding: 2px 4px;
+                // white-space: nowrap;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // min-width: 0; 
             }
         }
     }
