@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Carbon\Carbon;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
@@ -134,7 +133,7 @@ class BeverageController extends Controller
             }
 
             // flexible date normalization
-            // DB requires YYYY-MM-DD. We fill missing info with January 1st
+            // DB requires YYYY-MM-DD, fill missing info with January 1st
             $rawDate = $request->release_date;
             $parsedDate = null;
             $precision = 2;

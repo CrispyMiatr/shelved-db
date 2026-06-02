@@ -16,7 +16,7 @@ interface Props {
 
 const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
     const { field, direction } = sort;
-    const displayImg = brand.logo_path || `https://placehold.co/400x200?text=${brand.name}`;
+    const fallBackImg = `https://placehold.co/400x200?text=${brand.name}`
 
     return (
         <div className={styles['brand-container']}>
@@ -37,7 +37,12 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
                     <span className={styles['divider-v']}></span>
 
                     <img
-                        src={displayImg}
+                        src={brand.logo_path}
+                        onError={(e) => {
+                            if (e.currentTarget.src !== fallBackImg) {
+                                e.currentTarget.src = fallBackImg;
+                            }
+                        }}
                         alt={`${brand.name} logo`}
                         className={styles['header__brand-title__image']}
                     />

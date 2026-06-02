@@ -34,11 +34,9 @@ class BrandController extends Controller
     {
         $brand->load('company');
 
-        // 1. Determine Sort
         $sortField = $request->input('sort', 'created_at');
         $direction = $request->input('direction', 'desc');
 
-        // 2. Fetch Data via Helpers
         $beverages = $this->getFilteredBeverages($brand, $request, $sortField, $direction);
         $options = $this->getFilterOptions($brand);
 
@@ -59,7 +57,6 @@ class BrandController extends Controller
      */
     private function getFilteredBeverages(Brand $brand, Request $request, $sort, $direction)
     {
-        // Whitelist allowed sort columns
         $allowedSorts = ['name', 'volume', 'release_date', 'country_code', 'lineup_flavor', 'created_at'];
         $sort = \in_array($sort, $allowedSorts, true) ? $sort : 'created_at';
         $direction = \in_array($direction, ['asc', 'desc'], true) ? $direction : 'desc';
