@@ -243,11 +243,14 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                         <div className={show['empty-state__empty']}>
                                             <p>This shelf is currently empty.</p>
                                             {isOwner ? (
-                                                <Link href="/catalogue" className={show['empty-state__empty__browse-btn']}>
-                                                    Browse <strong>Catalogue </strong>to add your first beverage or upload a new beverage to the database.
-                                                </Link>
+                                                <div className={show['empty-state__empty__cta']}>
+                                                    <p>Add the first beverage to your collection.</p>
+                                                    <Link href={route('beverage.create')}>
+                                                        <button className={show['empty-state__browse-btn']}>Add new item</button>
+                                                    </Link>
+                                                </div>
                                             ) : (
-                                                <p>This collector hasn't added anything yet.</p>
+                                                <p>The collector hasn't added anything yet.</p>
                                             )}
                                         </div>
                                     )}

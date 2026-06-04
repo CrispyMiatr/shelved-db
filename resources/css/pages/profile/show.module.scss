@@ -251,7 +251,7 @@
         flex: 0 0 auto;
         justify-content: center;
         align-items: center;
-        padding: 0.25rem;
+        padding: 2px;
 
         border: solid 1px transparent;
         border-radius: $rad-sm;
@@ -435,6 +435,21 @@
 
       color: $clr-blue;
       text-decoration: underline;
+    }
+
+    &__browse-btn {
+      @include btn;
+
+      max-width: 250px;
+
+      margin: 4px 0;
+    }
+
+    &__empty {
+      &__cta {
+
+        margin: 24px 0;
+      }
     }
   }
 }
