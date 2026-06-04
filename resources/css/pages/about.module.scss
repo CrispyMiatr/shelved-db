@@ -10,6 +10,10 @@
         padding: 0 60px;
         padding-bottom: 40px;
     }
+
+    @media (min-width: $bp-sm) {
+        min-height: calc(100vh - 357px);
+    }
 }
 
 .title {

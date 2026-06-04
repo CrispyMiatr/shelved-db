@@ -19,6 +19,8 @@
   @media (min-width: $bp-lg) {
     padding: 0 120px;
     padding-bottom: 52px;
+
+    min-height: calc(100vh - 382px);
   }
 }
 
