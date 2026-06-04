@@ -1,6 +1,7 @@
-export interface ButtonItem {
+export interface ButtonType {
     name: string;
     link: string;
+    isActive?: boolean;
 }
 
 export interface SortButtonType {

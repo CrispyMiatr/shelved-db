@@ -1,4 +1,4 @@
-export type { ButtonItem, SortButtonType } from './button.types'
+export type { ButtonType, SortButtonType } from './button.types'
 export type { ProductCardType, BrandCardType, ProfileCardType, SkeletonCardType } from './uiCards.types'
 export type { BrandType } from './brand.types'
 export type { CompanyType } from './company.types'

@@ -21,7 +21,7 @@
     &.variant-header {
         display: flex;
         justify-content: center;
-        max-width: 400px;
+        max-width: 650px;
         margin: 0 auto;
 
         .search-input {
@@ -46,6 +46,9 @@
     border-radius: $rad-md;
     outline: none;
     transition: all 0.2s ease-in-out;
+
+    font-family: $ff-main;
+    font-size: $fs-base;
 }
 
 .dropdown {
@@ -100,7 +103,8 @@
         align-items: center;
 
         &__brand-tag {
-            font-size: 0.7rem;
+            font-size: $fs-xs;
+            font-weight: $fw-medium;
             background: $clr-gray-100;
             padding: 2px 6px;
             border-radius: 4px;

@@ -12,7 +12,7 @@ const About = () => {
             <div className={styles['about-container']}>
 
                 <div className={styles['title']}>
-                    <h2>Add New Beverage</h2>
+                    <h2>About</h2>
                 </div>
 
                 <header className={styles['hero']}>
@@ -73,8 +73,8 @@ const About = () => {
 
                     <div className={styles['illustration']}>
                         <div className={styles['illustration__text']}>
-                            <p>The final assignment submission</p>
-                            <p>My Monster Energy collection on 13/03/2023</p>
+                            <p className={styles['left']}>The final assignment submission</p>
+                            <p className={styles['right']}>My Monster Energy collection on 13/03/2023</p>
                         </div>
                         <img
                             src={concept}
