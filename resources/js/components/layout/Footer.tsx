@@ -5,13 +5,20 @@ import footer from '~styles/components/layout/footer.module.scss'
 
 export const Footer = () => {
     const { auth } = usePage<PageProps>().props;
+    const { url } = usePage();
     const user = auth.user;
+
+    const isHomeActive = url === '/';
+    const isCatalogueActive = url.startsWith('/catalogue');
+    const isCollectorsActive = url.startsWith('/collectors');
+    const isManufacturersActive = url.startsWith('/manufacturers');
+    const isAboutActive = url.startsWith('/about');
+    const isProfileActive = url.startsWith('/login') || url.startsWith('/@');
 
     return (
         <footer className={footer['footer']}>
             <div className={footer['footer__container']}>
 
-                {/* Brand Section */}
                 <div className={footer['footer__brand']}>
                     <Link href="/">
                         <img src={logo} alt="Shelved." className={footer['footer__brand__logo']} />
@@ -22,7 +29,6 @@ export const Footer = () => {
                     </Link>
                 </div>
 
-                {/* Socials Section */}
                 <div className={footer['footer__socials']}>
                     <h4>Social links</h4>
                     <ul className={footer['links']}>
@@ -47,7 +53,6 @@ export const Footer = () => {
                     </ul>
                 </div>
 
-                {/* Legal Section */}
                 <div className={footer['footer__legal']}>
                     <h4>Legal</h4>
                     <ul className={footer['links']}>
@@ -57,17 +62,26 @@ export const Footer = () => {
                     </ul>
                 </div>
 
-                {/* Navigation Section - Fixed Links */}
                 <div className={footer['footer__pages']}>
                     <h4>Pages</h4>
                     <ul className={footer['links-grid']}>
-                        <li className={footer['links__link-item']}><Link href="/">Home</Link></li>
-                        <li className={footer['links__link-item']}><Link href="/catalogue">Catalogue</Link></li>
-                        <li className={footer['links__link-item']}><Link href="/collectors">Collectors</Link></li>
-                        <li className={footer['links__link-item']}><Link href="/manufacturers">Manufacturers</Link></li>
-                        <li className={footer['links__link-item']}><Link href="/about">About</Link></li>
                         <li className={footer['links__link-item']}>
-                            <Link href={user ? `/@${user.username}` : "/login"}>
+                            <Link href="/" className={isHomeActive ? footer['link--active'] : ''}>Home</Link>
+                        </li>
+                        <li className={footer['links__link-item']}>
+                            <Link href="/catalogue" className={isCatalogueActive ? footer['link--active'] : ''}>Catalogue</Link>
+                        </li>
+                        <li className={footer['links__link-item']}>
+                            <Link href="/collectors" className={isCollectorsActive ? footer['link--active'] : ''}>Collectors</Link>
+                        </li>
+                        <li className={footer['links__link-item']}>
+                            <Link href="/manufacturers" className={isManufacturersActive ? footer['link--active'] : ''}>Manufacturers</Link>
+                        </li>
+                        <li className={footer['links__link-item']}>
+                            <Link href="/about" className={isAboutActive ? footer['link--active'] : ''}>About</Link>
+                        </li>
+                        <li className={footer['links__link-item']}>
+                            <Link href={user ? `/@${user.username}` : "/login"} className={isProfileActive ? footer['link--active'] : ''}>
                                 {user ? 'Profile' : 'Sign In'}
                             </Link>
                         </li>

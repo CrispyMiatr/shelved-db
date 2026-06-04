@@ -101,6 +101,11 @@
     }
 }
 
+.link--active {
+    color: $color-accent !important;
+    font-weight: $fw-semibold;
+}
+
 .links {
     display: flex;
     flex-direction: column;
