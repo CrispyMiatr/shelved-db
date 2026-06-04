@@ -7,7 +7,10 @@
 
     @media (min-width: $bp-sm) {
         padding: 0 60px;
-        min-height: calc(100vh - 377px);
+    }
+
+    @media (min-width: $bp-lg) {
+        min-height: calc(100vh - 143px);
     }
 }
 
