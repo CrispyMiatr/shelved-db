@@ -232,22 +232,20 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                 type="button"
                                 onClick={handleOcr}
                                 className={styles['ocr-btn']}
-                                // Dynamic disable logic
                                 disabled={isOcrLoading || !canExtract}
                             >
                                 {isOcrLoading ? (
                                     <span className={styles['loader-container']}>
-                                        <div className={styles['spinner']} /> Extracting...
+                                        <div className={styles['spinner']} />
+                                        <span>Extracting...</span>
                                     </span>
-                                ) : 'Extract Info'}
+                                ) : (
+                                    'Extract Info'
+                                )}
                             </button>
                             <p className={styles['hint-text']}>
                                 {!canExtract && "Upload Front + at least 2 other info-containing sides to extract info."}
                             </p>
-
-                            {/* <button type="button" onClick={() => setShowForm(true)} className={styles['manual-btn']}>
-                                Fill Manually
-                            </button> */}
                         </div>
                     )}
                 </section>
@@ -462,7 +460,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                     }}
                                 />
                                 <textarea
-                                    placeholder="Extra info (optional)..." // Fixed duplicate placeholder
+                                    placeholder="Extra info (optional)..."
                                     value={trans.extra_info}
                                     onChange={e => {
                                         const newTrans = [...data.translations];

@@ -94,12 +94,11 @@
         border-radius: 50%;
         transition: all 0.1s ease-in-out;
 
-        // Ensure the container is a fixed size so the circle doesn't change when image loads
         width: 36px;
         height: 36px;
         justify-content: center;
         align-items: center;
-        overflow: hidden; // Clips the image to the circle
+        overflow: hidden;
 
         &:hover,
         &--active {
@@ -109,7 +108,7 @@
         .avatar-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; // Prevents stretching
+            object-fit: cover;
             border-radius: 50%;
         }
     }

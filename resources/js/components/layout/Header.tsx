@@ -40,7 +40,6 @@ export const Header = () => {
                                 <Plus size={24} />
                             </Link>
 
-                            {/* Desktop Profile: Image if logged in, Icon if guest */}
                             <Link href={profilePath} className={`${header['icon-profile']} ${isProfileActive ? header['icon-profile--active'] : ''}`}>
                                 {user ? (
                                     <img src={user.avatar_url} alt="Profile" className={header['avatar-img']} />
@@ -86,7 +85,6 @@ export const Header = () => {
                     <Users size={24} />
                 </Link>
 
-                {/* Mobile Nav Profile: Image if logged in, Icon if guest */}
                 <Link href={profilePath} className={`${header['mobile-nav__link']} ${isProfileActive ? header['mobile-nav__link--active'] : ''}`}>
                     {user ? (
                         <img src={user.avatar_url} alt="Profile" className={header['avatar-img-mobile']} />

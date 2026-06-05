@@ -47,9 +47,8 @@
         }
 
         &.is-active {
-            background: rgba($color-yes, 0.1);
-            border-color: rgba($color-yes, 0.5);
-            color: $txt-black;
+            border-color: $color-yes;
+            color: $color-yes;
         }
     }
 
