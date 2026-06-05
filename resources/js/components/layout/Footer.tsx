@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { PageProps } from '~/types';
-import logo from "~assets/logo-white.svg"
+import logo from "~assets/logo_small-w.svg"
 import footer from '~styles/components/layout/footer.module.scss'
 
 export const Footer = () => {

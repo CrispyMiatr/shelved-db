@@ -1,6 +1,7 @@
 import { Carousel, Layout, ProductCard, ProfileCard, SkeletonCard } from '~/components';
 import home from '~styles/pages/home.module.scss'
 import banner from '~assets/banner.jpg'
+import logo from "~assets/logo_full-b.svg"
 
 const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
     const MIN_CAROUSEL_ITEMS = 20;
@@ -10,7 +11,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
             <section className={home['hero']} id='hero'>
                 <div className={home['hero__text']}>
                     <div className={home['hero__text__title']}>
-                        Shelved.
+                        <img src={logo} alt="Shelved." className={home['logo']} />
                     </div>
 
                     <div className={home['hero__text__subtitle']}>

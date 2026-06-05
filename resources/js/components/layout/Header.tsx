@@ -2,7 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { NavButton, Searchbar } from "~/components";
 import { PageProps } from '~/types';
 import { Plus, Info, Home, LayoutGrid, Users, UserRound, User } from 'lucide-react';
-import logo from "~assets/logo-white.svg"
+import logo from "~assets/logo_small-w.svg"
 import header from '~styles/components/layout/header.module.scss'
 
 export const Header = () => {
