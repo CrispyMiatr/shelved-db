@@ -28,7 +28,7 @@ const RegisterSetup = () => {
         const objectUrl = URL.createObjectURL(data.avatar);
         setPreview(objectUrl);
 
-        // free memory when this component unmounts or file changes
+        // free memory when component unmounts || file changes
         return () => URL.revokeObjectURL(objectUrl);
     }, [data.avatar]);
 

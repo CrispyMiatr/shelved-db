@@ -73,8 +73,6 @@
     overflow: hidden;
     transition: all 0.2s ease;
 
-    // max-width: 200px;
-
     input {
         position: absolute;
         opacity: 0;
@@ -88,7 +86,6 @@
     }
 }
 
-// Fields & Inputs
 .field {
     display: flex;
     flex-direction: column;
@@ -118,7 +115,6 @@
     }
 }
 
-// Input with "New" / "Cancel" buttons
 .input-group {
     display: flex;
     gap: 8px;
@@ -159,7 +155,6 @@
     }
 }
 
-// Manufacturer Grid
 .manufacturer-selector {
     margin-bottom: 30px;
 
@@ -251,7 +246,6 @@
     }
 }
 
-// Translations
 .translation-block {
     background: $bg-body;
     border: 1px solid $clr-gray-100;
@@ -317,7 +311,6 @@
     }
 }
 
-// Actions
 .add-btn {
     width: 100%;
     padding: 12px;

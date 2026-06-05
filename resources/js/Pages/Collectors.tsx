@@ -4,10 +4,10 @@ import { Layout, Searchbar } from '~/components';
 import styles from '~styles/pages/collectors.module.scss';
 
 const Collectors = ({ collectors, filters }: any) => {
-    // local state to store the growing list of collectors
+    // local state to store growing list of collectors
     const [list, setList] = useState(collectors.data);
 
-    // update list when the search results change or new data is fetched
+    // update list when search results change || new data is fetched
     useEffect(() => {
         if (collectors.current_page === 1) {
             setList(collectors.data);

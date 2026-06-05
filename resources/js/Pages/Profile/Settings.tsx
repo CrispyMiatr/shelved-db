@@ -9,7 +9,6 @@ const Settings = () => {
     const { auth, status } = usePage<PageProps>().props;
     const user = auth.user;
 
-    // privacy toggle
     const privacyForm = useForm({
         is_private: user.is_private,
         name: user.name,
@@ -18,14 +17,12 @@ const Settings = () => {
         _method: 'patch',
     });
 
-    // password reset
     const passwordForm = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
     });
 
-    // account deletion
     const deleteForm = useForm({
         password: '',
     });
@@ -89,7 +86,6 @@ const Settings = () => {
             </div>
 
             <div className={settings['sections-wrapper']}>
-                {/* Privacy Section */}
                 <section className={settings['card']}>
                     <div className={settings['card-header']}>
                         <Shield size={22} className={settings['icon']} />
@@ -114,7 +110,6 @@ const Settings = () => {
                     </div>
                 </section>
 
-                {/* Password Reset Section */}
                 <section className={settings['card']}>
                     <div className={settings['card-header']}>
                         <Lock size={22} className={settings['icon']} />
@@ -186,7 +181,6 @@ const Settings = () => {
                     </div>
                 </section>
 
-                {/* Delete Profile Section */}
                 <section className={`${settings['card']} ${settings['danger-zone']}`}>
                     <div className={settings['card-header']}>
                         <AlertTriangle size={22} className={settings['icon']} />

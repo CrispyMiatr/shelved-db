@@ -257,10 +257,10 @@
 .danger-zone {
     margin-top: 50px;
     padding-top: 30px;
-    border-top: 1px solid #fee2e2; // Light red border
+    border-top: 1px solid #fee2e2;
 
     .section-title--danger {
-        color: #b91c1c; // Dark red
+        color: $clr-red;
         font-size: 1.1rem;
         margin-bottom: 15px;
     }
@@ -303,8 +303,8 @@
     align-items: center;
     gap: 8px;
     background-color: #fff;
-    color: #dc2626;
-    border: 1px solid #dc2626;
+    color: $clr-red;
+    border: 1px solid $clr-red;
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: 600;
@@ -333,7 +333,7 @@
 }
 
 .btn-delete-confirm {
-    background-color: #dc2626;
+    background-color: $clr-red;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -342,6 +342,6 @@
     cursor: pointer;
 
     &:hover {
-        background-color: #b91c1c;
+        background-color: $clr-red;
     }
 }

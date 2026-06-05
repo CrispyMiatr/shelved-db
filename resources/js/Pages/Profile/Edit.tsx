@@ -37,7 +37,7 @@ const Edit = () => {
         const objectUrl = URL.createObjectURL(data.avatar);
         setPreview(objectUrl);
 
-        // free memory when this component unmounts or file changes
+        // free memory when component unmounts or file changes
         return () => URL.revokeObjectURL(objectUrl);
     }, [data.avatar]);
 
@@ -71,7 +71,6 @@ const Edit = () => {
             </div>
 
             <form onSubmit={submit} className={edit['edit-form']}>
-                {/* Mobile/Tablet Action Bar */}
                 <div className={edit['action-bar']}>
                     <Link href={route('profile.show', user.username)} className={edit['action-bar__left']}>
                         <ArrowLeft size={20} />
@@ -197,7 +196,6 @@ const Edit = () => {
                     })}
                 </section>
 
-                {/* Desktop Actions */}
                 <div className={edit['form-actions']}>
                     <Link href={route('profile.show', user.username)} className={edit['btn-cancel']}>
                         Cancel

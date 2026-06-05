@@ -113,7 +113,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                             {user.social_links && Object.entries(user.social_links).map(([platform, url]) => {
                                 const linkUrl = url as string;
 
-                                // only render if URL string exists & not empty
                                 if (!linkUrl || linkUrl.trim() === '') return null;
 
                                 return (
@@ -140,7 +139,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
 
                 <div className={show['info__actions']}>
                     {isOwner ? (
-                        /* Owner view: Edit + Share */
                         <div className={show['action-group']}>
                             <Link href={route('profile.edit')} className={show['edit-btn']}>
                                 <button>Edit Profile</button>
@@ -153,7 +151,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                             </Link>
                         </div>
                     ) : (
-                        /* Visitor view: Follow + Share */
                         <div className={show['action-group']}>
                             {!auth.user ? (
                                 <Link href={route('login')} className={show['flex-1']}>
@@ -225,10 +222,8 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                     ))}
                                 </div>
                             ) : (
-                                /* no items visible */
                                 <div className={show['empty-state']}>
                                     {totalInCollection > 0 ? (
-                                        /* user has items, but filters hid them */
                                         <div className={show['empty-state__no-matches']}>
                                             <p>No items match your selected filters.</p>
                                             <Link
@@ -239,7 +234,6 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                             </Link>
                                         </div>
                                     ) : (
-                                        /* user has zero items in database */
                                         <div className={show['empty-state__empty']}>
                                             <p>This shelf is currently empty.</p>
                                             {isOwner ? (

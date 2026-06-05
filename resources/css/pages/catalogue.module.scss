@@ -36,10 +36,8 @@
     margin: 0 auto;
     padding: 8px;
 
-    // mobile
     column-count: 1;
 
-    // tablet
     @media (min-width: $bp-sm) {
       column-count: 2;
     }
@@ -49,7 +47,6 @@
       column-gap: 120px;
     }
 
-    // desktop
     @media (min-width: $bp-xl) {
       column-count: 4;
     }

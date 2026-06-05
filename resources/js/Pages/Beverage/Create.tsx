@@ -24,13 +24,11 @@ export default function Create({ brands, companies, manufacturers, countries, la
     const [isNewManufacturer, setIsNewManufacturer] = useState(false);
 
     const { data, setData, post, processing, errors } = useForm({
-        // brand/company logic
         company_id: '',
         new_company_name: '',
         brand_id: '',
         new_brand_name: '',
 
-        // basic info
         name: '',
         country_code: '',
         lineup_flavor: '',
@@ -41,7 +39,6 @@ export default function Create({ brands, companies, manufacturers, countries, la
         manufacturer_ids: [] as number[],
         new_manufacturer_name: '',
 
-        // images
         img_front: null as File | null,
         img_back: null as File | null,
         img_left: null as File | null,

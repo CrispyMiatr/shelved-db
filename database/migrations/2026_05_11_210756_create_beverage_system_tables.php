@@ -78,15 +78,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // Drop pivot tables first -> depend on other tables
         Schema::dropIfExists('follows');
         Schema::dropIfExists('beverage_user');
         Schema::dropIfExists('beverage_manufacturer');
 
-        // Drop table that depends on brands
         Schema::dropIfExists('beverages');
 
-        // Drop independent tables last
         Schema::dropIfExists('brands');
         Schema::dropIfExists('companies');
         Schema::dropIfExists('manufacturers');

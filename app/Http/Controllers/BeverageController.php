@@ -58,13 +58,11 @@ class BeverageController extends Controller
         $request->replace($input);
 
         $request->validate([
-            // Brand/Company logic
             'company_id' => 'nullable|required_without:new_company_name|exists:companies,id',
             'new_company_name' => 'nullable|string|max:255',
             'brand_id' => 'nullable|required_without:new_brand_name|exists:brands,id',
             'new_brand_name' => 'nullable|string|max:255',
 
-            // basic info
             'name' => 'required|string|max:255',
             'lineup_flavor' => 'nullable|string',
             'country_code' => 'required|string|size:2',
@@ -77,7 +75,6 @@ class BeverageController extends Controller
             'manufacturer_ids.*' => 'exists:manufacturers,id',
             'new_manufacturer_name' => 'nullable|string|max:255',
 
-            // translations: language_code set to max 10 to allow codes like 'en-US' or 'jp'
             'translations' => 'required|array|min:1',
             'translations.*.language_code' => 'required|string|max:10',
             'translations.*.ingredients' => 'required|string',
@@ -97,7 +94,6 @@ class BeverageController extends Controller
             'img_top' => 'nullable|image|max:5120',
             'img_bottom' => 'nullable|image|max:5120',
 
-            // add to personal collection
             'add_to_collection' => 'boolean'
         ]);
 
@@ -112,7 +108,7 @@ class BeverageController extends Controller
 
         return DB::transaction(function () use ($request) {
 
-            // resolve company
+            // company
             $companyId = $request->company_id;
             if ($request->filled('new_company_name')) {
                 $company = Company::firstOrCreate([
@@ -123,7 +119,7 @@ class BeverageController extends Controller
                 $companyId = $company->id;
             }
 
-            // resolve brand
+            // brand
             $brandId = $request->brand_id;
             if ($request->filled('new_brand_name')) {
                 $brand = Brand::firstOrCreate([
@@ -134,7 +130,6 @@ class BeverageController extends Controller
             }
 
             // flexible date normalization
-            // DB requires YYYY-MM-DD, fill missing info with January 1st
             $rawDate = $request->release_date;
             $parsedDate = null;
             $precision = 2;

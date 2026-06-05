@@ -37,7 +37,7 @@ export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
     };
 
     const renderDropdown = (key: string, label: string, data?: FilterGroupType[], pluralLabel?: string) => {
-        // only render if there are options available
+        // only render if options available
         if (!data || data.length === 0) return null;
 
         const currentValue = filters[key];

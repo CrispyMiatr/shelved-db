@@ -44,7 +44,7 @@ export const Searchbar = ({ placeholder, initialValue = "", variant = 'default' 
         return () => clearTimeout(delayDebounceFn);
     }, [query]);
 
-    // handle live API search for Header hropdown
+    // handle live API search for Header dropdown
     useEffect(() => {
         if (!isHeaderMode) return;
         if (query.length < 2) {

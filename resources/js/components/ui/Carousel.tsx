@@ -18,7 +18,7 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
         if (scrollContainer.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
             setShowLeftArrow(scrollLeft > 0);
-            // uuse -1 to account for sub-pixel rounding errors
+            // use -1 for sub-pixel rounding errors
             setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
         }
     };
@@ -31,7 +31,7 @@ export const Carousel = ({ title, children, headerExtra }: CarouselProps) => {
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainer.current) {
-            // scroll by 80% of the visible width for natural feel
+            // scroll 80% of visible width
             const scrollAmount = scrollContainer.current.clientWidth * 0.8;
             scrollContainer.current.scrollBy({
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
