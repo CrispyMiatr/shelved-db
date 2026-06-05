@@ -27,7 +27,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
     'release_date',
     'release_date_precision',
     'nutrition_100ml',
-    'nutrition_500ml'
+    'nutrition_full'
 ])]
 class Beverage extends Model implements HasMedia
 {
@@ -41,7 +41,7 @@ class Beverage extends Model implements HasMedia
         return [
             'release_date' => 'date:Y-m-d',
             'nutrition_100ml' => 'array',
-            'nutrition_500ml' => 'array',
+            'nutrition_full' => 'array',
         ];
     }
 

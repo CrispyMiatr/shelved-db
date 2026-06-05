@@ -93,6 +93,7 @@ class OcrController extends Controller
            - Extract the ingredients list, warning text (allergens, caffeine, etc.), and extra info (reclaiming details, recyclability, storage advice).
            - If English is missing on the can, you must translate ingredients, warnings, and extra info into English and append a new 'en' item to the 'translations' array.
         4. NUTRITION & THE ENERGY ROW RULE:
+           - NUTRITION NAME: always make this Enlgish if the language on the can is not Enlgish.
            - Always provide values 'per_100ml' AND 'per_total_volume' (the value for the full container). If values are missing on the can, mathematically calculate them based on the volume_ml.
            - CRITICAL RULE FOR ENERGY: Do NOT create separate rows for 'Energy (kJ)', 'Energy (kcal)', or 'Calories'. There must be exactly ONE row named 'Energy'.
              a. If both kJ and kcal measurements are present, merge them into the single 'Energy' row formatted exactly as: 'X kJ / Y kcal' (e.g., '1.4 kJ / 0.3 kcal' or '14 kJ / 3 kcal').

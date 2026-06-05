@@ -1,4 +1,4 @@
-import { useForm, Head, usePage } from '@inertiajs/react';
+import { useForm, Head, usePage, router } from '@inertiajs/react';
 import { Layout } from '~/components';
 import { PageProps } from '~/types';
 import { User, AtSign, BookOpen, Camera } from 'lucide-react';
@@ -38,7 +38,11 @@ const RegisterSetup = () => {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('profile.update'));
+        post(route('profile.update'), {
+            onSuccess: () => {
+                router.visit(route('profile.show', data.username));
+            }
+        });
     };
 
     return (

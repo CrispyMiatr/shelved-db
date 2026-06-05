@@ -201,7 +201,7 @@ const Product = ({ beverage }: any) => {
                                                 {beverage.nutrition_100ml[key]}
                                             </td>
                                             <td className={prod['text-right']}>
-                                                {beverage.nutrition_500ml?.[key] ?? '-'}
+                                                {beverage.nutrition_full?.[key] ?? '-'}
                                             </td>
                                         </tr>
                                     ))}

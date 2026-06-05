@@ -88,7 +88,7 @@ class BeverageController extends Controller
             'nutrition_items' => 'nullable|array',
             'nutrition_items.*.name' => 'required|string|max:100',
             'nutrition_items.*.per_100ml' => 'nullable|string|max:50',
-            'nutrition_items.*.per_500ml' => 'nullable|string|max:50',
+            'nutrition_items.*.per_full_volume' => 'nullable|string|max:50',
 
             'img_front' => 'required|image|max:5120',
             'img_back' => 'nullable|image|max:5120',
@@ -101,12 +101,13 @@ class BeverageController extends Controller
             'add_to_collection' => 'boolean'
         ]);
 
-        $imageCount = collect(['img_front', 'img_back', 'img_left', 'img_right', 'img_top', 'img_bottom'])
+        $primarySlots = ['img_front', 'img_back', 'img_left', 'img_right'];
+        $primaryImageCount = collect($primarySlots)
             ->filter(fn($slot) => $request->hasFile($slot))
             ->count();
 
-        if ($imageCount < 3) {
-            return back()->withErrors(['img_front' => 'At least 3 images of different sides are required.']);
+        if ($primaryImageCount < 3) {
+            return back()->withErrors(['img_front' => 'At least 3 primary images (Front, Back, Left, or Right) are required.']);
         }
 
         return DB::transaction(function () use ($request) {
@@ -177,7 +178,7 @@ class BeverageController extends Controller
                 'lineup_flavor' => $request->lineup_flavor,
                 'sku' => $request->sku,
                 'nutrition_100ml' => $nutrition100,
-                'nutrition_500ml' => $nutritionFull,
+                'nutrition_full' => $nutritionFull,
             ]);
 
             // sync manufacturers

@@ -10,7 +10,7 @@ return new class extends Migration {
         // 1. Add nutrition storage to beverages
         Schema::table('beverages', function (Blueprint $table) {
             $table->jsonb('nutrition_100ml')->nullable();
-            $table->jsonb('nutrition_500ml')->nullable();
+            $table->jsonb('nutrition_full')->nullable();
         });
 
         // 2. Create translations table for multilingual support

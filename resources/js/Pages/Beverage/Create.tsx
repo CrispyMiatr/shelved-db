@@ -153,10 +153,12 @@ export default function Create({ brands, companies, manufacturers, countries, la
     // filter brands based on selected company
     const filteredBrands = brands.filter(b => !data.company_id || b.company_id === Number(data.company_id));
 
-    const requiredSlots = ['front', 'back', 'left', 'right'];
-    const imageSlots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
-    const uploadedCount = imageSlots.filter(slot => data[`img_${slot}` as keyof typeof data]).length;
-    const canExtract = data.img_front && uploadedCount >= 3;
+    const primarySlots = ['front', 'back', 'left', 'right'];
+    const secondarySlots = ['top', 'bottom'];
+    const imageSlots = [...primarySlots, ...secondarySlots];
+    const uploadedPrimaryCount = primarySlots.filter(slot => data[`img_${slot}` as keyof typeof data]).length;
+    const hasMinimumImages = data.img_front !== null && uploadedPrimaryCount >= 3;
+    const canExtract = hasMinimumImages;
 
     const handleImageChange = (slot: string, file: File | null) => {
         setData(`img_${slot}` as any, file);
@@ -183,6 +185,12 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!hasMinimumImages) {
+            alert("Please upload the FRONT image and at least two other sides (Back, Left, or Right).");
+            return;
+        }
+
         post(route('beverage.store'));
     };
 
@@ -198,9 +206,10 @@ export default function Create({ brands, companies, manufacturers, countries, la
             <form onSubmit={submit} className={styles['main-form']}>
 
                 <section className={styles['upload-section']}>
-                    {(errors.img_front || errors.img_back || errors.img_left || errors.img_right) && (
+                    {(!hasMinimumImages && (errors.img_front || errors.img_back || errors.img_left || errors.img_right)) && (
                         <div className={styles['error-banner']}>
-                            <AlertCircle size={16} /> Please upload all 4 required sides.
+                            <AlertCircle size={16} />
+                            <span>You must upload the Front and at least 2 other primary sides (Back, Left, or Right).</span>
                         </div>
                     )}
 
@@ -212,14 +221,13 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                 </label>
                                 <div
                                     className={`${styles['upload-box']} ${errors[`img_${slot}` as keyof typeof errors] ? styles['has-error'] : ''}`}
-                                    style={{ backgroundImage: `url(${previews[slot]})` }}
+                                    style={previews[slot] ? { backgroundImage: `url(${previews[slot]})` } : {}}
                                 >
                                     {!previews[slot] && <Upload size={32} />}
                                     <input
                                         type="file"
                                         accept="image/*"
                                         onChange={e => handleImageChange(slot, e.target.files?.[0] || null)}
-                                        required={slot === 'front'}
                                     />
                                 </div>
                             </div>

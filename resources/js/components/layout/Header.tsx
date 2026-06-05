@@ -18,7 +18,7 @@ export const Header = () => {
     const isCollectorsActive = url.startsWith('/collectors');
     const isAboutActive = url.startsWith('/about');
     const isCreateActive = url.startsWith('/beverages/create') || route().current('beverage.create');
-    const isProfileActive = url.startsWith(`/@${user.username}`) || route().current('login');
+    const isProfileActive = (user && url.startsWith(`/@${user.username}`)) || route().current('login');
 
     return (
         <>
