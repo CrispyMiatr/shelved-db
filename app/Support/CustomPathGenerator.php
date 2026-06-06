@@ -6,6 +6,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 use App\Models\User;
 use App\Models\Beverage;
+use App\Models\Brand;
+use App\Models\Manufacturer;
+use App\Models\Company;
 
 class CustomPathGenerator implements PathGenerator
 {
@@ -45,6 +48,9 @@ class CustomPathGenerator implements PathGenerator
         return match ($media->model_type) {
             User::class => 'avatars',
             Beverage::class => 'beverages',
+            Brand::class => 'brands',
+            Manufacturer::class => 'manufacturers',
+            Company::class => 'companies',
             default => 'misc',
         };
     }

@@ -3,6 +3,7 @@ import { Breadcrumbs, Layout } from '~/components';
 import { ChevronLeft, ChevronRight, AlertTriangle, List, Table, Info } from 'lucide-react';
 import prod from '~styles/pages/product.module.scss';
 import { Link } from '@inertiajs/react';
+import { BeverageType, ImageSetType } from '~/types';
 
 const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) => {
     if (disabled) return null;
@@ -32,16 +33,19 @@ const Product = ({ beverage }: any) => {
     });
 
     // image logic
-    const imageOrder = ['front', 'right', 'back', 'left', 'top', 'bottom'];
+    const imageOrder: (keyof BeverageType['image_urls'])[] = ['front', 'right', 'back', 'left', 'top', 'bottom'];
     const loadImages = imageOrder
         .map((slot) => beverage.image_urls[slot])
-        .filter((url) => url !== null);
-    const displayImages = loadImages.length > 1
-        ? loadImages
-        : ['/assets/images/placeholder_product.png'];
+        .filter((img): img is ImageSetType => img !== null);
+    const placeholder: ImageSetType = {
+        original: '/assets/images/placeholder_product.png',
+        card: '/assets/images/placeholder_product.png',
+        thumb: '/assets/images/placeholder_product.png'
+    };
+    const imagesToRender = loadImages.length > 0 ? loadImages : [placeholder];
 
-    const nextImg = () => setImgIndex((prev) => (prev + 1) % displayImages.length);
-    const prevImg = () => setImgIndex((prev) => (prev - 1 + displayImages.length) % displayImages.length);
+    const nextImg = () => setImgIndex((prev) => (prev + 1) % imagesToRender.length);
+    const prevImg = () => setImgIndex((prev) => (prev - 1 + imagesToRender.length) % imagesToRender.length);
 
     const translation = beverage.translations.find((trans: any) => trans.language_code === activeLang)
         || beverage.translations[0];
@@ -91,20 +95,20 @@ const Product = ({ beverage }: any) => {
                     >
                         <button className={`${prod['nav-btn']} ${prod['prev']}`} onClick={prevImg}><ChevronLeft strokeWidth={3} /></button>
                         <img
-                            src={displayImages[imgIndex]}
+                            src={imagesToRender[imgIndex].original}
                             alt={beverage.name}
                             className={prod['main-image']}
                         />
                         <button className={`${prod['nav-btn']} ${prod['next']}`} onClick={nextImg}><ChevronRight strokeWidth={3} /></button>
                     </div>
                     <div className={prod['thumbnail-row']}>
-                        {displayImages.map((img: string, idx: number) => (
+                        {imagesToRender.map((img, idx) => (
                             <div
                                 key={idx}
                                 className={`${prod['thumb']} ${imgIndex === idx ? prod['active'] : ''}`}
                                 onClick={() => setImgIndex(idx)}
                             >
-                                <img src={img} alt={`view ${idx}`} />
+                                <img src={img.card} alt={`view ${idx}`} />
                             </div>
                         ))}
                     </div>
@@ -138,7 +142,7 @@ const Product = ({ beverage }: any) => {
                                         className={prod['manu-badge']}
                                         title={manu.name}
                                     >
-                                        <img src={manu.logo_path || `<CircleQuestionMark />`} alt={manu.name} />
+                                        <img src={manu.logo_url.card || `<CircleQuestionMark />`} alt={manu.name} />
                                     </Link>
                                 ))}
                             </div>

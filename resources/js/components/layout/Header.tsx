@@ -42,7 +42,7 @@ export const Header = () => {
 
                             <Link href={profilePath} className={`${header['icon-profile']} ${isProfileActive ? header['icon-profile--active'] : ''}`}>
                                 {user ? (
-                                    <img src={user.avatar_url} alt="Profile" className={header['avatar-img']} />
+                                    <img src={user.avatar_url?.thumb} alt="Profile" className={header['avatar-img']} />
                                 ) : (
                                     <UserRound size={24} strokeWidth={2} />
                                 )}
@@ -87,7 +87,7 @@ export const Header = () => {
 
                 <Link href={profilePath} className={`${header['mobile-nav__link']} ${isProfileActive ? header['mobile-nav__link--active'] : ''}`}>
                     {user ? (
-                        <img src={user.avatar_url} alt="Profile" className={header['avatar-img-mobile']} />
+                        <img src={user.avatar_url?.thumb} alt="Profile" className={header['avatar-img-mobile']} />
                     ) : (
                         <User size={24} />
                     )}

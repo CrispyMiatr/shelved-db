@@ -70,7 +70,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
             <div className={show['info']}>
 
                 <div className={show['info__avatar']}>
-                    <img src={user.avatar_url} alt="avatar" />
+                    <img src={user.avatar_url.original} alt="avatar" />
                 </div>
 
                 <div className={show['info__header']}>
@@ -215,7 +215,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                             brand={item.brand.name}
                                             volume={item.volume}
                                             country={item.country_code}
-                                            img={item.image_urls.front}
+                                            img={item.image_urls.front.card}
                                             isSmall={true}
                                             href={`/catalogue/${item.brand.slug}/${item.slug}`}
                                         />
@@ -272,7 +272,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                     className={show['user-item']}
                                     onClick={() => setModalConfig({ ...modalConfig, show: false })}
                                 >
-                                    <img src={user.avatar_url} alt="Avatar" />
+                                    <img src={user.avatar_url.card} alt="Avatar" />
                                     <div className={show['user-item__name']}>
                                         <p className={show['user-item__name__display-name']}>{user.name}</p>
                                         <p className={show['user-item__name__username']}>@{user.username}</p>

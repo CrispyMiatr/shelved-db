@@ -145,13 +145,16 @@ class Beverage extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(200)
-            ->height(300)
+            ->keepOriginalImageFormat()
             ->sharpen(10)
             ->nonQueued();
 
         $this->addMediaConversion('card')
             ->width(400)
-            ->height(600);
+            ->quality(90)
+            ->keepOriginalImageFormat()
+            ->sharpen(10)
+            ->nonQueued();
     }
 
     /**
@@ -164,11 +167,22 @@ class Beverage extends Model implements HasMedia
                 $slots = ['front', 'back', 'left', 'right', 'top', 'bottom'];
                 $urls = [];
                 foreach ($slots as $slot) {
-                    $urls[$slot] = $this->hasMedia($slot)
-                        ? $this->getFirstMediaUrl($slot, 'card')
-                        : null;
+                    if ($this->hasMedia($slot)) {
+                        $media = $this->getFirstMedia($slot);
+                        $data[$slot] = [
+                            'original' => $media->getFullUrl(),
+                            'card' => $media->hasGeneratedConversion('card')
+                                ? $media->getUrl('card')
+                                : $media->getFullUrl(),
+                            'thumb' => $media->hasGeneratedConversion('card')
+                                ? $media->getUrl('card')
+                                : $media->getFullUrl(),
+                        ];
+                    } else {
+                        $data[$slot] = null;
+                    }
                 }
-                return $urls;
+                return $data;
             },
         );
     }

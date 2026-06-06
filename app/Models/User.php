@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 #[Fillable(['name', 'username', 'email', 'password', 'role', 'bio', 'social_links', 'is_private'])]
 #[Hidden(['password', 'remember_token'])]
@@ -30,6 +31,26 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
+     * Define the conversions for the avatar.
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        // Small version for the Header/Navbar
+        $this->addMediaConversion('thumb')
+            ->width(100)
+            ->keepOriginalImageFormat()
+            ->sharpen(10)
+            ->nonQueued();
+
+        // Medium version for profile lists (e.g., Collectors page)
+        $this->addMediaConversion('card')
+            ->width(300)
+            ->quality(90)
+            ->keepOriginalImageFormat()
+            ->nonQueued();
+    }
+
+    /**
      * Get the avatar URL or a placeholder.
      */
     protected function avatarUrl(): Attribute
@@ -37,11 +58,27 @@ class User extends Authenticatable implements HasMedia
         return Attribute::make(
             get: function () {
                 if ($this->hasMedia('avatar')) {
-                    return $this->getFirstMediaUrl('avatar');
+                    $media = $this->getFirstMedia('avatar');
+
+                    return [
+                        'original' => $media->getFullUrl(),
+                        'card' => $media->hasGeneratedConversion('card')
+                            ? $media->getUrl('card')
+                            : $media->getFullUrl(),
+                        'thumb' => $media->hasGeneratedConversion('thumb')
+                            ? $media->getUrl('thumb')
+                            : $media->getFullUrl(),
+                    ];
                 }
 
                 $name = urlencode($this->name ?: 'New User');
-                return "https://ui-avatars.com/api/?name={$name}&background=random";
+                $placeholder = "https://ui-avatars.com/api/?name={$name}&background=random";
+
+                return [
+                    'original' => $placeholder,
+                    'card' => $placeholder,
+                    'thumb' => $placeholder,
+                ];
             },
         );
     }

@@ -1,3 +1,5 @@
+import { ImageSetType } from "./imageSet.types";
+
 export interface SocialLinks {
     facebook: string;
     instagram: string;
@@ -16,7 +18,7 @@ export interface User {
     username: string;
     email: string;
     bio?: string | null;
-    avatar_url: string;
+    avatar_url: ImageSetType;
     is_private: boolean;
     social_links: SocialLinks | null;
     role: 'user' | 'admin' | 'head_admin';

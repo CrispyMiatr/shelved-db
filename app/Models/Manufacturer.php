@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['name', 'abbreviation', 'website_url', 'logo_path'])]
-class Manufacturer extends Model
+#[Fillable(['name', 'abbreviation', 'website_url'])]
+class Manufacturer extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     /**
      * The beverages produced by this manufacturer.
      */
@@ -19,15 +24,46 @@ class Manufacturer extends Model
     }
 
     /**
+     * Automatically generate optimized versions (thumbnails).
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('card')
+            ->width(400)
+            ->quality(90)
+            ->keepOriginalImageFormat()
+            ->sharpen(10)
+            ->nonQueued();
+    }
+
+    /**
      * Create manufacturer logo path.
      */
-    protected static function booted()
+    public function registerMediaCollections(): void
     {
-        static::creating(function ($manufacturer) {
-            if (!$manufacturer->logo_path) {
-                $slug = Str::slug($manufacturer->name);
-                $manufacturer->logo_path = "/assets/logos/manu/{$slug}.png";
-            }
-        });
+        $this->addMediaCollection('logo')->singleFile();
     }
+
+    protected function logoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->hasMedia('logo')) {
+                    $folder = strtolower(class_basename($this));
+                    return "/assets/logos/{$folder}/placeholder.png";
+                }
+
+                $media = $this->getFirstMedia('logo');
+
+                return [
+                    'original' => $media->getFullUrl(),
+                    'card' => ($media->mime_type !== 'image/svg+xml' && $media->hasGeneratedConversion('card'))
+                        ? $media->getUrl('card')
+                        : $media->getFullUrl(),
+                ];
+            }
+        );
+    }
+
+    protected $appends = ['logo_url'];
 }

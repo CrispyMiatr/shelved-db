@@ -45,7 +45,7 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
                                 key={brand.id}
                                 brand={brand.name}
                                 count={brand.beverages_count}
-                                img={brand.logo_path}
+                                img={brand.logo_url.card}
                                 href={`/catalogue/${brand.slug}`}
                             />
                         ))}

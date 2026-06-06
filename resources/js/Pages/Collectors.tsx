@@ -47,7 +47,7 @@ const Collectors = ({ collectors, filters }: any) => {
                             className={styles['grid__card']}
                         >
                             <img
-                                src={collector.avatar_url}
+                                src={collector.avatar_url.card}
                                 alt={collector.name}
                                 className={styles['grid__card__avatar']}
                             />

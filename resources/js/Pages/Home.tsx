@@ -2,8 +2,15 @@ import { Carousel, Layout, ProductCard, ProfileCard, SkeletonCard } from '~/comp
 import home from '~styles/pages/home.module.scss'
 import banner from '~assets/banner.jpg'
 import logo from "~assets/logo_full-b.svg"
+import { BeverageType, User } from '~/types';
 
-const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
+interface HomeProps {
+    newlyAdded: BeverageType[];
+    newlyReleased: BeverageType[];
+    popularProfiles: User[];
+}
+
+const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomeProps) => {
     const MIN_CAROUSEL_ITEMS = 20;
 
     return (
@@ -40,7 +47,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 brand={item.brand.name}
                                 volume={item.volume}
                                 country={item.country_code}
-                                img={item.image_urls.front}
+                                img={item.image_urls.front?.card ?? null}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
@@ -66,7 +73,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 brand={item.brand.name}
                                 volume={item.volume}
                                 country={item.country_code}
-                                img={item.image_urls.front}
+                                img={item.image_urls.front?.card ?? null}
                                 href={`/catalogue/${item.brand.slug}/${item.slug}`}
                             />
                         ))}
@@ -89,7 +96,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: any) => {
                                 key={user.id}
                                 name={user.name}
                                 username={user.username}
-                                img={user.avatar_url}
+                                img={user.avatar_url.card}
                                 href={`/@${user.username}`}
                             />
                         ))}

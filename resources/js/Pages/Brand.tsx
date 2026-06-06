@@ -37,7 +37,7 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
                     <span className={styles['divider-v']}></span>
 
                     <img
-                        src={brand.logo_path}
+                        src={brand.logo_url.original}
                         onError={(e) => {
                             if (e.currentTarget.src !== fallBackImg) {
                                 e.currentTarget.src = fallBackImg;
@@ -79,7 +79,7 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
                                 brand={brand.name}
                                 volume={beverage.volume}
                                 country={beverage.country_code}
-                                img={beverage.image_urls.front}
+                                img={beverage.image_urls.front?.card ?? null}
                                 isSmall={true}
                                 href={`/catalogue/${brand.slug}/${beverage.slug}`}
                             />

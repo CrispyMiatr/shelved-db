@@ -4,11 +4,12 @@ import { Layout } from '~/components';
 import { Upload, FileText, Plus, Trash2, AlertCircle, Building2, Globe, ImageIcon } from 'lucide-react';
 import axios from 'axios';
 import styles from '~styles/pages/beverage/create.module.scss';
+import { ImageSetType } from '~/types';
 
 interface Props {
     brands: { id: number, name: string, company_id: number }[];
     companies: { id: number, name: string }[];
-    manufacturers: { id: number, name: string, logo_path: string }[];
+    manufacturers: { id: number, name: string, logo_url: ImageSetType }[];
     countries: { code: string, name: string }[];
     languages: { code: string, name: string }[];
 }
@@ -368,8 +369,8 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                         onClick={() => toggleManufacturer(m.id)}
                                     >
                                         <div className={styles['m-logo']}>
-                                            {m.logo_path ? (
-                                                <img src={m.logo_path} alt={m.name} />
+                                            {m.logo_url?.card ? (
+                                                <img src={m.logo_url.card} alt={m.name} />
                                             ) : (
                                                 <ImageIcon size={20} className={styles['placeholder']} />
                                             )}

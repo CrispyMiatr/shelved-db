@@ -2,13 +2,14 @@ import { Breadcrumbs, Layout } from '~/components';
 import { Factory, Globe, ExternalLink } from 'lucide-react';
 import { Head } from '@inertiajs/react';
 import styles from '~styles/pages/manufacturers.module.scss';
+import { ImageSetType } from '~/types';
 
 interface Manufacturer {
     id: number;
     name: string;
     abbreviation: string | null;
     website_url: string | null;
-    logo_path: string | null;
+    logo_url: ImageSetType | null;
     beverages_count?: number;
 }
 
@@ -34,8 +35,8 @@ const Index = ({ manufacturers }: Props) => {
                             className={styles['row']}
                         >
                             <div className={styles['row__logo']}>
-                                {manu.logo_path ? (
-                                    <img src={manu.logo_path} alt={manu.name} />
+                                {manu.logo_url ? (
+                                    <img src={manu.logo_url.original} alt={manu.name} />
                                 ) : (
                                     <Factory size={24} />
                                 )}

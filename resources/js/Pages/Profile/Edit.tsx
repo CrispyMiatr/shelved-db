@@ -42,7 +42,7 @@ const Edit = () => {
     }, [data.avatar]);
 
     const dynamicInitials = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'New User')}&background=random`;
-    const avatarUrl = user?.avatar_url || '';
+    const avatarUrl = user?.avatar_url?.original || '';
     const isUsingPlaceholder = avatarUrl.includes('ui-avatars.com') || avatarUrl === '';
 
     const handleSocialChange = (platform: keyof SocialLinks, value: string) => {

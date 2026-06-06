@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['company_id', 'name', 'website_url', 'logo_path'])]
-class Brand extends Model
+#[Fillable(['company_id', 'name', 'website_url'])]
+class Brand extends Model implements HasMedia
 {
+    use InteractsWithMedia;
 
     /**
      * Get the company that owns the brand.
@@ -33,7 +37,7 @@ class Brand extends Model
     {
         $id = explode('-', $value)[0];
 
-        // check if the first part is actually a number
+        // check if the first part is a number
         if (!is_numeric($id)) {
             abort(404);
         }
@@ -52,17 +56,46 @@ class Brand extends Model
     }
 
     /**
-     * Create brand logo path.
+     * Automatically generate optimized versions (thumbnails).
      */
-    protected static function booted()
+    public function registerMediaConversions(?Media $media = null): void
     {
-        static::creating(function ($brand) {
-            if (!$brand->logo_path) {
-                $slug = Str::slug($brand->name);
-                $brand->logo_path = "/assets/logos/brand/{$slug}.png";
-            }
-        });
+        $this->addMediaConversion('card')
+            ->width(400)
+            ->quality(90)
+            ->keepOriginalImageFormat()
+            ->sharpen(10)
+            ->nonQueued();
     }
 
-    protected $appends = ['slug'];
+    /**
+     * Create brand logo path.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('logo')->singleFile();
+    }
+
+    protected function logoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->hasMedia('logo')) {
+                    $folder = strtolower(class_basename($this));
+                    return "/assets/logos/{$folder}/placeholder.png";
+                }
+
+                $media = $this->getFirstMedia('logo');
+
+                return [
+                    'original' => $media->getFullUrl(),
+                    'card' => ($media->mime_type !== 'image/svg+xml' && $media->hasGeneratedConversion('card'))
+                        ? $media->getUrl('card')
+                        : $media->getFullUrl(),
+                ];
+            }
+        );
+    }
+
+    protected $appends = ['slug', 'logo_url'];
 }

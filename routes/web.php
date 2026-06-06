@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OcrController;
+use App\Http\Controllers\Staff\ManagementController;
+use App\Http\Middleware\EnsureUserIsStaff;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -65,8 +67,28 @@ Route::middleware('auth')->group(function () {
     Route::post('/api/beverage/ocr', [OcrController::class, 'process'])->name('beverage.ocr');
 
     // Collection Management
-    Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');
-    Route::delete('/collection/remove/{beverage}', [BeverageController::class, 'removeFromCollection'])->name('collection.remove');
+    // Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');
+    // Route::delete('/collection/remove/{beverage}', [BeverageController::class, 'removeFromCollection'])->name('collection.remove');
+
+    // Staff Management
+    Route::middleware(['auth', EnsureUserIsStaff::class])
+        ->prefix('staff')
+        ->name('staff.')
+        ->group(function () {
+            Route::get('/', [ManagementController::class, 'index'])->name('dashboard');
+
+            Route::get('/brands', [ManagementController::class, 'brands'])->name('brands');
+            Route::post('/brands', [ManagementController::class, 'storeBrand'])->name('brands.store');
+            Route::patch('/brands/{brand}', [ManagementController::class, 'updateBrand'])->name('brands.update');
+
+            Route::get('/manufacturers', [ManagementController::class, 'manufacturers'])->name('manufacturers');
+            Route::post('/manufacturers', [ManagementController::class, 'storeManufacturer'])->name('manufacturers.store');
+            Route::patch('/manufacturers/{manufacturer}', [ManagementController::class, 'updateManufacturer'])->name('manufacturers.update');
+
+            Route::get('/companies', [ManagementController::class, 'companies'])->name('companies');
+            Route::post('/companies', [ManagementController::class, 'storeCompany'])->name('companies.store');
+            Route::patch('/companies/{company}', [ManagementController::class, 'updateCompany'])->name('companies.update');
+        });
 });
 
 /*
