@@ -142,6 +142,10 @@ h1 {
   font-size: $fs-lg;
   font-family: $ff-title;
   font-weight: $fw-regular;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-xl;
+  }
 }
 
 h2 {

@@ -17,6 +17,8 @@ const Login = () => {
 
     return (
         <div className={auth['auth-container']}>
+            <Head title="Sign In" />
+
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
                     <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />

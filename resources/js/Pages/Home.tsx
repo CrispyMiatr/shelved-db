@@ -3,6 +3,7 @@ import home from '~styles/pages/home.module.scss'
 import banner from '~assets/banner.jpg'
 import logo from "~assets/logo_full-b.svg"
 import { BeverageType, User } from '~/types';
+import { Head } from '@inertiajs/react';
 
 interface HomeProps {
     newlyAdded: BeverageType[];
@@ -15,6 +16,18 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomeProps) => {
 
     return (
         <div className={home['home-container']}>
+            <Head>
+                <title>Shelved. | The Ultimate Beverage Database</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Discover, collect, and share beverages from around the world. Explore our massive database of brands, manufacturers, and unique collector shelves."
+                />
+                <meta property="og:title" content="Shelved. | The Ultimate Beverage Database" />
+                <meta property="og:description" content="Discover, collect, and share beverages from around the world." />
+                <meta property="og:image" content="/assets/images/og-banner.jpg" />
+            </Head>
+
             <section className={home['hero']} id='hero'>
                 <div className={home['hero__text']}>
                     <div className={home['hero__text__title']}>

@@ -25,7 +25,7 @@ const ResetPassword = ({ token, email }: { token: string, email: string }) => {
 
     return (
         <div className={auth['auth-container']}>
-            <Head title="Reset Password" />
+            <Head title="New Password" />
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>

@@ -33,8 +33,9 @@ const RegisterSetup = () => {
     }, [data.avatar]);
 
     const namePlaceholder = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.username || 'New User')}&background=random`;
-    const avatarUrl = auth.user?.avatar_url || '';
-    const isUsingPlaceholder = avatarUrl.includes('ui-avatars.com') || avatarUrl === '';
+    const avatarUrlObj = auth.user?.avatar_url;
+    const originalUrl = avatarUrlObj?.original || '';
+    const isUsingPlaceholder = originalUrl.includes('ui-avatars.com') || originalUrl === '';
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -59,7 +60,7 @@ const RegisterSetup = () => {
                 <div className={authS['form__avatar']}>
                     <div className={authS['form__avatar__preview']}>
                         <img
-                            src={preview || (isUsingPlaceholder ? namePlaceholder : avatarUrl)}
+                            src={preview || (isUsingPlaceholder ? namePlaceholder : originalUrl)}
                             alt="Avatar preview"
                         />
                         <label htmlFor="avatar-input" className={authS['form__avatar__label']}>

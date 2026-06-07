@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Layout, BrandCard, Carousel, SkeletonCard } from '~/components';
 import catalog from '~styles/pages/catalogue.module.scss';
 import { BrandType } from '~/types';
+import { Head } from '@inertiajs/react';
 
 interface CatalogueProps {
     brands: BrandType[];
@@ -33,6 +34,15 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
 
     return (
         <div className={catalog['catalogue-container']}>
+            <Head>
+                <title>Beverage Catalogue | All Brands | Shelved.</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content={`Browse our complete index of ${brands.length} beverage brands. From major corporations to local craft producers, find every drink on the shelf.`}
+                />
+            </Head>
+
             <div className={catalog['title']}>
                 <h2>Catalogue</h2>
             </div>

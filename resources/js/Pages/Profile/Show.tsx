@@ -1,4 +1,4 @@
-import { Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { LogOut, Pencil, Settings, Share2, X } from 'lucide-react';
 import { useState } from 'react';
 import { FilterGroup, Layout, ProductCard, SortButton } from '~/components';
@@ -42,8 +42,20 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
         });
     };
 
+    const profileTitle = `${user.name} (@${user.username}) | Beverage Collector | Shelved.`;
+    const profileDesc = `Check out the beverage collection of ${user.name} on Shelved. Currently featuring ${totalInCollection} items on their shelf.`;
+
     return (
         <div className={show['profile-container']}>
+            <Head>
+                <title>{profileTitle}</title>
+                <meta head-key="description" name="description" content={profileDesc} />
+                <meta property="og:title" content={profileTitle} />
+                <meta property="og:description" content={profileDesc} />
+                <meta property="og:image" content={user.avatar_url.card} />
+                <meta name="twitter:card" content="summary" />
+            </Head>
+
             <div className={show['title']}>
                 <h2>Profile</h2>
             </div>

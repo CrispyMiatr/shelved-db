@@ -194,7 +194,10 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
     return (
         <div className={styles['container']}>
-            <Head title="Add Beverage" />
+            <Head>
+                <title>Add Beverage | Shelved. Database</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
 
             <div className={styles['title']}>
                 <h2>Add New Beverage</h2>

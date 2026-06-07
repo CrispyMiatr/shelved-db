@@ -1,6 +1,6 @@
 import { Breadcrumbs, FilterGroup, Layout, ProductCard, SortButton } from '~/components';
 import { BeverageType, BrandType } from '~/types';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import styles from '~styles/pages/brand.module.scss';
 
 interface Props {
@@ -18,8 +18,29 @@ const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
     const { field, direction } = sort;
     const fallBackImg = `https://placehold.co/400x200?text=${brand.name}`
 
+    const companyText = brand.company ? ` by ${brand.company.name}` : '';
+    const totalItems = brand.beverages_count ?? beverages.length;
+    const seoTitle = `${brand.name} Beverage Database | Shelved.`;
+    const seoDescription = `Explore the complete ${brand.name} beverage catalogue${companyText} on Shelved. Browse ${totalItems} unique cans and bottles.`;
+
     return (
         <div className={styles['brand-container']}>
+            <Head>
+                <title>{seoTitle}</title>
+                <meta head-key="description" name="description" content={seoDescription} />
+
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={seoTitle} />
+                <meta property="og:description" content={seoDescription} />
+                <meta property="og:image" content={brand.logo_url.card} />
+                <meta property="og:url" content={window.location.href} />
+
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={seoTitle} />
+                <meta name="twitter:description" content={seoDescription} />
+                <meta name="twitter:image" content={brand.logo_url.card} />
+            </Head>
+
             <div className={styles['breadcrumbs']}>
                 <Breadcrumbs crumbs={[
                     { label: 'Catalogue', href: '/catalogue' },

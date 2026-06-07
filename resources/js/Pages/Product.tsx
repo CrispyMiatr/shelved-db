@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Breadcrumbs, Layout } from '~/components';
 import { ChevronLeft, ChevronRight, AlertTriangle, List, Table, Info } from 'lucide-react';
 import prod from '~styles/pages/product.module.scss';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { BeverageType, ImageSetType } from '~/types';
 
 const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) => {
@@ -76,8 +76,26 @@ const Product = ({ beverage }: any) => {
         if (touchStart.current - touchEnd < -50) prevImg();
     };
 
+    // meta description
+    const seoDescription = `View details for ${beverage.brand.name} ${beverage.name} (${beverage.volume}mL) from ${beverage.country_name}. ${translation?.ingredients?.substring(0, 100)}...`;
+
     return (
         <div className={prod['product-container']}>
+            <Head>
+                <title>{`${beverage.brand.name} ${beverage.name} | Shelved.`}</title>
+                <meta name="description" content={seoDescription} />
+
+                <meta property="og:title" content={`${beverage.brand.name} ${beverage.name} | Shelved.`} />
+                <meta property="og:description" content={seoDescription} />
+                <meta property="og:image" content={beverage.image_urls.front?.card || ''} />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`${beverage.brand.name} ${beverage.name}`} />
+                <meta name="twitter:description" content={seoDescription} />
+                <meta name="twitter:image" content={beverage.image_urls.front?.card || ''} />
+            </Head>
+
             <div className={prod['breadcrumbs']}>
                 <Breadcrumbs crumbs={[
                     { label: 'Catalogue', href: '/catalogue' },

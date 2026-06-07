@@ -15,7 +15,7 @@ const ForgotPassword = ({ status }: { status?: string }) => {
 
     return (
         <div className={auth['auth-container']}>
-            <Head title="Forgot Password" />
+            <Head title="Reset Password" />
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>

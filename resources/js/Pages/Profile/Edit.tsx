@@ -64,7 +64,10 @@ const Edit = () => {
 
     return (
         <div className={edit['edit-profile-container']}>
-            <Head title="Edit Profile" />
+            <Head>
+                <title>Edit Profile | Shelved.</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
 
             <div className={edit['title']}>
                 <h2>Edit Profile</h2>

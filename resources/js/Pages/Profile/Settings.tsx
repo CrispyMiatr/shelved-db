@@ -37,8 +37,6 @@ const Settings = () => {
                 // TODO: "Saved" toast notification
             }
         });
-
-
     };
 
     const updatePassword = (e: FormEvent) => {
@@ -61,7 +59,10 @@ const Settings = () => {
 
     return (
         <div className={settings['settings-container']}>
-            <Head title="Account Settings" />
+            <Head>
+                <title>Account Settings | Shelved.</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
 
             <div className={settings['header']}>
                 <Link

@@ -73,7 +73,10 @@ const Management = ({ brands, companies, manufacturers, countries }: Props) => {
 
     return (
         <div className={manage['container']}>
-            <Head title="Staff Management" />
+            <Head>
+                <title>Staff Management | Shelved.</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
 
             <div className={manage['title']}>
                 <h2>Database Management</h2>

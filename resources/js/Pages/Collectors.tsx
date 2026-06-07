@@ -28,6 +28,11 @@ const Collectors = ({ collectors, filters }: any) => {
 
     return (
         <div className={styles['collector-container']}>
+            <Head>
+                <title>Collectors | Shelved. Community</title>
+                <meta name="description" content="Meet the global community of beverage collectors on Shelved. Explore unique shelves and find fellow enthusiasts." />
+            </Head>
+
             <div className={styles['title']}>
                 <h2>Collectors</h2>
             </div>

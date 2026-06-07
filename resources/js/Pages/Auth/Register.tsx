@@ -18,7 +18,7 @@ const Register = () => {
 
     return (
         <div className={auth['auth-container']}>
-            <Head title="Register" />
+            <Head title="Create Account" />
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
