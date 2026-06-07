@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
-import { Layout } from '~/components';
-import { Edit2, Globe, Building2, Factory, Tags, X, Check, Image as ImageIcon, Plus, ExternalLink } from 'lucide-react';
+import { Edit2, Building2, Factory, Tags, X, Check, Plus, ExternalLink } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { BrandType, CompanyType, ManagementPageType, ManufacturerType } from '~/types';
 import manage from '~styles/pages/staff/management.module.scss';
 
-interface Props {
-    brands: any[];
-    companies: any[];
-    manufacturers: any[];
-    countries: { value: string, label: string }[];
-}
-
 type TabType = 'brands' | 'companies' | 'manufacturers';
+type ManageableItem = BrandType | CompanyType | ManufacturerType;
 
-const Management = ({ brands, companies, manufacturers, countries }: Props) => {
+const Management = ({ brands, companies, manufacturers, countries }: ManagementPageType) => {
     const [activeTab, setActiveTab] = useState<TabType>('brands');
     const [modalItem, setModalItem] = useState<{ id?: number, type: TabType } | null>(null);
 
@@ -27,15 +22,18 @@ const Management = ({ brands, companies, manufacturers, countries }: Props) => {
         _method: 'patch' // default to patch for file uploads in updates
     });
 
-    const openEditModal = (type: TabType, item: any) => {
+    const openEditModal = (type: TabType, item: ManageableItem) => {
         setModalItem({ id: item.id, type });
         clearErrors();
+        const brandItem = item as BrandType;
+        const companyItem = item as CompanyType;
+        const manuItem = item as ManufacturerType;
         setData({
             name: item.name || '',
             website_url: item.website_url || '',
-            company_id: item.company_id?.toString() || '',
-            country_code: item.country_code || '',
-            abbreviation: item.abbreviation || '',
+            company_id: brandItem.company?.toString() || '',
+            country_code: companyItem.country_code || '',
+            abbreviation: manuItem.abbreviation || '',
             logo: null,
             _method: 'patch'
         });
@@ -70,6 +68,12 @@ const Management = ({ brands, companies, manufacturers, countries }: Props) => {
             onSuccess: () => closeModal(),
         });
     };
+
+    const currentList: ManageableItem[] = activeTab === 'brands'
+        ? brands
+        : activeTab === 'companies'
+            ? companies
+            : manufacturers;
 
     return (
         <div className={manage['container']}>
@@ -114,7 +118,7 @@ const Management = ({ brands, companies, manufacturers, countries }: Props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {(activeTab === 'brands' ? brands : activeTab === 'companies' ? companies : manufacturers).map((item) => (
+                        {currentList.map((item) => (
                             <tr key={item.id}>
                                 <td>
                                     <div className={manage['table__logo']}>
@@ -125,13 +129,13 @@ const Management = ({ brands, companies, manufacturers, countries }: Props) => {
                                     <span className={manage['table__item-name']}>{item.name}</span>
                                 </td>
                                 <td>
-                                    {activeTab === 'brands' && (item.company?.name || <span className={manage['table__missing']}>Missing Company</span>)}
-                                    {activeTab === 'companies' && (item.country_code || <span className={manage['table__missing']}>No Country</span>)}
-                                    {activeTab === 'manufacturers' && (item.abbreviation || '-')}
+                                    {activeTab === 'brands' && ((item as BrandType).company?.name || <span className={manage['table__missing']}>Missing Company</span>)}
+                                    {activeTab === 'companies' && ((item as CompanyType).country_code || <span className={manage['table__missing']}>No Country</span>)}
+                                    {activeTab === 'manufacturers' && ((item as ManufacturerType).abbreviation || '-')}
                                 </td>
                                 <td>
                                     {item.website_url ? (
-                                        <a href={item.website_url} target="_blank" className={manage['table__link-icon']}>
+                                        <a href={item.website_url} target="_blank" rel="noreferrer" className={manage['table__link-icon']}>
                                             <ExternalLink size={16} />
                                         </a>
                                     ) : <span className={manage['table__missing']}>No URL</span>}

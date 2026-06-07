@@ -1,15 +1,11 @@
 import React, { useMemo } from 'react';
-import { Layout, BrandCard, Carousel, SkeletonCard } from '~/components';
-import catalog from '~styles/pages/catalogue.module.scss';
-import { BrandType } from '~/types';
 import { Head } from '@inertiajs/react';
+import { Layout } from '~/components/common/Layout';
+import { BrandCard, Carousel, SkeletonCard } from '~/components';
+import { BrandType, CataloguePageType } from '~/types';
+import catalog from '~styles/pages/catalogue.module.scss';
 
-interface CatalogueProps {
-    brands: BrandType[];
-    popularBrands: BrandType[];
-}
-
-const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
+const Catalogue = ({ brands, popularBrands }: CataloguePageType) => {
     const MIN_CAROUSEL_ITEMS = 10;
     const ALPHABET = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -50,11 +46,11 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
             <section className={catalog['brands']} id='brands'>
                 <div className={catalog['brands__carousel']}>
                     <Carousel title="Popular Brands">
-                        {popularBrands.map((brand: any) => (
+                        {popularBrands.map((brand: BrandType) => (
                             <BrandCard
                                 key={brand.id}
                                 brand={brand.name}
-                                count={brand.beverages_count}
+                                count={brand.beverages_count ?? 0}
                                 img={brand.logo_url.card}
                                 href={`/catalogue/${brand.slug}`}
                             />
@@ -82,7 +78,7 @@ const Catalogue = ({ brands, popularBrands }: CatalogueProps) => {
 
                             <div className={catalog['index__group']}>
                                 {groupedBrands[letter].length > 0 ? (
-                                    groupedBrands[letter].map(brand => (
+                                    groupedBrands[letter].map((brand: BrandType) => (
                                         <div key={brand.id} className={catalog['index__group__item']}>
                                             <a href={`/catalogue/${brand.slug}`}>
                                                 <div className={catalog['index__group__item__name']}>

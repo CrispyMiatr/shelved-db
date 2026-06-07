@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import { Layout } from '~/components';
+import { Layout } from '~/components/common/Layout';
 import styles from '~styles/pages/about.module.scss';
 import logo from '~assets/logo_full-b.svg'
 import concept from '~assets/concept.png'

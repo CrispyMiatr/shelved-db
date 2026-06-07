@@ -1,15 +1,15 @@
-export interface FilterGroupType {
+export interface FilterType {
     label: string;
     value: string | number;
 }
 
-export interface FilterGroupProps {
+export interface FilterGroupType {
     filters: Record<string, string | number | null>;
     options: {
-        brands?: FilterGroupType[];
-        volumes?: FilterGroupType[];
-        years?: FilterGroupType[];
-        flavors?: FilterGroupType[];
-        countries?: FilterGroupType[];
+        brands?: FilterType[];
+        volumes?: FilterType[];
+        years?: FilterType[];
+        flavors?: FilterType[];
+        countries?: FilterType[];
     };
 }

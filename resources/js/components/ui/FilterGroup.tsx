@@ -1,9 +1,9 @@
 import { router } from '@inertiajs/react';
 import { useState, useRef, useEffect } from 'react';
-import { FilterGroupProps, FilterGroupType } from '~/types';
+import { FilterGroupType, FilterType } from '~/types';
 import styles from '~styles/components/ui/filterGroup.module.scss';
 
-export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
+export const FilterGroup = ({ filters, options }: FilterGroupType) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +36,7 @@ export const FilterGroup = ({ filters, options }: FilterGroupProps) => {
         setOpenDropdown(null);
     };
 
-    const renderDropdown = (key: string, label: string, data?: FilterGroupType[], pluralLabel?: string) => {
+    const renderDropdown = (key: string, label: string, data?: FilterType[], pluralLabel?: string) => {
         // only render if options available
         if (!data || data.length === 0) return null;
 

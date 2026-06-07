@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
-import { Layout, Searchbar } from '~/components';
+import { Layout } from '~/components/common/Layout';
+import { Searchbar } from '~/components';
+import { CollectorPageType, UserType } from '~/types';
 import styles from '~styles/pages/collectors.module.scss';
 
-const Collectors = ({ collectors, filters }: any) => {
+const Collectors = ({ collectors, filters }: CollectorPageType) => {
     // local state to store growing list of collectors
     const [list, setList] = useState(collectors.data);
 
-    // update list when search results change || new data is fetched
+    // update list when search results change || new data fetched
     useEffect(() => {
         if (collectors.current_page === 1) {
             setList(collectors.data);
         } else {
-            setList((prev: any) => [...prev, ...collectors.data]);
+            setList((prev) => [...prev, ...collectors.data]);
         }
-    }, [collectors.data]);
+    }, [collectors.data, collectors.current_page]);
 
     const loadMore = () => {
         if (!collectors.next_page_url) return;
@@ -45,7 +47,7 @@ const Collectors = ({ collectors, filters }: any) => {
 
             <div className={styles['grid']}>
                 {list.length > 0 ? (
-                    list.map((collector: any) => (
+                    list.map((collector: UserType) => (
                         <Link
                             key={collector.id}
                             href={`/@${collector.username}`}

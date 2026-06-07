@@ -1,9 +1,9 @@
-import { useForm, usePage, Head, Link, router } from '@inertiajs/react';
-import { PageProps, SocialLinks } from '~/types';
-import { Layout } from '~/components';
-import edit from '~styles/pages/profile/edit.module.scss';
-import { ArrowLeft, Camera, Save } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useForm, usePage, Head, Link, router } from '@inertiajs/react';
+import { ArrowLeft, Camera, Save } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { PageProps, SocialLinks } from '~/types';
+import edit from '~styles/pages/profile/edit.module.scss';
 
 const Edit = () => {
     const [preview, setPreview] = useState<string | null>(null);

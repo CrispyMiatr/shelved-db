@@ -6,6 +6,7 @@ export interface BrandType {
     name: string;
     slug: string;
     logo_url: ImageSetType;
+    website_url?: string | null;
     company?: CompanyType;
     beverages_count?: number;
 }

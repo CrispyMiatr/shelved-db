@@ -1,32 +1,24 @@
-import { Breadcrumbs, Layout } from '~/components';
-import { Factory, Globe, ExternalLink } from 'lucide-react';
 import { Head } from '@inertiajs/react';
+import { Factory, Globe, ExternalLink } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { ManufacturerPageType } from '~/types';
 import styles from '~styles/pages/manufacturers.module.scss';
-import { ImageSetType } from '~/types';
 
-interface Manufacturer {
-    id: number;
-    name: string;
-    abbreviation: string | null;
-    website_url: string | null;
-    logo_url: ImageSetType | null;
-    beverages_count?: number;
-}
+const Index = ({ manufacturers }: ManufacturerPageType) => {
+    const seoTitle = "Beverage Packaging Manufacturers | Shelved.";
+    const seoDescription = "A database of global beverage manufacturers, bottling companies, and canning facilities. See which companies produce your favorite drinks.";
 
-interface Props {
-    manufacturers: Manufacturer[];
-}
-
-const Index = ({ manufacturers }: Props) => {
     return (
         <div className={styles['manufacturer-container']}>
             <Head>
-                <title>Beverage Packaging Manufacturers | Shelved.</title>
-                <meta
-                    head-key="description"
-                    name="description"
-                    content="A database of global beverage manufacturers, bottling companies, and canning facilities. See which companies produce your favorite drinks."
-                />
+                <title>{seoTitle}</title>
+                <meta head-key="description" name="description" content={seoDescription} />
+
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={seoTitle} />
+                <meta property="og:description" content={seoDescription} />
+                <meta property="og:url" content={window.location.href} />
+                <meta name="twitter:card" content="summary" />
             </Head>
 
             <div className={styles['title']}>
@@ -35,6 +27,7 @@ const Index = ({ manufacturers }: Props) => {
 
             <div className={styles['list']}>
                 {manufacturers.map((manu) => (
+
                     <div
                         key={manu.id}
                         id={`manu-${manu.id}`}
@@ -42,7 +35,7 @@ const Index = ({ manufacturers }: Props) => {
                     >
                         <div className={styles['row__logo']}>
                             {manu.logo_url ? (
-                                <img src={manu.logo_url.original} alt={manu.name} />
+                                <img src={manu.logo_url.card} alt={manu.name} />
                             ) : (
                                 <Factory size={24} />
                             )}

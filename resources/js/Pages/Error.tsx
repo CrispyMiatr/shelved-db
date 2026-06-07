@@ -1,13 +1,10 @@
 import { Head, Link } from '@inertiajs/react';
-import { Layout } from '~/components';
-import { TriangleAlert, Home, Search, Lock, Beer } from 'lucide-react';
+import { TriangleAlert, Search, Lock } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { ErrorPageType } from '~/types';
 import error from '~styles/pages/error.module.scss';
 
-interface Props {
-    status: number;
-}
-
-const Error = ({ status }: Props) => {
+const Error = ({ status }: ErrorPageType) => {
     const content = {
         503: {
             title: '503: Service Unavailable',

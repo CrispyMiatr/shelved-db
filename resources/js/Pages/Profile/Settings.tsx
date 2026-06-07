@@ -1,9 +1,10 @@
-import { useForm, usePage, Head, Link } from '@inertiajs/react';
-import { PageProps } from '~/types';
-import { Layout } from '~/components';
-import settings from '~styles/pages/profile/settings.module.scss';
-import { ArrowLeft, Shield, Lock, Trash2, AlertTriangle, LogOut } from 'lucide-react';
 import { FormEvent } from 'react';
+import { useForm, usePage, Head, Link } from '@inertiajs/react';
+import { ArrowLeft, Shield, Lock, Trash2, AlertTriangle, LogOut } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { PageProps } from '~/types';
+import settings from '~styles/pages/profile/settings.module.scss';
+
 
 const Settings = () => {
     const { auth, status } = usePage<PageProps>().props;

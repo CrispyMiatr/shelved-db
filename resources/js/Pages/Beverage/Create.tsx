@@ -1,20 +1,12 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm, Head } from '@inertiajs/react';
-import { Layout } from '~/components';
 import { Upload, FileText, Plus, Trash2, AlertCircle, Building2, Globe, ImageIcon } from 'lucide-react';
-import axios from 'axios';
+import { Layout } from '~/components/common/Layout';
+import { CreatePageType } from '~/types';
 import styles from '~styles/pages/beverage/create.module.scss';
-import { ImageSetType } from '~/types';
 
-interface Props {
-    brands: { id: number, name: string, company_id: number }[];
-    companies: { id: number, name: string }[];
-    manufacturers: { id: number, name: string, logo_url: ImageSetType }[];
-    countries: { code: string, name: string }[];
-    languages: { code: string, name: string }[];
-}
-
-export default function Create({ brands, companies, manufacturers, countries, languages }: Props) {
+export default function Create({ brands, companies, manufacturers, countries, languages }: CreatePageType) {
     const [isOcrLoading, setIsOcrLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [previews, setPreviews] = useState<Record<string, string>>({});

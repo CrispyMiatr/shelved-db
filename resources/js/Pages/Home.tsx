@@ -1,17 +1,14 @@
-import { Carousel, Layout, ProductCard, ProfileCard, SkeletonCard } from '~/components';
+import { Head } from '@inertiajs/react';
+import { Layout } from '~/components/common/Layout';
+import { Carousel, ProductCard, ProfileCard, SkeletonCard } from '~/components';
+import { HomePageType } from '~/types';
 import home from '~styles/pages/home.module.scss'
 import banner from '~assets/banner.jpg'
 import logo from "~assets/logo_full-b.svg"
-import { BeverageType, User } from '~/types';
-import { Head } from '@inertiajs/react';
 
-interface HomeProps {
-    newlyAdded: BeverageType[];
-    newlyReleased: BeverageType[];
-    popularProfiles: User[];
-}
 
-const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomeProps) => {
+
+const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomePageType) => {
     const MIN_CAROUSEL_ITEMS = 20;
 
     return (

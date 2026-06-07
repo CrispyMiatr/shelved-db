@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
-import { Breadcrumbs, Layout } from '~/components';
-import { ChevronLeft, ChevronRight, AlertTriangle, List, Table, Info } from 'lucide-react';
-import prod from '~styles/pages/product.module.scss';
 import { Head, Link } from '@inertiajs/react';
-import { BeverageType, ImageSetType } from '~/types';
+import { ChevronLeft, ChevronRight, AlertTriangle, List, Table, Info } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { Breadcrumbs } from '~/components';
+import { BeverageType, ImageSetType, ProductPageTypes } from '~/types';
+import prod from '~styles/pages/product.module.scss';
 
 const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) => {
     if (disabled) return null;
@@ -20,7 +21,7 @@ const Collapsible = ({ title, isOpen, onClick, children, icon, disabled }: any) 
     );
 };
 
-const Product = ({ beverage }: any) => {
+const Product = ({ beverage }: ProductPageTypes) => {
     type SectionKey = 'ingredients' | 'warning' | 'nutrition' | 'extra_info';
 
     const [activeLang, setActiveLang] = useState('en');
@@ -47,8 +48,8 @@ const Product = ({ beverage }: any) => {
     const nextImg = () => setImgIndex((prev) => (prev + 1) % imagesToRender.length);
     const prevImg = () => setImgIndex((prev) => (prev - 1 + imagesToRender.length) % imagesToRender.length);
 
-    const translation = beverage.translations.find((trans: any) => trans.language_code === activeLang)
-        || beverage.translations[0];
+    const translation = beverage.translations.find((trans) => trans.language_code === activeLang)
+        || (beverage.translations.length > 0 ? beverage.translations[0] : null);
 
     const toggleSection = (section: SectionKey) => {
         setOpenSections(prev => ({
@@ -76,13 +77,14 @@ const Product = ({ beverage }: any) => {
         if (touchStart.current - touchEnd < -50) prevImg();
     };
 
-    // meta description
+    // SEO
+    const seoTitle = `${beverage.brand.name} ${beverage.name} | Shelved.`;
     const seoDescription = `View details for ${beverage.brand.name} ${beverage.name} (${beverage.volume}mL) from ${beverage.country_name}. ${translation?.ingredients?.substring(0, 100)}...`;
 
     return (
         <div className={prod['product-container']}>
             <Head>
-                <title>{`${beverage.brand.name} ${beverage.name} | Shelved.`}</title>
+                <title>{seoTitle}</title>
                 <meta name="description" content={seoDescription} />
 
                 <meta property="og:title" content={`${beverage.brand.name} ${beverage.name} | Shelved.`} />
@@ -148,12 +150,12 @@ const Product = ({ beverage }: any) => {
                         <InfoRow label="Date" value={beverage.release_date_formatted || 'Unknown'} />
                         <InfoRow label="Volume" value={`${beverage.volume} mL`} />
                         <InfoRow label="Barcode" value={beverage.barcode} />
-                        <InfoRow label="Website" value={beverage.brand.website} isLink />
+                        <InfoRow label="Website" value={beverage.brand.website_url} isLink />
 
                         <div className={prod['manufacturers-row']}>
                             <label>Manufacturer(s)</label>
                             <div className={prod['manu-list']}>
-                                {beverage.manufacturers.map((manu: any) => (
+                                {beverage.manufacturers && beverage.manufacturers.map((manu: any) => (
                                     <Link
                                         key={manu.id}
                                         href={`/manufacturers#manu-${manu.id}`}
@@ -220,7 +222,7 @@ const Product = ({ beverage }: any) => {
                                                 {key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ')}
                                             </td>
                                             <td className={prod['text-right']}>
-                                                {beverage.nutrition_100ml[key]}
+                                                {beverage.nutrition_100ml?.[key]}
                                             </td>
                                             <td className={prod['text-right']}>
                                                 {beverage.nutrition_full?.[key] ?? '-'}

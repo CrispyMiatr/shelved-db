@@ -1,23 +1,14 @@
-import { Breadcrumbs, FilterGroup, Layout, ProductCard, SortButton } from '~/components';
-import { BeverageType, BrandType } from '~/types';
 import { Head, Link } from '@inertiajs/react';
+import { Layout } from '~/components/common/Layout';
+import { Breadcrumbs, FilterGroup, ProductCard, SortButton } from '~/components';
+import { BrandPageType } from '~/types';
 import styles from '~styles/pages/brand.module.scss';
 
-interface Props {
-    brand: BrandType;
-    beverages: BeverageType[];
-    filters: any;
-    options: any;
-    sort: {
-        field: string;
-        direction: 'asc' | 'desc';
-    };
-}
-
-const Brand = ({ brand, beverages, filters, options, sort }: Props) => {
+const Brand = ({ brand, beverages, filters, options, sort }: BrandPageType) => {
     const { field, direction } = sort;
     const fallBackImg = `https://placehold.co/400x200?text=${brand.name}`
 
+    // SEO
     const companyText = brand.company ? ` by ${brand.company.name}` : '';
     const totalItems = brand.beverages_count ?? beverages.length;
     const seoTitle = `${brand.name} Beverage Database | Shelved.`;

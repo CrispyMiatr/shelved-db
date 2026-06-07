@@ -1,11 +1,12 @@
-import { Head, Link, router, usePage } from '@inertiajs/react';
-import { LogOut, Pencil, Settings, Share2, X } from 'lucide-react';
 import { useState } from 'react';
-import { FilterGroup, Layout, ProductCard, SortButton } from '~/components';
-import { PageProps } from '~/types';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Settings, Share2, X } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { FilterGroup, ProductCard, SortButton } from '~/components';
+import { PageProps, ProfilePageType, UserType } from '~/types';
 import show from '~styles/pages/profile/show.module.scss';
 
-const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent, totalInCollection, filters, options, sort }: any) => {
+const Profile = ({ user, collection, followers, following, isOwner, isFollowing, canSeeContent, totalInCollection, filters, options, sort }: ProfilePageType) => {
 
     const { auth } = usePage<PageProps>().props;
     const { field, direction } = sort;
@@ -15,12 +16,12 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
         alert('Profile link copied to clipboard!');
     };
 
-    const handleLogout = () => {
-        router.post(route('logout'));
-    };
-
     // modal state
-    const [modalConfig, setModalConfig] = useState<{ show: boolean, type: 'followers' | 'following', data: any[] }>({
+    const [modalConfig, setModalConfig] = useState<{
+        show: boolean,
+        type: 'followers' | 'following',
+        data: UserType[]
+    }>({
         show: false,
         type: 'followers',
         data: []
@@ -227,7 +228,7 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                                             brand={item.brand.name}
                                             volume={item.volume}
                                             country={item.country_code}
-                                            img={item.image_urls.front.card}
+                                            img={item.image_urls.front?.card ?? null}
                                             isSmall={true}
                                             href={`/catalogue/${item.brand.slug}/${item.slug}`}
                                         />

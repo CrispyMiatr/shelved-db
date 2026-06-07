@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, Head } from '@inertiajs/react';
-import { Layout } from '~/components';
 import { Lock, Mail } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
 import auth from '~styles/pages/auth.module.scss';
 
 const ResetPassword = ({ token, email }: { token: string, email: string }) => {

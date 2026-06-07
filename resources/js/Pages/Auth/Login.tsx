@@ -1,6 +1,6 @@
 import { useForm, Head, Link } from '@inertiajs/react';
 import { Lock, User } from 'lucide-react';
-import { Layout } from '~/components';
+import { Layout } from '~/components/common/Layout';
 import auth from '~styles/pages/auth.module.scss';
 
 const Login = () => {

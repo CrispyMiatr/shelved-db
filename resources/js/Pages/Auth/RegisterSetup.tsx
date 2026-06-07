@@ -1,9 +1,9 @@
-import { useForm, Head, usePage, router } from '@inertiajs/react';
-import { Layout } from '~/components';
-import { PageProps } from '~/types';
-import { User, AtSign, BookOpen, Camera } from 'lucide-react';
-import authS from '~styles/pages/auth.module.scss';
 import { useEffect, useState } from 'react';
+import { useForm, Head, usePage, router } from '@inertiajs/react';
+import { User, AtSign, BookOpen, Camera } from 'lucide-react';
+import { Layout } from '~/components/common/Layout';
+import { PageProps } from '~/types';
+import authS from '~styles/pages/auth.module.scss';
 
 const RegisterSetup = () => {
     const [preview, setPreview] = useState<string | null>(null);
