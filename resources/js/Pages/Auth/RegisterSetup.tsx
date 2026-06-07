@@ -52,7 +52,7 @@ const RegisterSetup = () => {
 
             <form onSubmit={submit} className={authS['form']}>
                 <div className={authS['form__title']}>
-                    <img src={'/logo-black.svg'} alt="Shelved." className={authS['form__title__logo']} />
+                    <img src={'/logo_small-b.svg'} alt="Shelved." className={authS['form__title__logo']} />
                     <h3>Welcome!</h3>
                     <p>Let's finish setting up your account for <br /> <strong>{auth.user.email}</strong></p>
                 </div>

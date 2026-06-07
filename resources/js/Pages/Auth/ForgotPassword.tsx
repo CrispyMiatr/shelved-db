@@ -1,4 +1,5 @@
 import { useForm, Head, Link } from '@inertiajs/react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { Mail, ArrowLeft } from 'lucide-react';
 import { Layout } from '~/components/common/Layout';
 import auth from '~styles/pages/auth.module.scss';
@@ -6,6 +7,7 @@ import auth from '~styles/pages/auth.module.scss';
 const ForgotPassword = ({ status }: { status?: string }) => {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
+        captcha_token: '',
     });
 
     const submit = (e: React.FormEvent) => {
@@ -19,7 +21,7 @@ const ForgotPassword = ({ status }: { status?: string }) => {
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
-                    <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />
+                    <img src={'/logo_small-b.svg'} alt="Shelved." className={auth['form__title__logo']} />
                     <h3>Reset Password</h3>
                     <p><strong>No worries.</strong> <br />Enter your email and we'll send you a link to reset it.</p>
                 </div>
@@ -44,6 +46,17 @@ const ForgotPassword = ({ status }: { status?: string }) => {
                         required
                     />
                     {errors.email && <div className="error">{errors.email}</div>}
+                </div>
+
+                <div className={auth['form__turnstile']}>
+                    <Turnstile
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => setData('captcha_token', token)}
+                        options={{
+                            theme: 'light',
+                            size: 'flexible',
+                        }}
+                    />
                 </div>
 
                 <button disabled={processing} className={auth['form__submit']}>

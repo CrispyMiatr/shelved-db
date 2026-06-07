@@ -5,6 +5,7 @@ import { Upload, FileText, Plus, Trash2, AlertCircle, Building2, Globe, ImageIco
 import { Layout } from '~/components/common/Layout';
 import { CreatePageType } from '~/types';
 import styles from '~styles/pages/beverage/create.module.scss';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function Create({ brands, companies, manufacturers, countries, languages }: CreatePageType) {
     const [isOcrLoading, setIsOcrLoading] = useState(false);
@@ -57,6 +58,8 @@ export default function Create({ brands, companies, manufacturers, countries, la
         ] as { name: string, per_100ml: string, per_full_volume: string, can_delete: boolean }[],
 
         add_to_collection: false,
+
+        captcha_token: '',
     });
 
     const handleOcr = async () => {
@@ -553,6 +556,16 @@ export default function Create({ brands, companies, manufacturers, countries, la
                                 />
                                 <span>Add this beverage to my personal collection immediately</span>
                             </label>
+
+                            <div className={styles['turnstile']}>
+                                <Turnstile
+                                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                                    onSuccess={(token) => setData('captcha_token', token)}
+                                    options={{
+                                        theme: 'light'
+                                    }}
+                                />
+                            </div>
 
                             <button type="submit" disabled={processing} className={styles['save-btn']}>
                                 {processing ? 'Saving...' : 'Confirm and Save Beverage'}

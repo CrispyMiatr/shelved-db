@@ -29,7 +29,7 @@ const ResetPassword = ({ token, email }: { token: string, email: string }) => {
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
-                    <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />
+                    <img src={'/logo_small-b.svg'} alt="Shelved." className={auth['form__title__logo']} />
                     <h3>New Password</h3>
                     <p>Please enter your email one more time and choose a secure new password.</p>
                 </div>

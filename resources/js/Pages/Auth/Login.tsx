@@ -21,7 +21,7 @@ const Login = () => {
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
-                    <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />
+                    <img src={'/logo_small-b.svg'} alt="Shelved." className={auth['form__title__logo']} />
                     <h3>Sign In</h3>
                     <p><strong>Welcome back!</strong> <br />Fill in your credentials to sign in.</p>
                 </div>

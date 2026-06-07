@@ -1,10 +1,10 @@
 import { PageProps as InertiaProps } from '@inertiajs/core';
 import { Config } from 'ziggy-js';
-import { User } from './profile.types';
+import { UserType } from './user.types';
 
 export interface PageProps<T extends Record<string, unknown> = Record<string, unknown>> extends InertiaProps {
     auth: {
-        user: User;
+        user: UserType;
     };
     ziggy: Config & { location: string };
 

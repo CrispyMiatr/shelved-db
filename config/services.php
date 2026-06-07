@@ -37,4 +37,10 @@ return [
     'gemini' => [
         'key' => env('GEMINI_API_KEY'),
     ],
+    'turnstile' => [
+        'enabled' => (bool) env('TURNSTILE_ENABLED', true),
+        'site_key' => env('VITE_TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+        'url' => env('TURNSTILE_URL', 'https://challenges.cloudflare.com/turnstile/v0/siteverify'),
+    ],
 ];

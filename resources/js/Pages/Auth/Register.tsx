@@ -1,4 +1,5 @@
-import { useForm, Head, Link } from '@inertiajs/react';
+import { useForm, Head, Link, usePage } from '@inertiajs/react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { Lock, Mail } from 'lucide-react';
 import { Layout } from '~/components/common/Layout';
 import auth from '~styles/pages/auth.module.scss';
@@ -9,6 +10,8 @@ const Register = () => {
         email: '',
         password: '',
         password_confirmation: '',
+
+        captcha_token: '',
     });
 
     const submit = (e: React.FormEvent) => {
@@ -22,7 +25,7 @@ const Register = () => {
 
             <form onSubmit={submit} className={auth['form']}>
                 <div className={auth['form__title']}>
-                    <img src={'/logo-black.svg'} alt="Shelved." className={auth['form__title__logo']} />
+                    <img src={'/logo_small-b.svg'} alt="Shelved." className={auth['form__title__logo']} />
                     <h3>Create Account</h3>
                     <p><strong>Welcome to Shelved.!</strong> <br />Fill in your information to create an account.</p>
                 </div>
@@ -74,6 +77,17 @@ const Register = () => {
                         onChange={e => setData('password_confirmation', e.target.value)}
                         placeholder='password'
                         required
+                    />
+                </div>
+
+                <div className={auth['form__turnstile']}>
+                    <Turnstile
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => setData('captcha_token', token)}
+                        options={{
+                            theme: 'light',
+                            size: 'flexible'
+                        }}
                     />
                 </div>
 

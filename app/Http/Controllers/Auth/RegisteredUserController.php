@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -31,6 +32,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Turnstile
+        if (config('services.turnstile.enabled')) {
+            $response = Http::asForm()->post(config('services.turnstile.url'), [
+                'secret' => config('services.turnstile.secret_key'),
+                'response' => $request->input('captcha_token'),
+                'remoteip' => $request->ip(),
+            ]);
+
+            if (!$response->json('success')) {
+                throw ValidationException::withMessages([
+                    'captcha_token' => 'Security check failed. Please try again.',
+                ]);
+            }
+        }
+
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],

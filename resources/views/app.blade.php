@@ -12,6 +12,8 @@
     <link rel="icon" type="image/svg+xml" href="/logo_small-w.svg" />
 
     <!-- Scripts -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
     @routes
     @viteReactRefresh
     @vite(['resources/js/main.tsx', "resources/js/Pages/{$page['component']}.tsx"])

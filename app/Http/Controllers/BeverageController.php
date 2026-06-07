@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Symfony\Component\Intl\Countries;
@@ -50,6 +51,19 @@ class BeverageController extends Controller
 
     public function store(Request $request)
     {
+        // Turnstile
+        if (config('services.turnstile.enabled')) {
+            $response = Http::asForm()->post(config('services.turnstile.url'), [
+                'secret' => config('services.turnstile.secret_key'),
+                'response' => $request->input('captcha_token'),
+                'remoteip' => $request->ip(),
+            ]);
+
+            if (!$response->json('success')) {
+                return back()->withErrors(['captcha_token' => 'Security check failed. Please try again.']);
+            }
+        }
+
         $input = $request->all();
         if (isset($input['company_id']) && $input['company_id'] === '')
             $input['company_id'] = null;

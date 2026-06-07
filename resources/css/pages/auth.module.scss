@@ -54,7 +54,7 @@
         }
 
         &__logo {
-            width: 45px;
+            width: 65px;
             padding-bottom: 1.5rem;
         }
     }
@@ -137,6 +137,17 @@
             font-weight: $fw-medium;
             margin-top: 0.25rem;
         }
+    }
+
+    &__turnstile {
+        display: flex;
+        justify-content: center;
+
+        height: 65px;
+
+        border: 1px solid #d9d9d9;
+        border-radius: $rad-sm;
+        overflow: hidden;
     }
 
     &__checkbox {
