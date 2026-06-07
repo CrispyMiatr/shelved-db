@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->index('volume');
             $table->index('lineup_flavor');
             $table->index('brand_id');
+            $table->index('barcode');
+            $table->index('sku');
         });
     }
 
@@ -31,6 +33,8 @@ return new class extends Migration {
             $table->dropIndex(['volume']);
             $table->dropIndex(['lineup_flavor']);
             $table->dropIndex(['brand_id']);
+            $table->dropIndex(['barcode']);
+            $table->dropIndex(['sku']);
         });
     }
 };

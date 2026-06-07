@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('beverage_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('beverage_id')->constrained()->onDelete('cascade');
-            $table->string('language_code', 2); // 'en', 'jp', 'hu'
+            $table->string('language_code', 10); // 'en', 'jp', 'hu'
             $table->text('ingredients');
             $table->text('warning_text')->nullable();
             $table->text('extra_info')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration {
     {
         Schema::dropIfExists('beverage_translations');
         Schema::table('beverages', function (Blueprint $table) {
-            $table->dropColumn(['nutrition_100ml', 'nutrition_500ml']);
+            $table->dropColumn(['nutrition_100ml', 'nutrition_full']);
         });
     }
 };
