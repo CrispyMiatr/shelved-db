@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { NavButton, Searchbar } from "~/components";
 import { PageProps } from '~/types';
-import { Plus, Info, Home, LayoutGrid, Users, UserRound, User } from 'lucide-react';
+import { Plus, Info, Home, LayoutGrid, Users, UserRound, User, ShieldCheck } from 'lucide-react';
 import logo from "~assets/logo_small-w.svg"
 import header from '~styles/components/layout/header.module.scss'
 
@@ -9,6 +9,7 @@ export const Header = () => {
     const { auth } = usePage<PageProps>().props;
     const { url } = usePage();
     const user = auth.user;
+    const isStaff = user?.role === 'admin' || user?.role === 'head_admin';
 
     const profilePath = user ? `/@${user.username}` : route('login');
     const createPath = user ? route('beverage.create') : route('login');
@@ -19,6 +20,7 @@ export const Header = () => {
     const isAboutActive = url.startsWith('/about');
     const isCreateActive = url.startsWith('/beverages/create') || route().current('beverage.create');
     const isProfileActive = (user && url.startsWith(`/@${user.username}`)) || route().current('login');
+    const isStaffActive = url.startsWith('/staff');
 
     return (
         <>
@@ -35,6 +37,16 @@ export const Header = () => {
                             </Link>
 
                             <Searchbar variant="header" />
+
+                            {isStaff && (
+                                <Link
+                                    href={route('staff.dashboard')}
+                                    className={`${header['icon-staff']} ${isStaffActive ? header['icon-staff--active'] : ''}`}
+                                    title="Staff Management"
+                                >
+                                    <ShieldCheck size={24} />
+                                </Link>
+                            )}
 
                             <Link href={createPath} className={`${header['icon-plus']} ${isCreateActive ? header['icon-plus--active'] : ''}`}>
                                 <Plus size={24} />

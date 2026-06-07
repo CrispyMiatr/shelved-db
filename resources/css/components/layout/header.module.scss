@@ -53,7 +53,8 @@
     }
 
     .icon-info,
-    .icon-plus {
+    .icon-plus,
+    .icon-staff {
         display: flex;
         align-items: center;
         color: inherit;
@@ -126,6 +127,16 @@
         .logo-link,
         .icon-profile {
             display: flex;
+        }
+
+        .icon-staff {
+            padding: 4px;
+
+            &:hover,
+            &--active {
+                color: $color-primary;
+                background-color: $clr-white;
+            }
         }
     }
 }

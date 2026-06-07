@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
                     'name',
                     'username',
                     'email',
+                    'role',
                     'bio',
                     'is_private',
                     'social_links',
