@@ -60,11 +60,14 @@ Route::middleware('auth')->group(function () {
     // Social
     Route::post('/follow/{user}', [ProfileController::class, 'toggleFollow'])->name('follow.toggle');
 
-    // Beverages & OCR
+    // Beverages & OCR - limits 5 uploads/extractions per minute
     Route::get('/beverages/create', [BeverageController::class, 'create'])->name('beverage.create');
-    Route::post('/beverages', [BeverageController::class, 'store'])->name('beverage.store');
-    Route::post('/beverages/analyze', [BeverageController::class, 'analyze'])->name('beverage.analyze');
-    Route::post('/api/beverage/ocr', [OcrController::class, 'process'])->name('beverage.ocr');
+    Route::post('/beverages', [BeverageController::class, 'store'])
+        ->middleware('throttle:5,1')
+        ->name('beverage.store');
+    Route::post('/api/beverage/ocr', [OcrController::class, 'process'])
+        ->middleware('throttle:5,1')
+        ->name('beverage.ocr');
 
     // Collection Management
     // Route::post('/collection/add/{beverage}', [BeverageController::class, 'addToCollection'])->name('collection.add');
