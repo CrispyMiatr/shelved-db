@@ -1,0 +1,73 @@
+@use '~styles/base/general.scss' as *;
+
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 24px;
+    padding-bottom: 32px;
+
+    text-align: center;
+
+    @media (min-width: $bp-sm) {
+        padding: 0 40px;
+        padding-bottom: 38px;
+    }
+
+    @media (min-width: $bp-md) {
+        padding: 0 80px;
+        padding-bottom: 46px;
+    }
+
+    @media (min-width: $bp-lg) {
+        padding: 0 120px;
+        padding-bottom: 52px;
+
+        min-height: calc(100vh - 95px);
+    }
+}
+
+.content {
+    max-width: 500px;
+}
+
+.icon-wrap {
+    color: $color-accent;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.status-code {
+    font-size: 5rem;
+    font-weight: 900;
+    color: $clr-gray-100;
+    line-height: 1;
+    user-select: none;
+}
+
+.title {
+    margin-bottom: 15px;
+}
+
+.description {
+    color: $txt-muted;
+    margin-bottom: 40px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    @media (min-width: $bp-sm) {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    button,
+    a {
+        @include btn;
+    }
+}

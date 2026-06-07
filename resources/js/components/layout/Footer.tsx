@@ -6,7 +6,7 @@ import footer from '~styles/components/layout/footer.module.scss'
 export const Footer = () => {
     const { auth } = usePage<PageProps>().props;
     const { url } = usePage();
-    const user = auth.user;
+    const user = auth?.user;
 
     const isHomeActive = url === '/';
     const isCatalogueActive = url.startsWith('/catalogue');

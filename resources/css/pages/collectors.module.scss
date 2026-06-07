@@ -52,6 +52,9 @@
         color: inherit;
         transition: transform 0.1s ease, box-shadow 0.1s ease;
 
+
+        overflow: hidden;
+
         &:hover {
             transform: translateY(-2px);
             box-shadow: 2px 4px 12px $sh-card;
@@ -64,6 +67,8 @@
             border-radius: 50%;
             margin-right: 15px;
             flex-shrink: 0;
+
+            object-fit: cover;
         }
 
         &__info {

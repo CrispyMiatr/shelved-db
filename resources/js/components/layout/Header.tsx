@@ -8,7 +8,7 @@ import header from '~styles/components/layout/header.module.scss'
 export const Header = () => {
     const { auth } = usePage<PageProps>().props;
     const { url } = usePage();
-    const user = auth.user;
+    const user = auth?.user;
     const isStaff = user?.role === 'admin' || user?.role === 'head_admin';
 
     const profilePath = user ? `/@${user.username}` : route('login');
