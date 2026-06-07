@@ -16,6 +16,7 @@
         "laravel/tinker": "^3.0",
         "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-medialibrary": "^11.22",
+        "spatie/laravel-sitemap": "^8.1",
         "symfony/intl": "^8.0",
         "tightenco/ziggy": "^2.0"
     },

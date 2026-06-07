@@ -1,2 +1,22 @@
 User-agent: *
-Disallow:
+
+Allow: /
+Allow: /catalogue/
+Allow: /manufacturers/
+Allow: /collectors/
+Allow: /search
+
+Disallow: /settings
+Disallow: /profile
+Disallow: /setup
+
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Disallow: /staff/
+
+Disallow: /api/
+
+Sitemap: https://shelvedb.com/sitemap.xml
