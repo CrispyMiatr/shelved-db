@@ -47,7 +47,7 @@ export const Footer = () => {
                         <li className={footer['links__link-item']}>
                             <a href="mailto:crispy.drinks@shelvedb.com">
                                 <img src="/assets/icons/icon_email-w.svg" alt="" />
-                                crispy.drinks@shelvedb.com
+                                info@shelvedb.com
                             </a>
                         </li>
                     </ul>
