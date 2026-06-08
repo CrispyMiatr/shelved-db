@@ -105,7 +105,7 @@ export default function Create({ brands, companies, manufacturers, countries, la
 
             setShowForm(true);
         } catch (err) {
-            alert("Extraction failed. Please fill manually.");
+            alert("Extraction failed. Please try again.");
         } finally {
             setIsOcrLoading(false);
         }
