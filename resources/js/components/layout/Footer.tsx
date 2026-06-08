@@ -15,6 +15,9 @@ export const Footer = () => {
     const isAboutActive = url.startsWith('/about');
     const isProfileActive = url.startsWith('/login') || url.startsWith('/@');
 
+    const name = "info";
+    const domain = "shelvedb.com";
+
     return (
         <footer className={footer['footer']}>
             <div className={footer['footer__container']}>
@@ -45,9 +48,14 @@ export const Footer = () => {
                             </a>
                         </li>
                         <li className={footer['links__link-item']}>
-                            <a href="mailto:crispy.drinks@shelvedb.com">
+                            <a href="#"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href = `mailto:${name}@${domain}`;
+                                }}
+                            >
                                 <img src="/assets/icons/icon_email-w.svg" alt="" />
-                                info@shelvedb.com
+                                Contact via email.
                             </a>
                         </li>
                     </ul>
