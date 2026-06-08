@@ -56,9 +56,8 @@ export const Footer = () => {
                 <div className={footer['footer__legal']}>
                     <h4>Legal</h4>
                     <ul className={footer['links']}>
-                        <li className={footer['links__link-item']}><Link href="#">Terms of service</Link></li>
-                        <li className={footer['links__link-item']}><Link href="#">Cookie policy</Link></li>
-                        <li className={footer['links__link-item']}><Link href="#">Privacy notice</Link></li>
+                        <li className={footer['links__link-item']}><Link href={route('terms')}>Terms of service</Link></li>
+                        <li className={footer['links__link-item']}><Link href={route('privacy')}>Privacy notice</Link></li>
                     </ul>
                 </div>
 

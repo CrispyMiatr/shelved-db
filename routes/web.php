@@ -36,10 +36,20 @@ Route::get('/manufacturers/{manufacturer}', [ManufacturerController::class, 'sho
 // Collectors
 Route::get('/collectors', [ProfileController::class, 'index'])->name('collectors.index');
 
-// About (static page)
+// About
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
+
+// Privacy policy
+Route::get('/privacy', function () {
+    return Inertia::render('Privacy');
+})->name('privacy');
+
+// Terms of service
+Route::get('/terms', function () {
+    return Inertia::render('Terms');
+})->name('terms');
 
 /*
 |--------------------------------------------------------------------------
