@@ -122,7 +122,7 @@ const Management = ({ brands, companies, manufacturers, countries }: ManagementP
                             <tr key={item.id}>
                                 <td>
                                     <div className={manage['table__logo']}>
-                                        <img src={item.logo_url.card} alt="" />
+                                        <img src={item.logo_url?.card} alt="" />
                                     </div>
                                 </td>
                                 <td>
