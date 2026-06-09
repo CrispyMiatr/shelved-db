@@ -230,7 +230,8 @@
       width: 100%;
 
       .edit-btn,
-      .share-btn {
+      .share-btn,
+      .btn-follow {
         flex: 1;
       }
 
@@ -238,6 +239,7 @@
         @include btn-small;
         width: 100%;
         white-space: nowrap;
+        flex: 1;
 
         &.btn-unfollow {
           color: $txt-white;

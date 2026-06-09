@@ -14,7 +14,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomePageType) => {
     return (
         <div className={home['home-container']}>
             <Head>
-                <title>Shelved. | The Ultimate Beverage Database</title>
+                <title>Shelved. | A Worldwide Beverage Database</title>
                 <meta
                     head-key="description"
                     name="description"
@@ -32,7 +32,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomePageType) => {
                     </div>
 
                     <div className={home['hero__text__subtitle']}>
-                        The Ultimate Beverage Database
+                        A Worldwide Beverage Database
                     </div>
 
                     <div className={home['hero__text__description']}>

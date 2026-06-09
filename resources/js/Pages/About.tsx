@@ -27,7 +27,7 @@ const About = () => {
                     className={styles['hero__logo']}
                 />
                 <div className={styles['hero__text']}>
-                    <h1>The Ultimate Beverage Database</h1>
+                    <h1>A Worldwide Beverage Database</h1>
                     <p>
                         A crowd-sourced passion project made with a love for data visualisation
                         (and the collecting of energy drink cans).

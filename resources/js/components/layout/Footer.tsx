@@ -27,7 +27,7 @@ export const Footer = () => {
                         <img src={logo} alt="Shelved." className={footer['footer__brand__logo']} />
                         <div className={footer['footer__brand__text']}>
                             <h3>Shelved.</h3>
-                            <p>The Ultimate <br />Beverage <br />Database</p>
+                            <p>A Worldwide <br />Beverage <br />Database</p>
                         </div>
                     </Link>
                 </div>

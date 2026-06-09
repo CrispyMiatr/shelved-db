@@ -166,8 +166,8 @@ const Profile = ({ user, collection, followers, following, isOwner, isFollowing,
                     ) : (
                         <div className={show['action-group']}>
                             {!auth.user ? (
-                                <Link href={route('login')} className={show['flex-1']}>
-                                    <button className={show['btn-follow']}>Follow</button>
+                                <Link href={route('login')} className={show['btn-follow']}>
+                                    <button>Follow</button>
                                 </Link>
                             ) : (
                                 <button
