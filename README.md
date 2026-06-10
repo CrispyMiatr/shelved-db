@@ -7,7 +7,7 @@ Shelved (shelvedb.com) is a platform for cataloguing, tracking, and searching be
 
 ## 🚀 Key Features
 *   **Global Catalogue:** Search drinks by brand, volume, flavor, or country of origin.
-*   **AI-Powered OCR:** Effortless beverage entry. Upload can/bottle photos and use **Google Gemini AI** to automatically extract product names, multilingual ingredients, and nutrition facts.
+*   **AI-Powered OCR:** Effortless beverage entry. Upload can/bottle photos and use Google Gemini AI to automatically extract product names, multilingual ingredients, and nutrition facts.
 *   **Multilingual Support:** Access packaging information in its original language, with automatic English translations provided for international items.
 *   **Personal Collections:** Track your physical shelf digitally. Includes privacy settings to restrict your collection visibility to mutual followers only.
 *   **Staff Management:** A unified dashboard for admins to moderate brands, companies, and packaging manufacturers.
@@ -20,7 +20,6 @@ Shelved (shelvedb.com) is a platform for cataloguing, tracking, and searching be
 *   **Laravel 11 (PHP 8.5):** Robust API and server-side logic.
 *   **PostgreSQL:** Utilizing **JSONB** columns for flexible storage of nutrition data and social links.
 *   **Spatie Media Library:** Advanced media handling with automated image conversions for optimized performance.
-*   **Supervisor:** Managing background queue workers for asynchronous image processing.
 
 ### Frontend
 *   **React + TypeScript:** A type-safe, reactive user interface.
@@ -29,9 +28,8 @@ Shelved (shelvedb.com) is a platform for cataloguing, tracking, and searching be
 
 ### Infrastructure & Security
 *   **Cloudflare R2:** S3-compatible object storage for high-performance global asset delivery.
-*   **Google Gemini 1.5 Flash:** Multimodal AI for high-accuracy data extraction from images.
+*   **Google Gemini 2.5 Flash:** Multimodal AI for high-accuracy data extraction from images.
 *   **Cloudflare Turnstile:** Non-intrusive bot protection for registration and AI routes.
-*   **Nginx:** Hardened production configuration with strict CSP headers and SSL.
 
 ---
 
