@@ -20,7 +20,7 @@ const Home = ({ newlyAdded, newlyReleased, popularProfiles }: HomePageType) => {
                     name="description"
                     content="Discover, collect, and share beverages from around the world. Explore our massive database of brands, manufacturers, and unique collector shelves."
                 />
-                <meta property="og:title" content="Shelved. | The Ultimate Beverage Database" />
+                <meta property="og:title" content="Shelved. | A Worldwide Beverage Database" />
                 <meta property="og:description" content="Discover, collect, and share beverages from around the world." />
                 <meta property="og:image" content="/assets/images/og-banner.jpg" />
             </Head>
